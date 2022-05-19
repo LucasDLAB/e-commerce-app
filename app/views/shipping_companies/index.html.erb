@@ -1,0 +1,35 @@
+<title>Transportadoras Filiadas</title>
+
+<h2>Transportadoras Filiadas</h2>
+
+<div>
+	<%if @shipping_companies.any?%>
+		
+		<%@shipping_companies.each do |s|%>
+			<div>
+				<dl>
+					<dt>
+						Nome:
+					</dt>
+					
+					<dd>
+						<%= s.corporate_name%>
+					</dd>
+					
+					<dt>
+						Número de registro:
+					</dt>
+					
+					<dd>
+						<%= s.registration_number%>
+					</dd>
+				</dl>
+			</div>
+		<%end%>
+
+	<%else%>
+		
+		<p>Nenhuma transportadora cadastrada</p>
+	
+	<%end%>
+</div>
