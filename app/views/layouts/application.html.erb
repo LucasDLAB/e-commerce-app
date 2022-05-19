@@ -12,8 +12,18 @@
   <body>
     <header>
       <h1>Stay Night</h1>
+        <nav>
+          <%if user_signed_in? || admin_signed_in?%>
+            <%= link_to "Sair", root_path%>
+          <%else%>
+            <%= link_to "Entrar como Administrador", shipping_companies_path%> |
+            <%= link_to "Entrar como colaborador de uma Transportadora", new_user_session_path %> |
+          <%end%>
+          <%= link_to "Rastrear um pedido"%>
+        </nav>
     </header>
     <div>
+      <%= alert%>
       <%= notice%>
     </div>
     <%= yield %>
