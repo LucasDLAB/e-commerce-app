@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      user: "Usuário"
+      admin: "Administrador"
+    attributes:
+      user: 
+        name: "Nome"
+      admin: 
+        name: "Nome"

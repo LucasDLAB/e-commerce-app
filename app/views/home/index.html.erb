@@ -5,3 +5,12 @@
 	demanda da melhor maneira e com preço acessível.</p>
 </div>
 
+<div>
+	<%if admin_signed_in?%>
+		<h2>Acessar transportadoras</h2>
+			<%= link_to "Transportadoras",shipping_companies_path%>
+	<% elsif user_signed_in?%>
+			<h2>Acessar a transportadora</h2>
+			<%= link_to "Transportadora"%>
+	<% end %>
+</div>

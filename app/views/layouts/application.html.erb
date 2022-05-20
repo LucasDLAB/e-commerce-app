@@ -14,9 +14,15 @@
       <h1>Stay Night</h1>
         <nav>
           <%if user_signed_in? || admin_signed_in?%>
-            <%= link_to "Sair", root_path%>
+            <%if user_signed_in?%>
+              <%=current_user.name%> |
+              <%= button_to "Sair", destroy_user_session_path, method: :delete%>
+            <% else%>
+              <%=current_admin.name%> |
+              <%= button_to "Sair", destroy_admin_session_path, method: :delete%>
+            <%end%>
           <%else%>
-            <%= link_to "Entrar como Administrador", shipping_companies_path%> |
+            <%= link_to "Entrar como Administrador", new_admin_session_path%> |
             <%= link_to "Entrar como colaborador de uma Transportadora", new_user_session_path %> |
           <%end%>
           <%= link_to "Rastrear um pedido"%>
