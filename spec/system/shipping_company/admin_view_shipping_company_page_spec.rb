@@ -4,7 +4,7 @@ describe "Administrador acessa a página de transportadoras" do
 	it "com sucesso" do
 		Admin.create!(email:"lucas@sistemadefrete.com",password:"password",name:"Lucas")
 		ShippingCompany.create!(brand_name: "Quicksilver LTDA",corporate_name:"Quicksilver",
-														registration_number:"12345678910110",email_domain: "quick.com",
+														registration_number:"12345678910110",email_domain: "@quick.com",
 														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo")
 
 		visit root_path
@@ -39,7 +39,7 @@ describe "Administrador acessa a página de transportadoras" do
 
 	it "criar conta de Administrador" do
 		ShippingCompany.create!(brand_name: "Quicksilver LTDA",corporate_name:"Quicksilver",
-														registration_number:"12345678910110",email_domain: "quick.com",
+														registration_number:"12345678910110",email_domain: "@quick.com",
 														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo")
 
 		visit root_path

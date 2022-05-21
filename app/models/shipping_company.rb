@@ -10,6 +10,7 @@ class ShippingCompany < ApplicationRecord
 
 	#format 
   validates :registration_number, format: {with:/[0-9]{14}/}
+  validates :email_domain, format: {with: /@\w.+/}
 
   after_save :addressing
 

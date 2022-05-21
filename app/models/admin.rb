@@ -6,4 +6,6 @@ class Admin < ApplicationRecord
 
   #presence
   validates :name, presence: true
+
+  validates :email, format: { with: /\w+@sistemadefrete.\w+/}
 end
