@@ -1,9 +1,9 @@
 class ShippingCompany < ApplicationRecord
 	# presence
-	validates :brand_name, :corporate_name, :email_domain, :registration_number, :billing_address, presence:true
+	validates :brand_name, :corporate_name, :email_domain, :registration_number, :state, :street, :number, :city, presence:true
 
 	#uniqueness
-	validates :brand_name, :corporate_name, :email_domain, :registration_number, :billing_address, presence: true
+	validates :brand_name, :corporate_name, :email_domain, :registration_number, presence: true
 
 	#length
 	validates :registration_number, length: {is:14}

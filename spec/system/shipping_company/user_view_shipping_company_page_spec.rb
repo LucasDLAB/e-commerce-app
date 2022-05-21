@@ -4,8 +4,8 @@ describe "Colaborador acessa a página de transportadora" do
 	it "com sucesso" do
 
 		corporation = ShippingCompany.create!(brand_name: "Quicksilver LTDA",corporate_name:"Quicksilver",
-																					registration_number:"12345678910110",
-																					email_domain: "quick.com",billing_address:"Carlos Reis, 152 RJ")
+																					registration_number:"12345678910110",email_domain: "quick.com",
+																					street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo")
 		User.create!(email:"lucas@quicksilver.com",password:"password",name:"Lucas",shipping_company_id: corporation.id)
 		visit root_path
 		click_on "Entrar como colaborador de uma Transportadora"

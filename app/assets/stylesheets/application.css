@@ -13,3 +13,7 @@
  *= require_tree .
  *= require_self
  */
+#titulo a {
+    color: black;
+    text-decoration: none;
+}

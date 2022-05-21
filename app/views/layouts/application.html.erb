@@ -11,8 +11,9 @@
 
   <body>
     <header>
-      <h1>Stay Night</h1>
+      <h1 id="titulo"><%= link_to "Stay Night", root_path%></h1>
         <nav>
+          <%= link_to "Rastrear um pedido"%> |
           <%if user_signed_in? || admin_signed_in?%>
             <%if user_signed_in?%>
               <%=current_user.name%> |
@@ -25,7 +26,6 @@
             <%= link_to "Entrar como Administrador", new_admin_session_path%> |
             <%= link_to "Entrar como colaborador de uma Transportadora", new_user_session_path %> |
           <%end%>
-          <%= link_to "Rastrear um pedido"%>
         </nav>
     </header>
     <div>

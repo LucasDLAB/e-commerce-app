@@ -1,0 +1,49 @@
+<title>Cadastro de nova Transportadora</title>
+
+<h2>Cadastro de nova Transportadora</h2>
+
+<%=form_with(model:@shipping_company) do |sc|%>
+	 <div>
+    <%= sc.label :brand_name%>
+    <%= sc.text_field :brand_name%>
+  </div>
+
+  <div>
+    <%= sc.label :corporate_name%>
+    <%= sc.text_field :corporate_name%>
+  </div>
+
+  <div>
+    <%= sc.label :registration_number%>
+    <%= sc.number_field :registration_number%>
+  </div>
+
+  <div>
+    <%= sc.label :email_domain%>
+    <%= sc.text_field :email_domain%>
+  </div>
+
+  <div>
+    <%= sc.label :street%>
+    <%= sc.text_field :street%>
+  </div>
+
+  <div>
+    <%= sc.label :number%>
+    <%= sc.number_field :number%>
+  </div>
+
+  <div>
+    <%= sc.label :city%>
+    <%= sc.text_field :city%>
+  </div>
+
+  <div>
+    <%= sc.label :state%>
+    <%= sc.text_field :state%>
+  </div>
+
+  <div>
+    <%=sc.submit "Registrar Transportadora"%>
+  </div>
+<%end%>

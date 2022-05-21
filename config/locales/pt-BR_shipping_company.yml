@@ -1,0 +1,16 @@
+pt-BR:
+  activerecord:
+    models:
+      shipping_company: "Transportadora"
+    attributes:
+      shipping_company:
+        brand_name: "Razão Social"
+        corporate_name: "Nome Fantasia"
+        registration_number: "Número de registro" 
+        email_domain: "Domínio de email"
+        billing_address: "Endereço de faturamento"
+        street: "Rua"
+        number: "Número"
+        state: "Estado"
+        city: "Cidade"
+        
