@@ -20,9 +20,4 @@ describe "Colaborador acessa a página de transportadora" do
 		expect(page).to have_content "12.345.678/9101-10"
 		expect(page).to have_content "Carlos Reis, 152 RJ"
 	end
-
-	it "sem a transportadora cadastrada" do
-		visit root_path
-		click_on "Entrar como colaborador de uma Transportadora"
-	end
 end

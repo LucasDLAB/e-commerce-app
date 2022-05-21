@@ -12,7 +12,7 @@ class ShippingCompaniesController < ApplicationController
 			@shipping_company = ShippingCompany.find(params[:id])
 			format_documentation(@shipping_company)
 		else
-			redirect_to root_path
+			redirect_to root_path, notice: "Acesso permitido apenas para Administradores"
 		end
 	end
 
@@ -25,7 +25,6 @@ class ShippingCompaniesController < ApplicationController
                                       :email_domain,:registration_number, :state, :number)
 		@shipping_company = ShippingCompany.new(shipping_company_params)
     if @shipping_company.save
-    	@shipping_company.billing_address = "Rua #{@shipping_company.street} #{@shipping_company.number} - #{@shipping_company.city}, #{@shipping_company.state}"
 			@shipping_company.save
 			redirect_to shipping_company_path(@shipping_company.id), notice: "Transportadora cadastrada com sucesso!"
 		else 

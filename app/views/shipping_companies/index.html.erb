@@ -8,26 +8,21 @@
 
 <div>
 	<%if @shipping_companies.any?%>
-		
+
 		<%@shipping_companies.each do |s|%>
 			<div>
-				<dl>
-					<dt>
-						Nome:
-					</dt>
+				<table>
+					<tr>
+						<td>Nome</td>
+						<td>Número de registro</td>
+					</tr>
 					
-					<dd>
-						<%= s.corporate_name%>
-					</dd>
-					
-					<dt>
-						Número de registro:
-					</dt>
-					
-					<dd>
-						<%= s.registration_number%>
-					</dd>
-				</dl>
+					<tr>
+						<td><%= s.corporate_name%></td>
+						<td><%= s.registration_number%></td>
+					</tr>
+				</table>
+				<p>Para mais detalhes: <%= link_to "clique aqui", s%></p>
 			</div>
 		<%end%>
 

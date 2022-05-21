@@ -10,4 +10,11 @@ class ShippingCompany < ApplicationRecord
 
 	#format 
   validates :registration_number, format: {with:/[0-9]{14}/}
+
+  after_save :addressing
+
+  private
+  	def addressing
+  		self.billing_address = "Rua #{self.street} #{self.number} - #{self.city}, #{self.state}"
+  	end
 end
