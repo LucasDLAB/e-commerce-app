@@ -41,7 +41,7 @@ describe "Administrador registra uma nova Transportadora" do
 		fill_in "Razão Social", with: "Quicksilver LTDA"
 		fill_in "Número de registro", with: "12345678910110"
 		fill_in "Domínio de email", with: "@quick.com"
-		fill_in "Rua", with: "Carlos Reis"
+		fill_in "Rua", with: "Rua Carlos Reis"
 		fill_in "Número", with: 152
 		fill_in "Cidade", with: "São Gonçalo"
 		fill_in "Estado", with: "RJ"

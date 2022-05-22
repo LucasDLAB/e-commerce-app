@@ -7,5 +7,9 @@ class Admin < ApplicationRecord
   #presence
   validates :name, presence: true
 
+  #uniqueness
+  validates :email, uniqueness: true
+
+  #format
   validates :email, format: { with: /\w+@sistemadefrete.\w+/}
 end

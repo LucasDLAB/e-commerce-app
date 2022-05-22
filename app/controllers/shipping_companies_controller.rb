@@ -1,7 +1,7 @@
 class ShippingCompaniesController < ApplicationController
 	if not :admin_logado 
-		before_action :authenticate_admin!, only: [:show,:index]
-	elsif not :user_logado
+		before_action :authenticate_admin!, only: [:index]
+	elsif not :user_logado || :admin_logado
 		before_action :authenticate_user!, only: [:show]		
 	end
 
@@ -47,7 +47,7 @@ class ShippingCompaniesController < ApplicationController
       cnpj.registration_number.insert(15, "-")
     end
     def admin_logado
-    	if admin_signed_in? 
+    	if admin_signed_in?
     		return true
     	end
     end
