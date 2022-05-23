@@ -12,4 +12,5 @@ class Admin < ApplicationRecord
 
   #format
   validates :email, format: { with: /\w+@sistemadefrete.\w+/}
+  
 end

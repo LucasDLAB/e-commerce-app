@@ -154,8 +154,5 @@ RSpec.describe ShippingCompany, type: :model do
 
 			expect(result).to eql false
 		end
-
-		it "" do
-		end
 	end
 end

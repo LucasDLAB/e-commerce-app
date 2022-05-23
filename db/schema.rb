@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_21_153120) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_23_013606) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -36,6 +36,23 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_21_153120) do
     t.string "city"
     t.integer "number"
     t.string "state"
+  end
+
+  create_table "table_prices", force: :cascade do |t|
+    t.integer "minimum_weight"
+    t.integer "max_weight"
+    t.integer "minimum_dimension"
+    t.integer "max_dimension"
+    t.integer "max_height"
+    t.integer "minimum_height"
+    t.integer "max_width"
+    t.integer "minimum_width"
+    t.integer "max_length"
+    t.integer "minimum_length"
+    t.integer "shipping_company_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shipping_company_id"], name: "index_table_prices_on_shipping_company_id"
   end
 
   create_table "transport_vehicles", force: :cascade do |t|
@@ -65,6 +82,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_21_153120) do
     t.index ["shipping_company_id"], name: "index_users_on_shipping_company_id"
   end
 
+  add_foreign_key "table_prices", "shipping_companies"
   add_foreign_key "transport_vehicles", "shipping_companies"
   add_foreign_key "users", "shipping_companies"
 end

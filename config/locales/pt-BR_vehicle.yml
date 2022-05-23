@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      vehicle: "Veículo"
+    attributes:
+      vehicle:
+        brand: "Marca"
+        year_manufacture: "Ano de fabricação"
+        payload: "Capacidade máxima"
+        vehicle_model: "Modelo de veículo"
+        identification_plate: "Placa de identificação"
