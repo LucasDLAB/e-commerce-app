@@ -9,3 +9,7 @@ pt-BR:
         payload: "Capacidade máxima"
         vehicle_model: "Modelo de veículo"
         identification_plate: "Placa de identificação"
+        dimension: "Dimensão"
+        height: "Altura"
+        length: "Comprimento"
+        width: "Largura"

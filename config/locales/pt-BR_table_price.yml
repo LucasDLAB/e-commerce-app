@@ -14,3 +14,4 @@ pt-BR:
         minimum_width: "Largura mínima"
         max_length: "Comprimento máximo"
         minimum_length: "Comprimento mínimo"
+        price: "Preço por Km"
