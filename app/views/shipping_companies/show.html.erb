@@ -1,3 +1,5 @@
+<title>Transportadora <%=@shipping_company.corporate_name%></title>
+
 <h2>Transportadora <%=  @shipping_company.corporate_name%></h2>
 
 <dl>
@@ -25,3 +27,7 @@
 		<%=@shipping_company.billing_address%>
 	</dd>
 </dl>
+
+<%if user_signed_in?%>
+	<%= link_to "Adicionar linha na tabela de preço", new_table_price_path%>
+<%end%>

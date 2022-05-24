@@ -3,7 +3,7 @@ pt-BR:
     models:
       table_price: "Tabela de preços"
     attributes:
-      user: 
+      table_price: 
         minimum_weight: "Peso mínimo"
         max_weight: "Peso máximo"
         minimum_dimension: "Dimensão mínima"
