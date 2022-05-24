@@ -1,24 +1,24 @@
 class ShippingCompaniesController < ApplicationController
-	if not :admin_logado 
-		before_action :authenticate_admin!, only: [:index]
-	elsif not :user_logado || :admin_logado
-		before_action :authenticate_user!, only: [:show]		
-	end
+	before_action :authenticate_admin!, only: [:index,:new]
 
 	def index
 		@shipping_companies = ShippingCompany.all
 
 		@shipping_companies.each do |sc|
-			format_documentation(sc)
+		format_documentation(sc)
 		end
 	end
 
 	def show
-		if admin_signed_in?
-			@shipping_company = ShippingCompany.find(params[:id])
+		@shipping_company = ShippingCompany.find(params[:id])
 			format_documentation(@shipping_company)
-		else
-			redirect_to root_path, notice: "Acesso permitido apenas para Administradores"
+		
+		if  user_signed_in?
+			if current_user.shipping_company_id.to_s != params[:id]
+				redirect_to root_path, notice: "Acesso permitido apenas para Administradores ou Usuários desta Transportadora"
+			end
+		elsif !admin_signed_in?
+			redirect_to root_path, notice: "Acesso permitido apenas para Administradores ou Usuários desta Transportadora"
 		end
 	end
 
@@ -45,16 +45,5 @@ class ShippingCompaniesController < ApplicationController
       cnpj.registration_number.insert(6, ".")
       cnpj.registration_number.insert(10, "/")
       cnpj.registration_number.insert(15, "-")
-    end
-    def admin_logado
-    	if admin_signed_in?
-    		return true
-    	end
-    end
-
-    def user_logado
-    	if user_signed_in?
-    		return true
-    	end
     end
 end

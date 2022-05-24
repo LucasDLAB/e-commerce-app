@@ -11,6 +11,6 @@
 			<%= link_to "Transportadoras",shipping_companies_path%>
 	<% elsif user_signed_in?%>
 			<h2>Acessar a transportadora</h2>
-			<%= link_to "Transportadora"%>
+			<%= link_to "Transportadora " + current_user.shipping_company.corporate_name, shipping_company_path(current_user.shipping_company_id)%>
 	<% end %>
 </div>
