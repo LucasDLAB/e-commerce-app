@@ -1,0 +1,21 @@
+pt-BR:
+  activerecord:
+    models:
+      transport_vehicle: "Veículo de entrega"
+    attributes:
+      transport_vehicle: 
+          brand: "Marca"
+          year_manufacture: "Ano de fabricação"
+          payload: "Capacidade máxima"
+          vehicle_model: "Modelo do Veículo"
+          identification_plate: "Placa de identificação"
+          dimension: "Dimensão"
+          height: "Altura"
+          length: "Comprimento"
+          width: "Largura"
+    errors:
+      models:
+        transport_vehicle:
+          attributes:
+            year_manufacture:
+              comparison: "Ano de fabricação deve ser igual ou menor ao ano atual"

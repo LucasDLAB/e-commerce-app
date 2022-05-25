@@ -1,6 +1,19 @@
-<title>Criando linha na tabela de preço</title>
+<title>Criação de nova linha na tabela de preço</title>
 
-<h2>Criando linha na tabela de preço</h2>
+<h2>Criação linha na tabela de preço</h2>
+
+<% if @table_price_line.errors.any?%>
+  <div>
+    <p>Verifique os erros abaixo:</p>
+    <ul>
+      <% @table_price_line.errors.full_messages.each do |msg| %>
+        <li>
+          <%= msg%>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 
 <%= form_with(model: @table_price_line) do |tpl|%>
 	<div>

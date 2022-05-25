@@ -7,7 +7,7 @@ pt-BR:
         brand: "Marca"
         year_manufacture: "Ano de fabricação"
         payload: "Capacidade máxima"
-        vehicle_model: "Modelo de veículo"
+        vehicle_model: "Modelo do veículo"
         identification_plate: "Placa de identificação"
         dimension: "Dimensão"
         height: "Altura"

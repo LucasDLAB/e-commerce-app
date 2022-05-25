@@ -1,0 +1,60 @@
+<title>Cadastro de novo veículo</title>
+
+<h2>Cadastro de novo veículo</h2>
+
+<% if @transport_vehicle.errors.any?%>
+  <div>
+    <p>Verifique os erros abaixo:</p>
+    <ul>
+      <% @transport_vehicle.errors.full_messages.each do |msg| %>
+        <li>
+          <%= msg%>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%=form_with(model:@transport_vehicle) do |tv|%>
+	<div>
+    <%= tv.label :brand%>
+    <%= tv.text_field :brand%>
+  </div>
+
+  <div>
+    <%= tv.label :year_manufacture%>
+    <%= tv.number_field :year_manufacture%>
+  </div>
+  
+  <div>
+    <%= tv.label :payload%>
+    <%= tv.number_field :payload%>
+  </div>
+  
+  <div>
+    <%= tv.label :identification_plate%>
+    <%= tv.text_field :identification_plate%>
+  </div>
+  
+  <div>
+    <%= tv.label :vehicle_model%>
+    <%= tv.text_field :vehicle_model%>
+  </div>
+
+  <div>
+    <%= tv.label :height%>
+    <%= tv.text_field :height%>
+  </div>  
+  
+  <div>
+    <%= tv.label :length%>
+    <%= tv.text_field :length%>
+  </div>
+
+  <div>
+    <%= tv.label :width%>
+    <%= tv.text_field :width%>
+  </div>
+
+  <div><%=tv.submit "Registrar veículo"%></div>
+<%end%>

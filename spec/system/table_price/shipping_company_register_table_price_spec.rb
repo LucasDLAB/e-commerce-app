@@ -46,13 +46,14 @@ describe "Usuário da Transportadora cadastra uma nova linha na tabela de preço
 		fill_in "Largura mínima", with: 1
 		fill_in "Largura máxima", with: 5
 		fill_in "Comprimento mínimo", with: 10
-		fill_in "Comprimento máximo", with: 20
+		fill_in "Comprimento máximo", with: 10
 		fill_in "Preço por Km", with: 0.5
+		click_on "Adicionar linha"
 
-		expect(page).to have_content ""
-		expect(page).to have_content ""
-		expect(page).to have_content ""
-		expect(page).to have_content ""
+		expect(page).to have_content "Tabela de Preços"
+		expect(page).to have_content "10 a 50"
+		expect(page).to have_content "10 a 250"
+		expect(page).to have_content "0.5"
 	end
 
 	it "com dados vazios" do
@@ -69,7 +70,8 @@ describe "Usuário da Transportadora cadastra uma nova linha na tabela de preço
 		click_on "Transportadora Quicksilver"
 		click_on "Adicionar linha na tabela de preço"
 		fill_in "Peso mínimo",with: ""
+		click_on "Adicionar linha"
 
-		expect(page).to have_content "Erro"
+		expect(page).to have_content "Falha ao adicionar a nova linha"
 	end
 end

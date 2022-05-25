@@ -12,7 +12,9 @@ class ShippingCompaniesController < ApplicationController
 	def show
 		@shipping_company = ShippingCompany.find(params[:id])
 			format_documentation(@shipping_company)
-		
+		@table_prices = TablePrice.where(shipping_company_id: @shipping_company.id) 
+		@transport_vehicles = TransportVehicle.where(shipping_company_id: @shipping_company.id)
+
 		if  user_signed_in?
 			if current_user.shipping_company_id.to_s != params[:id]
 				redirect_to root_path, notice: "Acesso permitido apenas para Administradores ou Usuários desta Transportadora"

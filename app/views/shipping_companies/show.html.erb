@@ -28,6 +28,9 @@
 	</dd>
 </dl>
 
-<%if user_signed_in?%>
-	<%= link_to "Adicionar linha na tabela de preço", new_table_price_path%>
-<%end%>
+<div>
+	<%if user_signed_in?%>
+		<%= link_to "Adicionar linha na tabela de preço", new_table_price_path%> |
+		<%= link_to "Adicionar um novo veículo", new_transport_vehicle_path%> |
+	<%end%>
+</div>
