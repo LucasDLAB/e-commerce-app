@@ -50,10 +50,7 @@ describe "Usuário da Transportadora cadastra uma nova linha na tabela de preço
 		fill_in "Preço por Km", with: 0.5
 		click_on "Adicionar linha"
 
-		expect(page).to have_content "Tabela de Preços"
-		expect(page).to have_content "10 a 50"
-		expect(page).to have_content "10 a 250"
-		expect(page).to have_content "0.5"
+		expect(page).to have_content "Nova linha adicionada com sucesso!"
 	end
 
 	it "com dados vazios" do

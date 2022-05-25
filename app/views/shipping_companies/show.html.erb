@@ -28,9 +28,25 @@
 	</dd>
 </dl>
 
+
+<h3>Veículos da Transportadora <%=@shipping_company.corporate_name%></h3>
+<div>
+	<%if !@transport_vehicles != [] %>	
+		<% @transport_vehicles.each do |tv|%>
+			<dl>
+				<dt>
+					<%= link_to tv.vehicle_model, tv%>
+				</dt>
+			</dl>
+		<%end%>
+	<%else%>
+		<p>Não possui veículos cadastrados</p>
+	<%end%>
+</div>
+
 <div>
 	<%if user_signed_in?%>
 		<%= link_to "Adicionar linha na tabela de preço", new_table_price_path%> |
-		<%= link_to "Adicionar um novo veículo", new_transport_vehicle_path%> |
+		<%= link_to "Adicionar um novo veículo", new_transport_vehicle_path%>
 	<%end%>
 </div>

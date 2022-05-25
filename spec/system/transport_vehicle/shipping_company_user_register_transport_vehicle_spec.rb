@@ -43,17 +43,13 @@ describe "Usuário da Transportadora cadastrada um novo veículo" do
 		fill_in "Modelo do Veículo", with:"Atego"
 		fill_in "Placa de identificação", with:"AAAA000"
 		fill_in "Capacidade máxima", with:9000_000
-		fill_in "Altura", with:1200
-		fill_in "Largura", with:1000
-		fill_in "Comprimento", with:5000
+		fill_in "Altura", with:12
+		fill_in "Largura", with:1
+		fill_in "Comprimento", with:5
 		click_on "Registrar veículo"
 
 		expect(page).to have_content "Veículos da Transportadora Quicksilver"
-		expect(page).to have_content "Atego"
-		expect(page).to have_content "AAAA000"
-		expect(page).to have_content "2017"
-		expect(page).to have_content "6"
-		expect(page).to have_content "9000000"
+		expect(page).to have_link "Atego"	
 	end
 
 	it "com dados vazios" do

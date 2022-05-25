@@ -11,9 +11,12 @@ class ShippingCompaniesController < ApplicationController
 
 	def show
 		@shipping_company = ShippingCompany.find(params[:id])
-			format_documentation(@shipping_company)
-		@table_prices = TablePrice.where(shipping_company_id: @shipping_company.id) 
-		@transport_vehicles = TransportVehicle.where(shipping_company_id: @shipping_company.id)
+		format_documentation(@shipping_company)
+
+		@transport_vehicles = []
+		TransportVehicle.where(shipping_company_id: @shipping_company.id).find_each do |tv|
+			@transport_vehicles << tv
+		end
 
 		if  user_signed_in?
 			if current_user.shipping_company_id.to_s != params[:id]
