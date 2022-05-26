@@ -1,6 +1,6 @@
 <title>Tabela de Preço</title>
 
-<h2>Tabela de Preços da Transportadora <%=current_user.shipping_company.corporate_name%></h2>
+<h2>Tabela de Preços da Transportadora <%=@endereco.corporate_name%></h2>
 
 <%if @table_prices != []%>
 	<div>
@@ -24,4 +24,4 @@
 	<p>Tabela não possui linhas de preço</p>
 <%end%>
 
-<%= link_to "Voltar", shipping_company_path(current_user.shipping_company_id)%>
+<%= link_to "Voltar", shipping_company_path(@endereco.id)%>

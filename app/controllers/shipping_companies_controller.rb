@@ -3,16 +3,14 @@ class ShippingCompaniesController < ApplicationController
 
 	def index
 		@shipping_companies = ShippingCompany.all
-
 		@shipping_companies.each do |sc|
-		format_documentation(sc)
+			format_documentation(sc)
 		end
 	end
 
 	def show
 		@shipping_company = ShippingCompany.find(params[:id])
 		format_documentation(@shipping_company)
-
 		@transport_vehicles = []
 		TransportVehicle.where(shipping_company_id: @shipping_company.id).find_each do |tv|
 			@transport_vehicles << tv

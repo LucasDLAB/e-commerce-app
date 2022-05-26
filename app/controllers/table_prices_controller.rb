@@ -1,9 +1,10 @@
 class TablePricesController < ApplicationController
-	before_action :authenticate_user!
+	before_action :authenticate_user!, only: [:new, :create]
 
-	def index
+	def show
 		@table_prices = []
-		TablePrice.where(shipping_company_id: current_user.id).find_each do |tp|
+		@endereco = ShippingCompany.find(params[:id])
+		TablePrice.where(shipping_company_id: params[:id]).find_each do |tp|
 			@table_prices << tp
 		end
 	end

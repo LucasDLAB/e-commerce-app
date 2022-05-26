@@ -48,8 +48,7 @@ describe "Usuário da Transportadora cadastrada um novo veículo" do
 		fill_in "Comprimento", with:5
 		click_on "Registrar veículo"
 
-		expect(page).to have_content "Veículos da Transportadora Ligeirinho"
-		expect(page).to have_link "Atego"	
+		expect(page).to have_content "Veículo cadastrado com sucesso!"	
 	end
 
 	it "com dados vazios" do

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   root to: "home#index"
   resources :shipping_companies, only: [:index,:show,:new, :create]
   resources :transport_vehicles, only: [:index,:new, :create,:show]
-  resources :table_prices, only: [:index,:new,:create]
+  resources :table_prices, only: [:show,:new,:create]
   # Defines the root path route ("/")
   # root "articles#index"
 end

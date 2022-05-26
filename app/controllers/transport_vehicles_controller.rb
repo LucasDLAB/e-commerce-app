@@ -1,5 +1,13 @@
 class TransportVehiclesController < ApplicationController
-	before_action :authenticate_user!
+	before_action :authenticate_user!, only: [:new, :create]
+
+	def show
+		@transport_vehicles = []
+		@endereco = ShippingCompany.find(params[:id])
+		TransportVehicle.where(shipping_company_id: params[:id]).find_each do |tv|
+			@transport_vehicles << tv
+		end
+	end
 
 	def new
 		@transport_vehicle = TransportVehicle.new

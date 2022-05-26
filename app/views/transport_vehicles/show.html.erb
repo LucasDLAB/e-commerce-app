@@ -1,0 +1,48 @@
+<title>Frota da Tranportadora</title>
+
+<h2>Frota da Transportadora <%=@endereco.corporate_name%></h2>
+
+<%if @transport_vehicles != []%>
+	<%@transport_vehicles.each do |tv|%>
+		<div>
+			<dl>
+				<dt>
+					Modelo do Veículo
+				</dt>
+
+				<dd>
+					<%=tv.vehicle_model%>
+				</dd>
+
+				<dt>
+					Marca do Veículo
+				</dt>
+
+				<dd>
+					<%=tv.brand%>
+				</dd>
+
+				<dt>
+					Ano de fabricação
+				</dt>
+
+				<dd>
+					<%=tv.year_manufacture%>
+				</dd>
+
+				<dt>
+					Placa de identificação
+				</dt>
+
+				<dd>
+					<%=tv.identification_plate%>
+				</dd>
+			</dl>
+		</div>
+		<br>
+	<%end%>
+<%else%>
+	<p>Sem veículos registrados</p>
+<%end%>
+
+<%= link_to "Voltar", shipping_company_path(@endereco.id)%>
