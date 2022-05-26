@@ -1,6 +1,13 @@
 class TablePricesController < ApplicationController
 	before_action :authenticate_user!
 
+	def index
+		@table_prices = []
+		TablePrice.where(shipping_company_id: current_user.id).find_each do |tp|
+			@table_prices << tp
+		end
+	end
+	
 	def new
 		@table_price_line = TablePrice.new
 	end
@@ -11,8 +18,13 @@ class TablePricesController < ApplicationController
 																																	:minimum_length,:max_length,:price)
 		@table_price_line = TablePrice.new(table_price_line_params)
 		@table_price_line.shipping_company_id = current_user.shipping_company_id
+    
     if @table_price_line.save
+    	@table_price_line.max_dimension = @table_price_line.max_length * @table_price_line.max_width * @table_price_line.max_height
+    	@table_price_line.minimum_dimension = @table_price_line.minimum_length * @table_price_line.minimum_width * @table_price_line.minimum_height
+    	@table_price_line.save
     	redirect_to shipping_company_path(current_user.shipping_company_id), notice: "Nova linha adicionada com sucesso!"
+		
 		else 
 			flash.now[:notice] = "Falha ao adicionar a nova linha de preço"
 			render :new

@@ -1,0 +1,27 @@
+<title>Tabela de Preço</title>
+
+<h2>Tabela de Preços da Transportadora <%=current_user.shipping_company.corporate_name%></h2>
+
+<%if @table_prices != []%>
+	<div>
+		<table>
+				<tr>
+					<td>M³</td>
+					<td>Peso</td>
+					<td>Preço por Km</td>
+				</tr>
+					
+				<%@table_prices.each do |tp|%>
+					<tr>
+						<td><%= "De #{tp.minimum_dimension} a #{tp.max_dimension}"%></td>
+						<td><%= "De #{tp.minimum_weight} a #{tp.max_weight}"%></td>
+						<td><%= number_to_currency(tp.price)%></td>
+					</tr>
+				<%end%>
+			</table>
+	</div>
+<%else%>
+	<p>Tabela não possui linhas de preço</p>
+<%end%>
+
+<%= link_to "Voltar", shipping_company_path(current_user.shipping_company_id)%>

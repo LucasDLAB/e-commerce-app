@@ -15,7 +15,7 @@ class TransportVehiclesController < ApplicationController
     if @transport_vehicle.save
     	@transport_vehicle.dimension = @transport_vehicle.height * @transport_vehicle.length * @transport_vehicle.width
 			@transport_vehicle.save
-			redirect_to shipping_company_path(@transport_vehicle.id), notice: "Veículo cadastrado com sucesso!"
+			redirect_to shipping_company_path(current_user.id), notice: "Veículo cadastrado com sucesso!"
 		else 
 			flash.now[:notice] = "Falha ao cadastrar o veículo"
 			render :new
