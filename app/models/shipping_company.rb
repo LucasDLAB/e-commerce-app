@@ -3,10 +3,13 @@ class ShippingCompany < ApplicationRecord
 	has_many :transport_vehicles
 	has_many :table_prices 
 	# presence
-	validates :brand_name, :corporate_name, :email_domain, :registration_number, :state, :street, :number, :city, presence:true
+	validates :distance,:brand_name, :corporate_name, :email_domain, :registration_number, :state, :street, :number, :city, presence:true
 
 	#uniqueness
 	validates :brand_name, :corporate_name, :email_domain, :registration_number, uniqueness: true
+
+	#numericality
+	validates :number, :distance, numericality:true
 
 	#length
 	validates :registration_number, length: {is:14}

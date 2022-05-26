@@ -31,7 +31,7 @@ class ShippingCompaniesController < ApplicationController
 
 	def create
 		shipping_company_params = params.require(:shipping_company).permit(:brand_name,:corporate_name,:street,:city,
-                                      :email_domain,:registration_number, :state, :number)
+                                      :email_domain,:registration_number, :state, :number,:distance)
 		@shipping_company = ShippingCompany.new(shipping_company_params)
     if @shipping_company.save
 			@shipping_company.save

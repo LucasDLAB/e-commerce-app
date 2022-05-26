@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe TransportVehicle, type: :model do
 	describe "#valid" do
 		it "falso se o campo Marca estiver vazio" do 
-			ShippingCompany.create(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
-															registration_number:"12345678910112",email_domain: "@ligeiro.com",
-															street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo")
+			ShippingCompany.create(brand_name: "Quicksilver LTDA",corporate_name:"Quicksilver",
+													registration_number:"12345678910110",email_domain: "@quick.com",
+													street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
 			tv = TransportVehicle.create(brand: "",year_manufacture: 2017,payload: 9000,
 												 identification_plate:"AAAA000",vehicle_model:"Atego",
 												 height:12,length:33,width:43, shipping_company_id:1)
@@ -18,9 +18,9 @@ RSpec.describe TransportVehicle, type: :model do
 		end
 
 		it "falso se o campo Ano de fabricação estiver vazio" do 
-			ShippingCompany.create(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
-															registration_number:"12345678910112",email_domain: "@ligeiro.com",
-															street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo")
+			ShippingCompany.create(brand_name: "Quicksilver LTDA",corporate_name:"Quicksilver",
+													registration_number:"12345678910110",email_domain: "@quick.com",
+													street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
 			tv = TransportVehicle.create(brand: "Mercedes",year_manufacture:"",payload: 9000,
 												 identification_plate:"AAAA000",vehicle_model:"Atego",
 												 height:12,length:33,width:43, shipping_company_id:1)
@@ -33,9 +33,9 @@ RSpec.describe TransportVehicle, type: :model do
 		end
 
 		it "falso se o campo Capacidade máxima estiver vazio" do 
-			ShippingCompany.create(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
-															registration_number:"12345678910112",email_domain: "@ligeiro.com",
-															street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo")
+			ShippingCompany.create!(brand_name: "Quicksilver LTDA",corporate_name:"Quicksilver",
+													registration_number:"12345678910110",email_domain: "@quick.com",
+													street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
 			tv = TransportVehicle.create(brand: "Mercedes",year_manufacture:2017,payload: "",
 												 identification_plate:"AAAA000",vehicle_model:"Atego",
 												 height:12,length:33,width:43, shipping_company_id:1)
@@ -48,9 +48,9 @@ RSpec.describe TransportVehicle, type: :model do
 		end
 
 		it "falso se o campo Placa de identificação estiver vazio" do 
-			ShippingCompany.create(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
-															registration_number:"12345678910112",email_domain: "@ligeiro.com",
-															street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo")
+			ShippingCompany.create!(brand_name: "Quicksilver LTDA",corporate_name:"Quicksilver",
+													registration_number:"12345678910110",email_domain: "@quick.com",
+													street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
 			tv = TransportVehicle.create(brand: "Mercedes",year_manufacture:2017,payload: 9000,
 												 identification_plate:"",vehicle_model:"Atego",
 												 height:12,length:33,width:43, shipping_company_id:1)
@@ -63,9 +63,9 @@ RSpec.describe TransportVehicle, type: :model do
 		end
 
 		it "falso se o campo Modelo do veículo estiver vazio" do 
-			ShippingCompany.create(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
-															registration_number:"12345678910112",email_domain: "@ligeiro.com",
-															street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo")
+			ShippingCompany.create!(brand_name: "Quicksilver LTDA",corporate_name:"Quicksilver",
+														registration_number:"12345678910110",email_domain: "@quick.com",
+														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
 			tv = TransportVehicle.create(brand: "Mercedes",year_manufacture:2017,payload: 9000,
 												 identification_plate:"AAAA000",vehicle_model:"",
 												 height:12,length:33,width:43, shipping_company_id:1)
@@ -78,9 +78,9 @@ RSpec.describe TransportVehicle, type: :model do
 		end
 
 		it "falso se o campo Altura estiver vazio" do 
-			ShippingCompany.create(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
-															registration_number:"12345678910112",email_domain: "@ligeiro.com",
-															street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo")
+			ShippingCompany.create!(brand_name: "Quicksilver LTDA",corporate_name:"Quicksilver",
+														registration_number:"12345678910110",email_domain: "@quick.com",
+														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
 			tv = TransportVehicle.create(brand: "Mercedes",year_manufacture:2017,payload: 9000,
 												 identification_plate:"AAAA000",vehicle_model:"Atego",
 												 height:"",length:33,width:43, shipping_company_id:1)
@@ -93,9 +93,9 @@ RSpec.describe TransportVehicle, type: :model do
 		end
 
 		it "falso se o campo Comprimento estiver vazio" do 
-			ShippingCompany.create(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
-															registration_number:"12345678910112",email_domain: "@ligeiro.com",
-															street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo")
+				ShippingCompany.create!(brand_name: "Quicksilver LTDA",corporate_name:"Quicksilver",
+														registration_number:"12345678910110",email_domain: "@quick.com",
+														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
 			tv = TransportVehicle.create(brand: "Mercedes",year_manufacture:2017,payload: 9000,
 												 identification_plate:"AAAA000",vehicle_model:"Atego",
 												 height:12,length:"",width:43, shipping_company_id:1)
@@ -108,9 +108,9 @@ RSpec.describe TransportVehicle, type: :model do
 		end
 
 		it "falso se o campo Largura estiver vazio" do 
-			ShippingCompany.create(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
-															registration_number:"12345678910112",email_domain: "@ligeiro.com",
-															street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo")
+			ShippingCompany.create!(brand_name: "Quicksilver LTDA",corporate_name:"Quicksilver",
+														registration_number:"12345678910110",email_domain: "@quick.com",
+														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
 			tv = TransportVehicle.create(brand: "Mercedes",year_manufacture:"",payload: 9000,
 												 identification_plate:"AAAA000",vehicle_model:"Atego",
 												 height:12,length:33,width:"", shipping_company_id:1)
@@ -123,9 +123,9 @@ RSpec.describe TransportVehicle, type: :model do
 		end
 
 		it "falso se o campo Ano de fabricação for futura" do 
-			ShippingCompany.create(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
-															registration_number:"12345678910112",email_domain: "@ligeiro.com",
-															street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo")
+			ShippingCompany.create!(brand_name: "Quicksilver LTDA",corporate_name:"Quicksilver",
+													registration_number:"12345678910110",email_domain: "@quick.com",
+													street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
 			tv = TransportVehicle.create(brand: "Mercedes",year_manufacture:Time.now.year+1,payload: 9000,
 												 identification_plate:"AAAA000",vehicle_model:"Atego",
 												 height:12,length:33,width:43, shipping_company_id:1)
@@ -138,9 +138,9 @@ RSpec.describe TransportVehicle, type: :model do
 		end
 
 		it "falso se o campo Ano de fabricação for futura" do 
-			ShippingCompany.create(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
-															registration_number:"12345678910112",email_domain: "@ligeiro.com",
-															street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo")
+			ShippingCompany.create!(brand_name: "Quicksilver LTDA",corporate_name:"Quicksilver",
+													registration_number:"12345678910110",email_domain: "@quick.com",
+													street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
 			tv = TransportVehicle.create(brand: "Mercedes",year_manufacture:Time.now.year+1,payload: 9000,
 												 identification_plate:"AAAA000",vehicle_model:"Atego",
 												 height:12,length:33,width:43, shipping_company_id:1)
@@ -153,9 +153,9 @@ RSpec.describe TransportVehicle, type: :model do
 		end
 
 		it "falso se o campo Capacidade máxima deve ser maior que 0" do 
-			ShippingCompany.create(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
-															registration_number:"12345678910112",email_domain: "@ligeiro.com",
-															street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo")
+			ShippingCompany.create!(brand_name: "Quicksilver LTDA",corporate_name:"Quicksilver",
+															registration_number:"12345678910110",email_domain: "@quick.com",
+															street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
 			tv = TransportVehicle.create(brand: "Mercedes",year_manufacture:Time.now.year,payload: 0,
 												 identification_plate:"AAAA000",vehicle_model:"Atego",
 												 height:12,length:33,width:43, shipping_company_id:1)
@@ -168,9 +168,9 @@ RSpec.describe TransportVehicle, type: :model do
 		end
 
 		it "falso se o campo Deve ter 4 letras e 3 números" do 
-			ShippingCompany.create(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
-															registration_number:"12345678910112",email_domain: "@ligeiro.com",
-															street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo")
+			sc = ShippingCompany.create!(brand_name: "Quicksilver LTDA",corporate_name:"Quicksilver",
+													registration_number:"12345678910110",email_domain: "@quick.com",
+													street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
 			tv = TransportVehicle.create(brand: "Mercedes",year_manufacture:Time.now.year,payload: 0,
 												 identification_plate:"AAA0000",vehicle_model:"Atego",
 												 height:12,length:33,width:43, shipping_company_id:1)
@@ -182,10 +182,10 @@ RSpec.describe TransportVehicle, type: :model do
 			expect(tv.errors[:identification_plate]).to include("deve possuir 4 letras e 3 números.")
 		end
 
-		it "falso se o campo Deve ter 4 letras e 3 números" do 
-			ShippingCompany.create(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
-															registration_number:"12345678910112",email_domain: "@ligeiro.com",
-															street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo")
+		it "falso se o campo Placa de identificação ter 4 letras e 3 números" do 
+			ShippingCompany.create!(brand_name: "Quicksilver LTDA",corporate_name:"Quicksilver",
+												registration_number:"12345678910110",email_domain: "@quick.com",
+												street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
 			tv = TransportVehicle.create(brand: "Mercedes",year_manufacture:Time.now.year,payload: 10,
 												 identification_plate:"AAAA000",vehicle_model:"Atego",
 												 height:12,length:33,width:43, shipping_company_id:1)

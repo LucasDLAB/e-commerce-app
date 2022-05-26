@@ -22,6 +22,7 @@ describe "Administrador registra uma nova Transportadora" do
 		expect(page).to have_field "Número"
 		expect(page).to have_field "Cidade"
 		expect(page).to have_field "Estado"
+		expect(page).to have_field "Distância em metros"
 	end
 
 	it "com sucesso" do
@@ -44,6 +45,7 @@ describe "Administrador registra uma nova Transportadora" do
 		fill_in "Rua", with: "Rua Carlos Reis"
 		fill_in "Número", with: 152
 		fill_in "Cidade", with: "São Gonçalo"
+		fill_in "Distância em metros", with:200
 		fill_in "Estado", with: "RJ"
 		click_on "Registrar Transportadora"
 
@@ -73,6 +75,7 @@ describe "Administrador registra uma nova Transportadora" do
     expect(page).to have_content "Nome Fantasia não pode ficar em branco"
     expect(page).to have_content "Domínio de email não pode ficar em branco"
     expect(page).to have_content "Número de registro não pode ficar em branco"
+    expect(page).to have_content "Distância em metros não pode ficar em branco"
     expect(page).to have_content "Estado não pode ficar em branco"
     expect(page).to have_content "Rua não pode ficar em branco"
     expect(page).to have_content "Número não pode ficar em branco"

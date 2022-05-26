@@ -1,4 +1,4 @@
-<title>Frota da Tranportadora</title>
+<title>Frota da Tranportadora <%=@endereco.corporate_name%></title>
 
 <h2>Frota da Transportadora <%=@endereco.corporate_name%></h2>
 
@@ -36,6 +36,23 @@
 
 				<dd>
 					<%=tv.identification_plate%>
+				</dd>
+
+
+				<dt>
+					Capacidade máxima
+				</dt>
+
+				<dd>
+					<%=tv.payload%>
+				</dd>
+
+				<dt>
+					Dimensão
+				</dt>
+
+				<dd>
+					<%=tv.dimension%>
 				</dd>
 			</dl>
 		</div>

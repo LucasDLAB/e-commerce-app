@@ -4,7 +4,7 @@ describe "Usuário da Transportadora cadastrada um novo veículo" do
 	it "acessa a página do formulário" do
 		ShippingCompany.create!(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
 														registration_number:"12345678910112",email_domain: "@ligeiro.com",
-														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo")
+														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
 		User.create!(name:"Walter",email:"walter@ligeiro.com",password:"password")
 
 		visit root_path
@@ -28,7 +28,7 @@ describe "Usuário da Transportadora cadastrada um novo veículo" do
 	it "com sucesso" do
 		sc = ShippingCompany.create!(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
 														registration_number:"12345678910112",email_domain: "@ligeir.com",
-														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo")
+														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
 		u =User.create!(name:"Walter",email:"walter@ligeir.com",password:"password")
 
 		visit root_path
@@ -48,13 +48,15 @@ describe "Usuário da Transportadora cadastrada um novo veículo" do
 		fill_in "Comprimento", with:5
 		click_on "Registrar veículo"
 
-		expect(page).to have_content "Veículo cadastrado com sucesso!"	
+		expect(page).to have_content "Veículo cadastrado com sucesso!"
+		expect(page).to have_content "Mercedes"
+		expect(page).to have_content "2017"	
 	end
 
 	it "com dados vazios" do
 		ShippingCompany.create!(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
 														registration_number:"12345678910112",email_domain: "@ligeiro.com",
-														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo")
+														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo", distance:1)
 		User.create!(name:"Walter",email:"walter@ligeiro.com",password:"password")
 
 		visit root_path

@@ -22,7 +22,7 @@ describe "Administrador acessa a página de transportadoras" do
 		Admin.create!(email:"lucas@sistemadefrete.com",password:"password",name:"Lucas")
 		ShippingCompany.create!(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
 														registration_number:"12345678910112",email_domain: "@ligeiro.com",
-														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo")
+														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
 
 		visit root_path
 		click_on "Entrar como Administrador"

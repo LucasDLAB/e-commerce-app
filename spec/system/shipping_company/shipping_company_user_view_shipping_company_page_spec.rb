@@ -5,7 +5,7 @@ describe "Colaborador da Transportadora acessa a página de transportadora" do
 	it "com sucesso" do
 		sc = ShippingCompany.create!(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
 														registration_number:"12345678910112",email_domain: "@ligeiro.com",
-														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo")
+														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
 		visit root_path
 		click_on "Entrar como colaborador de uma Transportadora"
 		click_on "Criar um usuário"
@@ -23,5 +23,7 @@ describe "Colaborador da Transportadora acessa a página de transportadora" do
 		expect(page).to have_content "Ligeirinho LTDA"
 		expect(page).to have_content "12.345.678/9101-12"
 		expect(sc.billing_address).to eql "Carlos Reis 152 - São Gonçalo, RJ"
+		expect(page).to have_content "Distância"
+		expect(page).to have_content "1 m"
 	end
 end
