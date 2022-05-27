@@ -1,0 +1,27 @@
+pt-BR:
+  activerecord:
+    models:
+      order: "Pedido"
+    attributes:
+      order:
+        destinatary_name: "Nome do destinatário" 
+        destinatary_identification: "Número de identificação do destinatário"
+        street: "Rua"
+        city: "Cidade"
+        state: "Estado"
+        number: "Número"
+        weight: "Peso"
+        width: "Largura"
+        length: "Comprimento"
+        height: "Altura"
+        destinatary_distance: "Distância do destinatário"
+        dimension: "Dimensão"
+        status: "Status do pedido"
+        statuses:
+          pending: "Pendente de aceite" 
+          refused: "Recusada"
+          accepted: "Aceita"
+          waiting: "Aguardando pagamento"
+          road: "À caminho"
+          delivered: "Entregue"
+

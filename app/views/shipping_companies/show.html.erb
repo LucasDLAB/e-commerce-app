@@ -44,7 +44,8 @@
 <div>
 	<%if user_signed_in?%>
 		<%= link_to "Adicionar linha na tabela de preço", new_table_price_path%> |
-		<%= link_to "Adicionar um novo veículo", new_transport_vehicle_path%>
+		<%= link_to "Adicionar um novo veículo", new_transport_vehicle_path%> |
+		<%= link_to "Adicionar uma nova linha de estimativa de entrega", new_estimated_date_path%>
 	<%elsif%>
 		<%= link_to "Voltar para o site das transportadoras", shipping_companies_path%>
 	<%end%>

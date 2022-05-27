@@ -1,0 +1,52 @@
+<title>Listagem de pedidos</title>
+
+<h2>Listagem de pedidos</h2>
+
+<nav>
+<%= link_to "Criar um novo pedido", new_order_path %>
+</nav>
+
+<% @orders.each do |o|%>7
+	<h3>Pedido <%= o.order_code%></h3>
+	<dl>
+		<dt>
+			<%=Order.human_attribute_name(:destinatary_name)%>
+		</dt>
+
+		<dd>
+			<%=o.destinatary_name%>
+		</dd>
+
+		<dt>
+			<%=Order.human_attribute_name(:destinatary_distance)%>
+		</dt>
+
+		<dd>
+			<%=o.destinatary_distance%>
+		</dd>
+
+		<dt>
+			<%=Order.human_attribute_name(:weight)%>
+		</dt>
+
+		<dd>
+			<%= o.weight%>
+		</dd>
+
+		<dt>
+			<%=Order.human_attribute_name(:dimension)%>
+		</dt>
+
+		<dd>
+			<%= o.dimension%>
+		</dd>
+
+		<dt>
+			<%=Order.human_attribute_name(:status)%>
+		</dt>
+
+		<dd>
+			<%= Order.human_enum_name(:status,o.status)%>
+		</dd>
+	</dl>
+<%end%>

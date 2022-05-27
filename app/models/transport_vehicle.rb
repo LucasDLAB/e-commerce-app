@@ -8,7 +8,9 @@ class TransportVehicle < ApplicationRecord
   
   validates :payload, :height, :length, :width, comparison: { greater_than: 0}
   
-  validates :payload, :height, :length, :width,:dimension, numericality: {allow_nil:true}
+  validates :payload, :height, :length, :width, numericality:true
+  
+  validates :dimension, numericality: {allow_nil:true}
 
   validates :year_manufacture, comparison: {less_than_or_equal_to: Time.now.year}
 

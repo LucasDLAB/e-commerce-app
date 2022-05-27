@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_26_164940) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_27_015155) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -22,6 +22,36 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_26_164940) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "estimated_dates", force: :cascade do |t|
+    t.integer "min_distance"
+    t.integer "max_distance"
+    t.integer "business_day"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "street"
+    t.string "city"
+    t.string "state"
+    t.integer "number"
+    t.integer "weight"
+    t.integer "length"
+    t.integer "height"
+    t.integer "width"
+    t.string "destinatary_name"
+    t.string "destinatary_identification"
+    t.integer "shipping_company_id"
+    t.integer "dimension"
+    t.string "order_code"
+    t.integer "destinatary_distance"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "status", default: 0
+    t.string "full_address"
+    t.index ["shipping_company_id"], name: "index_orders_on_shipping_company_id"
   end
 
   create_table "shipping_companies", force: :cascade do |t|
@@ -88,6 +118,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_26_164940) do
     t.index ["shipping_company_id"], name: "index_users_on_shipping_company_id"
   end
 
+  add_foreign_key "orders", "shipping_companies"
   add_foreign_key "table_prices", "shipping_companies"
   add_foreign_key "transport_vehicles", "shipping_companies"
   add_foreign_key "users", "shipping_companies"

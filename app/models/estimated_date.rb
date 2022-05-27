@@ -1,0 +1,2 @@
+class EstimatedDate < ApplicationRecord
+end

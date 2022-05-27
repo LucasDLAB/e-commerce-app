@@ -1,0 +1,80 @@
+<title>Solicitação de novo pedido</title>
+
+<h2>Solicitação de novo pedido</h2>
+
+<% if @order.errors.any?%>
+  <div>
+    <p>Verifique os erros abaixo:</p>
+    <ul>
+      <% @order.errors.full_messages.each do |msg| %>
+        <li>
+          <%= msg%>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with(model:@order) do |o|%>
+	<div>
+		<%=o.label :destinatary_name%>
+		<%=o.text_field :destinatary_name%>	
+	</div>
+
+	<div>
+		<%= o.label :destinatary_identification%>
+		<%= o.text_field :destinatary_identification%>
+	</div>
+
+	<div>
+		<%= o.label :destinatary_distance%>
+		<%= o.number_field :destinatary_distance%>
+	</div>
+
+	<div>
+		<%= o.label :street%>
+		<%= o.text_field :street%>
+	</div>
+
+	<div>
+		<%= o.label :number%>
+		<%= o.number_field :number%>
+	</div>
+
+	<div>
+		<%= o.label :city%>
+		<%= o.text_field :city%>
+	</div>
+
+	<div>
+		<%= o.label :state%>
+		<%= o.text_field :state%>
+	</div>
+
+	<div>
+		<%= o.label :weight%>
+		<%= o.number_field :weight%>
+	</div>
+
+	<div>
+		<%= o.label :length%>
+		<%= o.number_field :length%>
+	</div>
+
+	<div>
+		<%= o.label :width%>
+		<%= o.number_field :width%>
+	</div>
+
+
+	<div>
+		<%= o.label :height%>
+		<%= o.number_field :height%>
+	</div>
+
+	<div>
+		<%= o.submit "Criar pedido"%>
+	</div>
+<%end%>
+
+ 

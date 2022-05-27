@@ -13,6 +13,7 @@ class ShippingCompany < ApplicationRecord
 
 	#length
 	validates :registration_number, length: {is:14}
+	validates :state, length: {is:2}
 
 	#format 
   validates :registration_number, format: {with:/[0-9]{14}/}

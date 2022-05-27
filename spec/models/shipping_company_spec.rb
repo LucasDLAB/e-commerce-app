@@ -183,7 +183,7 @@ RSpec.describe ShippingCompany, type: :model do
 			expect(sc.errors[:registration_number]).to include("não possui o tamanho esperado (14 caracteres)")
 		end
 
-		it "falso se o campo Estado possuir formato diferente de [A-Z]{2}" do
+		it "falso se o campo Estado não for maiúscula" do
 			sc =ShippingCompany.create(brand_name: "Quicksilver LTDA",corporate_name:"Quicksilver",
 														registration_number:"123456789101100",email_domain: "@quick.com",
 														street: "Carlos Reis", number: 152, state:"Rs", city:"São Gonçalo")
@@ -193,6 +193,30 @@ RSpec.describe ShippingCompany, type: :model do
 
 			expect(result).to be true
 			expect(sc.errors[:state]).to include("não é válido")
+		end
+
+		it "falso se o campo Estado possuir apenas uma letra" do
+			sc =ShippingCompany.create(brand_name: "Quicksilver LTDA",corporate_name:"Quicksilver",
+														registration_number:"123456789101100",email_domain: "@quick.com",
+														street: "Carlos Reis", number: 152, state:"R", city:"São Gonçalo")
+
+			sc.valid?
+			result = sc.errors.include?(:state)
+
+			expect(result).to be true
+			expect(sc.errors[:state]).to include("não é válido")
+		end
+
+		it "falso se o campo Estado possuir mais de duas letras" do
+			sc =ShippingCompany.create(brand_name: "Quicksilver LTDA",corporate_name:"Quicksilver",
+														registration_number:"123456789101100",email_domain: "@quick.com",
+														street: "Carlos Reis", number: 152, state:"RSS", city:"São Gonçalo")
+
+			sc.valid?
+			result = sc.errors.include?(:state)
+
+			expect(result).to be true
+			expect(sc.errors[:state]).to include("não possui o tamanho esperado (2 caracteres)")
 		end
 
 		it "falso se o campo Dominio de email possuir formato diferente de @..." do

@@ -1,0 +1,25 @@
+<title>Criação de nova linha de estimativa de prazo</title>
+
+<h2>Criação de linha de estimativa de prazo</h2>
+
+<%= form_with(model:@estimated_date) do |ed|%>
+
+	<div>
+		<%=ed.label :min_distance%>
+		<%=ed.number_field :min_distance%>
+	</div>
+
+	<div>
+		<%=ed.label :max_distance%>
+		<%=ed.number_field :max_distance%>
+	</div>
+
+	<div>
+		<%=ed.label :business_day%>
+		<%=ed.number_field :business_day%>
+	</div>
+
+	<div>
+		<%= ed.submit "Criar linha de estimativa"%>
+	</div>
+<%end%>

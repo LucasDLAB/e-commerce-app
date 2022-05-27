@@ -1,0 +1,9 @@
+pt-BR:
+  activerecord:
+    models:
+      estimated_date: "Prazo estimado"
+    attributes:
+      estimated_date:
+        min_distance: "Distância mínima"
+        max_distance: "Distância máxima"
+        business_day: "Dia(s) úteis"
