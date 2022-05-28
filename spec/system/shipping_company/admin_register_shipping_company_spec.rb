@@ -89,4 +89,21 @@ describe "Administrador registra uma nova Transportadora" do
     expect(page).to have_content "Número de registro não é válido"
     expect(page).to have_content "Domínio de email não é válido"
 	end
+
+	it "retorna à página de transportadoras a partir da página registro de transportadora" do
+		Admin.create!(email:"lucas@sistemadefrete.com",password:"password",name:"Lucas")
+
+		visit root_path 
+		click_on "Entrar como Administrador"
+		fill_in "E-mail", with:"lucas@sistemadefrete.com"
+		fill_in "Senha", with: "password"
+		within "form" do
+			click_on "Entrar"
+		end
+		click_on "Transportadoras"
+		click_on "Cadastrar uma nova Transportadora"
+		click_on "Voltar para a página de transportadoras"
+
+		expect(page).to have_content "Transportadoras Filiadas"
+	end
 end

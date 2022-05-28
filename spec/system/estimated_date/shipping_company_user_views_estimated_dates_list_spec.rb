@@ -57,7 +57,7 @@ describe "Usuário da Transportadora acessa a página da Tabela de estimativa de
 		click_on "Entrar"
 		click_on "Transportadora Ligeirinho"
 		click_on "Tabela de estimativa de entrega"
-		click_on "Voltar para o site da transportadora"
+		click_on "Voltar para a página da transportadora"
 
 		expect(page).to have_content "Transportadora Ligeirinho"
 	end

@@ -18,11 +18,10 @@
 					</tr>
 					
 					<tr>
-						<td><%= s.corporate_name%></td>
+						<td><%= link_to s.corporate_name, s%></td>
 						<td><%= s.registration_number%></td>
 					</tr>
 				</table>
-				<p>Para mais detalhes: <%= link_to "clique aqui", s%></p>
 			</div>
 		<%end%>
 
@@ -32,3 +31,5 @@
 	
 	<%end%>
 </div>
+
+<%= link_to "Voltar para a página inicial", root_path%>

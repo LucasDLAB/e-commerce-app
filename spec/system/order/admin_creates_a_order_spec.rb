@@ -106,5 +106,23 @@ describe "Administrador cria um novo pedido" do
  		expect(page).to have_content "Altura em cm não é um número"
  		expect(page).to have_content "Distância do destinatário em Km não é um número"
 	end
+
+	it "retornar para a página de pedidos" do
+		Admin.create!(email:"lucas@sistemadefrete.com",password:"password",name:"Lucas")
+		ShippingCompany.create!(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
+														registration_number:"12345678910112",email_domain: "@ligeiro.com",
+														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:100)
+		
+		visit root_path 
+		click_on "Entrar como Administrador"
+		fill_in "E-mail", with: "lucas@sistemadefrete.com"
+		fill_in "Senha", with: "password"
+		click_on "Entrar"
+		click_on "Pedidos"
+		click_on "Criar um novo pedido"
+		click_on "Voltar para a página de pedidos"
+
+		expect(page).to have_content "Listagem de pedidos"
+	end
 end
 

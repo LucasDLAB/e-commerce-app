@@ -55,7 +55,7 @@ describe "Usuário acessa a Tabela de Preços" do
 		click_on "Entrar"
 		click_on "Transportadora Ligeirinho"
 		click_on "Tabela de Preços"
-		click_on "Voltar para o site da transportadora"
+		click_on "Voltar para a página da transportadora"
 
 		expect(page).to have_content "Transportadora Ligeirinho"
 	end
