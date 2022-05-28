@@ -20,7 +20,7 @@ class ShippingCompany < ApplicationRecord
   validates :state, format: {with:/[A-Z]{2}/}
   validates :email_domain, format: {with: /@\w.+/}
 
-  after_save :addressing
+  after_validation :addressing
 
   private
   	def addressing

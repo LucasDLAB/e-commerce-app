@@ -20,4 +20,11 @@ describe "Usuário da Transportadora registra uma nova estimativa de entrega" do
 		expect(page).to have_field "Dia(s) úteis"
 		expect(page).to have_button "Criar linha de estimativa"	
 	end
+
+	it "com sucesso" do
+
+	end
+
+	it "com campos vazios" do 
+	end
 end

@@ -14,7 +14,7 @@ class Order < ApplicationRecord
   validates :order_code, length: {is:15}
   validates :state, length: {is:2}
   
-  after_save :addressing
+  after_validation :addressing
   before_validation :generate_code
 
   private

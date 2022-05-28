@@ -21,8 +21,6 @@ class TablePricesController < ApplicationController
 		@table_price_line.shipping_company_id = current_user.shipping_company_id
     
     if @table_price_line.save
-    	@table_price_line.max_dimension = @table_price_line.max_length * @table_price_line.max_width * @table_price_line.max_height
-    	@table_price_line.minimum_dimension = @table_price_line.minimum_length * @table_price_line.minimum_width * @table_price_line.minimum_height
     	@table_price_line.save
     	redirect_to shipping_company_path(current_user.shipping_company_id), notice: "Nova linha adicionada com sucesso!"
 		

@@ -18,9 +18,9 @@ RSpec.describe ShippingCompany, type: :model do
 		end
 
 		it "falso se o campo Nome Fantasia não for único" do
-				sc = ShippingCompany.create(brand_name: "Quicksilver LTDA",corporate_name:"Quicksilver",
-														registration_number:"12345678910110",email_domain: "@quick.com",
-														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
+			sc = ShippingCompany.create(brand_name: "Quicksilver LTDA",corporate_name:"Quicksilver",
+													registration_number:"12345678910110",email_domain: "@quick.com",
+													street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
 			second_sc = ShippingCompany.create(brand_name: "Ligeirinho LTDA",corporate_name:"Quicksilver",
 														registration_number:"12345678910112",email_domain: "@ligeiro.com",
 														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo")
@@ -33,9 +33,9 @@ RSpec.describe ShippingCompany, type: :model do
 		end
 
 		it "falso se o campo Número de registro não for único" do
-				sc = ShippingCompany.create(brand_name: "Quicksilver LTDA",corporate_name:"Quicksilver",
-														registration_number:"12345678910110",email_domain: "@quick.com",
-														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
+			sc = ShippingCompany.create(brand_name: "Quicksilver LTDA",corporate_name:"Quicksilver",
+													registration_number:"12345678910110",email_domain: "@quick.com",
+													street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
 			second_sc = ShippingCompany.create(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
 														registration_number:"12345678910110",email_domain: "@ligeiro.com",
 														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo")
@@ -48,9 +48,9 @@ RSpec.describe ShippingCompany, type: :model do
 		end
 
 		it "falso se o campo Dominio de email não for único" do
-				sc = ShippingCompany.create(brand_name: "Quicksilver LTDA",corporate_name:"Quicksilver",
-														registration_number:"12345678910110",email_domain: "@quick.com",
-														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
+			sc = ShippingCompany.create(brand_name: "Quicksilver LTDA",corporate_name:"Quicksilver",
+													registration_number:"12345678910110",email_domain: "@quick.com",
+													street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
 			second_sc = ShippingCompany.create(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
 														registration_number:"12345678910112",email_domain: "@quick.com",
 														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo")
