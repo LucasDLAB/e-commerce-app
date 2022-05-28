@@ -13,9 +13,7 @@ class TablePrice < ApplicationRecord
 
   validates :minimum_weight,:max_weight,:minimum_height,
             :max_height,:minimum_width,:max_width, 
-            :minimum_length,:max_length, comparison: {greater_than: 0}
-
-  validates :price, comparison: {greater_than: 0.2}
+            :minimum_length,:max_length, :price, comparison: {greater_than: 0}
 
   validates :max_weight, comparison: {greater_than: :minimum_weight}
   

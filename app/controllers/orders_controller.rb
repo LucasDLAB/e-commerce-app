@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-	before_action :authenticate_admin!, only: [:new]
+	before_action :authenticate_admin!, only: [:new, :create]
 
 	def index 
 		if admin_signed_in?

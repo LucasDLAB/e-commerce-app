@@ -32,14 +32,7 @@ RSpec.describe TablePrice, type: :model do
 			expect(tp.errors[:max_width]).to include("deve ser maior que 0")
 			expect(tp.errors[:max_length]).to include("deve ser maior que 0")
 			expect(tp.errors[:minimum_length]).to include("deve ser maior que 0")
-		end
-
-		it "falso se o campo Preço não for menor ou igual à 0.2" do
-			tp = TablePrice.create(price:0.2)
-			
-			tp.valid?
-
-			expect(tp.errors[:price]).to include("deve ser maior que 0.2")
+			expect(tp.errors[:price]).to include("deve ser maior que 0")
 		end
 
 		it "falso se o campo Peso mínimo maior que Peso máximo" do

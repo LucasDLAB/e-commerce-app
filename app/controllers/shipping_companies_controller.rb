@@ -1,5 +1,5 @@
 class ShippingCompaniesController < ApplicationController
-	before_action :authenticate_admin!, only: [:index,:new]
+	before_action :authenticate_admin!, only: [:index,:new, :create]
 
 	def index
 		@shipping_companies = ShippingCompany.all

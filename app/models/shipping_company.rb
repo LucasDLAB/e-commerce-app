@@ -27,7 +27,7 @@ class ShippingCompany < ApplicationRecord
 
   private
   	def min_tax
-  		self_min_price = 0.2 * self.distance.to_d
+  		self.min_price = 0.2 * self.distance.to_d
   	end
 
   	def addressing
