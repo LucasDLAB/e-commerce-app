@@ -14,10 +14,14 @@ class Order < ApplicationRecord
   validates :order_code, length: {is:15}
   validates :state, length: {is:2}
   
-  after_validation :addressing
+  after_validation :dimensioning,:addressing
   before_validation :generate_code
 
   private
+    def dimensioning
+      self.dimension = self.length.to_d * self.width.to_d * self.height.to_d
+    end
+
     def addressing
       self.full_address = "#{self.street} #{self.number} - #{self.city}, #{self.state}"
     end

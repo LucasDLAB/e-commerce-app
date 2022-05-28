@@ -34,7 +34,6 @@ class ShippingCompaniesController < ApplicationController
                                       :email_domain,:registration_number, :state, :number,:distance)
 		@shipping_company = ShippingCompany.new(shipping_company_params)
     if @shipping_company.save
-			@shipping_company.save
 			redirect_to shipping_company_path(@shipping_company.id), notice: "Transportadora cadastrada com sucesso!"
 		else 
 			flash.now[:notice] = "Falha ao cadastrar a Transportadora"

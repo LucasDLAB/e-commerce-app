@@ -4,7 +4,8 @@
 
 <nav>
 	<%= link_to "Tabela de Preços", table_price_path(@shipping_company.id)%> |
-	<%= link_to "Veículos", transport_vehicle_path(@shipping_company.id)%>
+	<%= link_to "Veículos", transport_vehicle_path(@shipping_company.id)%> |
+	<%= link_to "Tabela de estimativa de entrega", estimated_date_path(@shipping_company.id)%> |
 </nav>
 
 <dl>

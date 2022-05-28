@@ -21,8 +21,7 @@ class TablePricesController < ApplicationController
 		@table_price_line.shipping_company_id = current_user.shipping_company_id
     
     if @table_price_line.save
-    	@table_price_line.save
-    	redirect_to shipping_company_path(current_user.shipping_company_id), notice: "Nova linha adicionada com sucesso!"
+    	redirect_to table_price_path(current_user.shipping_company_id), notice: "Nova linha adicionada com sucesso!"
 		
 		else 
 			flash.now[:notice] = "Falha ao adicionar a nova linha de preço"

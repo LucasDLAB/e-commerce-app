@@ -21,8 +21,6 @@ class OrdersController < ApplicationController
 																									:length, :height, :destinatary_distance)
 		@order = Order.new(order_params)
 		if @order.save
-			@order.dimension = @order.height * @order.length * @order.width
-			@order.save
 			redirect_to orders_path, notice: "Pedido feito com sucesso"
 		else 
 			flash.now[:notice] = "Falha ao cadastrar ao criar o novo pedido"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_27_015155) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_28_022503) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -30,6 +30,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_27_015155) do
     t.integer "business_day"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "shipping_company_id", null: false
+    t.index ["shipping_company_id"], name: "index_estimated_dates_on_shipping_company_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -118,6 +120,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_27_015155) do
     t.index ["shipping_company_id"], name: "index_users_on_shipping_company_id"
   end
 
+  add_foreign_key "estimated_dates", "shipping_companies"
   add_foreign_key "orders", "shipping_companies"
   add_foreign_key "table_prices", "shipping_companies"
   add_foreign_key "transport_vehicles", "shipping_companies"

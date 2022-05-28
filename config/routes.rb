@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :transport_vehicles, only: [:new, :create,:show]
   resources :table_prices, only: [:show,:new,:create]
   resources :orders, only: [:index,:new, :create]
-  resources :estimated_dates, only: [:new, :create]
+  resources :estimated_dates, only: [:new, :create,:show]
   # Defines the root path route ("/")
   # root "articles#index"
 end

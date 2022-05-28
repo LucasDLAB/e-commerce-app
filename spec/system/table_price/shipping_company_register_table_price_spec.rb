@@ -51,6 +51,9 @@ describe "Usuário da Transportadora cadastra uma nova linha na tabela de preço
 		click_on "Adicionar linha"
 
 		expect(page).to have_content "Nova linha adicionada com sucesso!"
+		expect(page).to have_content "De 10 a 375"
+		expect(page).to have_content "De 10 a 50"
+		expect(page).to have_content "R$ 0,50"
 	end
 
 	it "com dados vazios" do

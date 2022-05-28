@@ -1,0 +1,27 @@
+<title>Tabela de estimativa de entrega</title>
+
+<h2>Tabela de estimativa de entrega da Transportadora <%=@endereco.corporate_name%></h2>
+
+<%if @estimated_date_lines != []%>
+	<div>
+		<table>
+				<tr>
+					<td>Distância mínima</td>
+					<td>Distância máxima</td>
+					<td>Dia(s) úteis</td>
+				</tr>
+					
+				<%@estimated_date_lines.each do |ed|%>
+					<tr>
+						<td><%= ed.min_distance%> M</td>
+						<td><%= ed.max_distance%> M</td>
+						<td><%= ed.business_day%></td>
+					</tr>
+				<%end%>
+			</table>
+	</div>
+<%else%>
+	<p>Tabela de estimativa de entrega não possui linhas adicionadas</p>
+<%end%>
+
+<%= link_to "Voltar para o site da transportadora", shipping_company_path(@endereco.id)%>

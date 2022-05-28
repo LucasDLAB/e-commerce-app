@@ -1,5 +1,5 @@
 class TablePrice < ApplicationRecord
-  belongs_to :shipping_company, optional: true
+  belongs_to :shipping_company
 
   validates :minimum_weight,:max_weight,:minimum_height,
             :max_height,:minimum_width,:max_width, 
@@ -23,6 +23,8 @@ class TablePrice < ApplicationRecord
   
   validates :max_height, comparison: {greater_than: :minimum_height}
 
+  validates :price, uniqueness: {scope: :shipping_company}
+
   after_validation :dimensioning
 
   after_validation :nulling_interval_conflict
@@ -37,13 +39,13 @@ class TablePrice < ApplicationRecord
       tp = TablePrice.all
       tp.each do |t|
         if t.shipping_company_id == self.shipping_company_id && self.id != t.id
-          if self.minimum_dimension >= t.minimum_dimension && self.minimum_dimension <= t.max_dimension
+          if self.minimum_dimension > t.minimum_dimension && self.minimum_dimension < t.max_dimension
             self.errors.add(:minimum_dimension,"deve possuir valor maior ou inferior ao dos intervalos anteriores")
-          elsif (self.minimum_dimension <= t.minimum_dimension && self.max_dimension >= t.minimum_dimension)
+          elsif (self.minimum_dimension < t.minimum_dimension && self.max_dimension > t.minimum_dimension)
             self.errors.add(:minimum_dimension,"não pode possuir intervalos que abrangem outros intervalos")
           end
 
-          if self.max_dimension >= t.minimum_dimension && self.max_dimension <= t.max_dimension
+          if self.max_dimension > t.minimum_dimension && self.max_dimension < t.max_dimension
             self.errors.add(:max_dimension,"deve possuir valor maior ou inferior ao dos intervalos anteriores")
             self.errors.add(:max_dimension,"não pode possuir intervalos que abrangem outros intervalos")
           end

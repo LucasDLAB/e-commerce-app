@@ -18,7 +18,13 @@ class TransportVehicle < ApplicationRecord
 
   validate :confirm_format
 
+  after_validation :dimensioning
+
   private 
+    def dimensioning
+      self.dimension = self.length.to_d * self.width.to_d * self.height.to_d
+    end
+
     def confirm_format
       count_alpha = 0
       count_num = 0
