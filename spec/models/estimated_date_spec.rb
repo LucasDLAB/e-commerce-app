@@ -26,7 +26,7 @@ RSpec.describe EstimatedDate, type: :model do
 			expect(ed.errors[:business_day]).to include("não é um número")	
 		end
 
-		it "falso se os campos forem iguais a zero" do
+		it "falso se os campos forem menores ou iguais à zero" do
 			ShippingCompany.create!(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
 														registration_number:"12345678910112",email_domain: "@ligeiro.com",
 														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
@@ -45,7 +45,7 @@ RSpec.describe EstimatedDate, type: :model do
 			User.create!(name:"Walter",email:"walter@ligeiro.com",password:"password")
 			ed = EstimatedDate.create(min_distance:10,max_distance:5,business_day:1,shipping_company_id:1)
 			
-			expect(ed.errors[:min_distance]).to include("deve ser menor que 5")	
+			expect(ed.errors[:min_distance]).to include("deve ser menor que 5.0")	
 		end
 
 		it "falso se as Distãncia de estimativa possuir intervalos intercalados" do

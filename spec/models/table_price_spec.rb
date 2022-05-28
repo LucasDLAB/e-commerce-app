@@ -17,14 +17,13 @@ RSpec.describe TablePrice, type: :model do
 		end
 
 
-		it "falso se os campos forem 0" do
+		it "falso se os campos forem menores ou iguais à 0" do
 			tp = TablePrice.create(minimum_weight:0,max_weight:0,minimum_height:0,
 											 max_height:0,minimum_width:0,max_width:0,
 											 minimum_length:0,max_length:0,price:0,shipping_company_id:1)
 			
 			tp.valid?
 
-			expect(tp.errors[:price]).to include("deve ser maior que 0")
 			expect(tp.errors[:minimum_weight]).to include("deve ser maior que 0")
 			expect(tp.errors[:max_weight]).to include("deve ser maior que 0")
 			expect(tp.errors[:max_height]).to include("deve ser maior que 0")
@@ -33,6 +32,14 @@ RSpec.describe TablePrice, type: :model do
 			expect(tp.errors[:max_width]).to include("deve ser maior que 0")
 			expect(tp.errors[:max_length]).to include("deve ser maior que 0")
 			expect(tp.errors[:minimum_length]).to include("deve ser maior que 0")
+		end
+
+		it "falso se o campo Preço não for menor ou igual à 0.2" do
+			tp = TablePrice.create(price:0.2)
+			
+			tp.valid?
+
+			expect(tp.errors[:price]).to include("deve ser maior que 0.2")
 		end
 
 		it "falso se o campo Peso mínimo maior que Peso máximo" do
@@ -44,7 +51,7 @@ RSpec.describe TablePrice, type: :model do
 			result = tp.errors.include?(:max_weight)
 
 			expect(result).to be true
-			expect(tp.errors[:max_weight]).to include("deve ser maior que 100")
+			expect(tp.errors[:max_weight]).to include("deve ser maior que 100.0")
 		end
 
 		it "falso se o campo Peso mínimo igual ao Peso máximo" do
@@ -56,7 +63,7 @@ RSpec.describe TablePrice, type: :model do
 			result = tp.errors.include?(:max_weight)
 
 			expect(result).to be true
-			expect(tp.errors[:max_weight]).to include("deve ser maior que 100")
+			expect(tp.errors[:max_weight]).to include("deve ser maior que 100.0")
 		end
 
 		it "verdadeiro se o campo Dimensão máxima e Dimensão mínima for igual em Tabelas de diferentes transportadoras" do 	

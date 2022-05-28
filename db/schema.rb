@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_28_022503) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_28_121156) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -25,8 +25,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_28_022503) do
   end
 
   create_table "estimated_dates", force: :cascade do |t|
-    t.integer "min_distance"
-    t.integer "max_distance"
+    t.decimal "min_distance"
+    t.decimal "max_distance"
     t.integer "business_day"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -39,16 +39,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_28_022503) do
     t.string "city"
     t.string "state"
     t.integer "number"
-    t.integer "weight"
-    t.integer "length"
-    t.integer "height"
-    t.integer "width"
+    t.decimal "weight"
+    t.decimal "length"
+    t.decimal "height"
+    t.decimal "width"
     t.string "destinatary_name"
     t.string "destinatary_identification"
     t.integer "shipping_company_id"
-    t.integer "dimension"
+    t.decimal "dimension"
     t.string "order_code"
-    t.integer "destinatary_distance"
+    t.decimal "destinatary_distance"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "status", default: 0
@@ -68,20 +68,21 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_28_022503) do
     t.string "city"
     t.integer "number"
     t.string "state"
-    t.integer "distance"
+    t.decimal "distance"
+    t.decimal "min_price", default: "0.0"
   end
 
   create_table "table_prices", force: :cascade do |t|
-    t.integer "minimum_weight"
-    t.integer "max_weight"
-    t.integer "minimum_dimension"
-    t.integer "max_dimension"
-    t.integer "max_height"
-    t.integer "minimum_height"
-    t.integer "max_width"
-    t.integer "minimum_width"
-    t.integer "max_length"
-    t.integer "minimum_length"
+    t.decimal "minimum_weight"
+    t.decimal "max_weight"
+    t.decimal "minimum_dimension"
+    t.decimal "max_dimension"
+    t.decimal "max_height"
+    t.decimal "minimum_height"
+    t.decimal "max_width"
+    t.decimal "minimum_width"
+    t.decimal "max_length"
+    t.decimal "minimum_length"
     t.integer "shipping_company_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -92,16 +93,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_28_022503) do
   create_table "transport_vehicles", force: :cascade do |t|
     t.string "brand"
     t.integer "year_manufacture"
-    t.integer "payload"
+    t.decimal "payload"
     t.string "vehicle_model"
     t.string "identification_plate"
     t.integer "shipping_company_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "dimension"
-    t.integer "height"
-    t.integer "length"
-    t.integer "width"
+    t.decimal "dimension"
+    t.decimal "height"
+    t.decimal "length"
+    t.decimal "width"
     t.index ["shipping_company_id"], name: "index_transport_vehicles_on_shipping_company_id"
   end
 

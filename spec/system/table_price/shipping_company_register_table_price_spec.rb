@@ -39,7 +39,7 @@ describe "Usuário da Transportadora cadastra uma nova linha na tabela de preço
 		click_on "Entrar"
 		click_on "Transportadora Ligeirinho"
 		click_on "Adicionar linha na tabela de preço"
-		fill_in "Peso mínimo",with: 10
+		fill_in "Peso mínimo",with: 10.4
 		fill_in "Peso máximo",with: 50
 		fill_in "Altura mínima", with: 1 
 		fill_in "Altura máxima", with: 5
@@ -51,8 +51,8 @@ describe "Usuário da Transportadora cadastra uma nova linha na tabela de preço
 		click_on "Adicionar linha"
 
 		expect(page).to have_content "Nova linha adicionada com sucesso!"
-		expect(page).to have_content "De 10 a 375"
-		expect(page).to have_content "De 10 a 50"
+		expect(page).to have_content "De 10.0 a 375.0"
+		expect(page).to have_content "De 10.4 a 50.0"
 		expect(page).to have_content "R$ 0,50"
 	end
 

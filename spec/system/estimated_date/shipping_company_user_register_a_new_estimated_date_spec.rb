@@ -42,9 +42,9 @@ describe "Usuário da Transportadora registra uma nova estimativa de entrega" do
 		expect(page).to have_content "Nova linha de estimativa adicionada com sucesso"
 		within "table" do
 			expect(page).to have_content "Distância mínima"
-			expect(page).to have_content "1 M"
+			expect(page).to have_content "1.0 M"
 			expect(page).to have_content "Distância máxima"
-			expect(page).to have_content "100 M"
+			expect(page).to have_content "100.0 M"
 			expect(page).to have_content "Dia(s) úteis"
 			expect(page).to have_content "2"
 		end

@@ -35,9 +35,9 @@ describe "Usuário acessa a Tabela de Preços" do
 		click_on "Transportadora Ligeirinho"
 		click_on "Tabela de Preços"
 
-		expect(page).to have_content "De 10 a 50"
-		expect(page).to have_content "De 10 a 375"
-		expect(page).to have_content "R$ 0,5"
+		expect(page).to have_content "De 10.0 a 50.0"
+		expect(page).to have_content "De 10.0 a 375.0"
+		expect(page).to have_content "R$ 0,50"
 	end
 
 	it "retorna à página da Transportadora" do
