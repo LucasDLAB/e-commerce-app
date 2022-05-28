@@ -24,7 +24,7 @@ describe "Colaborador da Transportadora acessa a página de transportadora" do
 		expect(page).to have_content "12.345.678/9101-12"
 		expect(sc.billing_address).to eql "Carlos Reis 152 - São Gonçalo, RJ"
 		expect(page).to have_content "Distância"
-		expect(page).to have_content "1.0 m"
+		expect(page).to have_content "1.0 Km"
 	end
 
 	it "criar conta de colaborador de uma Transportadora" do

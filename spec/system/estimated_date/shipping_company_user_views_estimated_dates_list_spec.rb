@@ -35,9 +35,9 @@ describe "Usuário da Transportadora acessa a página da Tabela de estimativa de
 
 		within "table" do
 			expect(page).to have_content "Distância mínima"
-			expect(page).to have_content "10.0 M"
+			expect(page).to have_content "10.0 Km"
 			expect(page).to have_content "Distância máxima"
-			expect(page).to have_content "100.0 M"
+			expect(page).to have_content "100.0 Km"
 			expect(page).to have_content "Dia(s) úteis"
 			expect(page).to have_content "3"
 		end

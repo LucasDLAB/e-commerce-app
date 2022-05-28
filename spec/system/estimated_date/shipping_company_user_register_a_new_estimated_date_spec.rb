@@ -34,17 +34,17 @@ describe "Usuário da Transportadora registra uma nova estimativa de entrega" do
 		click_on "Entrar"
 		click_on "Transportadora Ligeirinho"
 		click_on "Adicionar uma nova linha de estimativa de entrega"
-		fill_in "Distância mínima", with: "1"
-		fill_in "Distância máxima", with: "100"
+		fill_in "Distância mínima em Km", with: "1"
+		fill_in "Distância máxima em Km", with: "100"
 		fill_in "Dia(s) úteis", with: "2"
 		click_on "Criar linha de estimativa"
 
 		expect(page).to have_content "Nova linha de estimativa adicionada com sucesso"
 		within "table" do
 			expect(page).to have_content "Distância mínima"
-			expect(page).to have_content "1.0 M"
+			expect(page).to have_content "1.0 Km"
 			expect(page).to have_content "Distância máxima"
-			expect(page).to have_content "100.0 M"
+			expect(page).to have_content "100.0 Km"
 			expect(page).to have_content "Dia(s) úteis"
 			expect(page).to have_content "2"
 		end
