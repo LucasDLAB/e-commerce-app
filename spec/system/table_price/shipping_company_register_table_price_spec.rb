@@ -15,14 +15,14 @@ describe "Usuário da Transportadora cadastra uma nova linha na tabela de preço
 		click_on "Transportadora Ligeirinho"
 		click_on "Adicionar linha na tabela de preço"
 
-		expect(page).to have_field "Peso mínimo"
-		expect(page).to have_field "Peso máximo"
-		expect(page).to have_field "Altura máxima"
-		expect(page).to have_field "Altura mínima"
-		expect(page).to have_field "Largura máxima"
-		expect(page).to have_field "Largura mínima"
-		expect(page).to have_field "Comprimento máximo"
-		expect(page).to have_field "Comprimento mínimo"
+		expect(page).to have_field "Peso mínimo em Kg"
+		expect(page).to have_field "Peso máximo em Kg"
+		expect(page).to have_field "Altura máxima em cm"
+		expect(page).to have_field "Altura mínima em cm"
+		expect(page).to have_field "Largura máxima em cm"
+		expect(page).to have_field "Largura mínima em cm"
+		expect(page).to have_field "Comprimento máximo em cm"
+		expect(page).to have_field "Comprimento mínimo em cm"
 		expect(page).to have_field "Preço por Km"		
 	end
 
@@ -51,7 +51,7 @@ describe "Usuário da Transportadora cadastra uma nova linha na tabela de preço
 		click_on "Adicionar linha"
 
 		expect(page).to have_content "Nova linha adicionada com sucesso!"
-		expect(page).to have_content "De 10.0 a 375.0"
+		expect(page).to have_content "De 0.00001 a 0.000375"
 		expect(page).to have_content "De 10.4 a 50.0"
 		expect(page).to have_content "R$ 0,50"
 	end

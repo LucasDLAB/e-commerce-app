@@ -50,11 +50,11 @@ describe "Administrador cria um novo pedido" do
 		fill_in "Cidade", with: "Rio de janeiro"
 		fill_in "Número", with: 24
 		fill_in "Estado", with: "RJ"
-		fill_in "Peso", with: 27 
-		fill_in "Largura", with: 12
-		fill_in "Comprimento", with:15
-		fill_in "Altura", with:32
-		fill_in "Distância do destinatário", with: 5000
+		fill_in "Peso em Kg", with: 27 
+		fill_in "Largura em cm", with: 12
+		fill_in "Comprimento em cm", with:15
+		fill_in "Altura em cm", with:32
+		fill_in "Distância do destinatário em Km", with: 5000
 		click_on "Criar pedido"
 
 		expect(page).to have_content "Pedido feito com sucesso" 
@@ -64,9 +64,9 @@ describe "Administrador cria um novo pedido" do
 		expect(page).to have_content "Distância do destinatário"
 		expect(page).to have_content "5000"
 		expect(page).to have_content "Peso"
-		expect(page).to have_content "27"
+		expect(page).to have_content "27.0 Kg"
 		expect(page).to have_content "Dimensão"
-		expect(page).to have_content "5760"
+		expect(page).to have_content "0.00576 m³"
 		expect(page).to have_content "Status do pedido"
 		expect(page).to have_content "Pendente de aceite"
 	end
@@ -94,17 +94,17 @@ describe "Administrador cria um novo pedido" do
  		expect(page).to have_content "Cidade não pode ficar em branco"
  		expect(page).to have_content "Estado não pode ficar em branco"
  		expect(page).to have_content "Número não pode ficar em branco"
- 		expect(page).to have_content "Peso não pode ficar em branco"
- 		expect(page).to have_content "Largura não pode ficar em branco"
- 		expect(page).to have_content "Comprimento não pode ficar em branco"
- 		expect(page).to have_content "Altura não pode ficar em branco"
- 		expect(page).to have_content "Distância do destinatário não pode ficar em branco"
+ 		expect(page).to have_content "Peso em Kg não pode ficar em branco"
+ 		expect(page).to have_content "Largura em cm não pode ficar em branco"
+ 		expect(page).to have_content "Comprimento em cm não pode ficar em branco"
+ 		expect(page).to have_content "Altura em cm não pode ficar em branco"
+ 		expect(page).to have_content "Distância do destinatário em Km não pode ficar em branco"
  		expect(page).to have_content "Número não é um número"
- 		expect(page).to have_content "Peso não é um número"
- 		expect(page).to have_content "Largura não é um número"
- 		expect(page).to have_content "Comprimento não é um número"
- 		expect(page).to have_content "Altura não é um número"
- 		expect(page).to have_content "Distância do destinatário não é um número"
+ 		expect(page).to have_content "Peso em Kg não é um número"
+ 		expect(page).to have_content "Largura em cm não é um número"
+ 		expect(page).to have_content "Comprimento em cm não é um número"
+ 		expect(page).to have_content "Altura em cm não é um número"
+ 		expect(page).to have_content "Distância do destinatário em Km não é um número"
 	end
 end
 

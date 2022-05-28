@@ -20,9 +20,9 @@ describe "Usuário da Transportadora cadastrada um novo veículo" do
 		expect(page).to have_field "Modelo do Veículo"
 		expect(page).to have_field "Placa de identificação"
 		expect(page).to have_field "Capacidade máxima"
-		expect(page).to have_field "Altura"
-		expect(page).to have_field "Largura"
-		expect(page).to have_field "Comprimento"
+		expect(page).to have_field "Altura em cm"
+		expect(page).to have_field "Largura em cm"
+		expect(page).to have_field "Comprimento em cm"
 	end
 
 	it "com sucesso" do
@@ -43,9 +43,9 @@ describe "Usuário da Transportadora cadastrada um novo veículo" do
 		fill_in "Modelo do Veículo", with:"Atego"
 		fill_in "Placa de identificação", with:"AAAA000"
 		fill_in "Capacidade máxima", with:9000_000
-		fill_in "Altura", with:12
-		fill_in "Largura", with:1
-		fill_in "Comprimento", with:5
+		fill_in "Altura em cm", with:12
+		fill_in "Largura em cm", with:1
+		fill_in "Comprimento em cm", with:5
 		click_on "Registrar veículo"
 
 		expect(page).to have_content "Veículo cadastrado com sucesso!"
@@ -72,15 +72,11 @@ describe "Usuário da Transportadora cadastrada um novo veículo" do
 		expect(page).to have_content "Falha ao cadastrar o veículo"
 		expect(page).to have_content "Marca não pode ficar em branco"
  		expect(page).to have_content "Ano de fabricação não pode ficar em branco"
- 		expect(page).to have_content "Capacidade máxima não pode ficar em branco"
+ 		expect(page).to have_content "Capacidade máxima em Kg não pode ficar em branco"
  		expect(page).to have_content "Modelo do Veículo não pode ficar em branco"
- 		expect(page).to have_content "Altura não pode ficar em branco"
- 		expect(page).to have_content "Comprimento não pode ficar em branco"
- 		expect(page).to have_content "Largura não pode ficar em branco"
- 		expect(page).to have_content "Capacidade máxima não pode ficar em branco"
- 		expect(page).to have_content "Altura não pode ficar em branco"
- 		expect(page).to have_content "Comprimento não pode ficar em branco"
- 		expect(page).to have_content "Largura não pode ficar em branco"
+ 		expect(page).to have_content "Altura em cm não pode ficar em branco"
+ 		expect(page).to have_content "Comprimento em cm não pode ficar em branco"
+ 		expect(page).to have_content "Largura em cm não pode ficar em branco"
  		expect(page).to have_content "Ano de fabricação não pode ficar em branco"
  		expect(page).to have_content "Placa de identificação não é válido"
  		expect(page).to have_content "Placa de identificação deve possuir 4 letras e 3 números."

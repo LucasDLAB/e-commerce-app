@@ -8,6 +8,9 @@ class ShippingCompany < ApplicationRecord
 	#uniqueness
 	validates :brand_name, :corporate_name, :email_domain, :registration_number, uniqueness: true
 
+	#greater than
+	validates :distance, comparison: {greater_than: 0}
+
 	#numericality
 	validates :number, :distance, numericality:true
 
@@ -20,9 +23,13 @@ class ShippingCompany < ApplicationRecord
   validates :state, format: {with:/[A-Z]{2}/}
   validates :email_domain, format: {with: /@\w.+/}
 
-  after_validation :addressing
+  after_validation :addressing, :min_tax
 
   private
+  	def min_tax
+  		self_min_price = 0.2 * self.distance.to_d
+  	end
+
   	def addressing
   		self.billing_address = "#{self.street} #{self.number} - #{self.city}, #{self.state}"
   	end

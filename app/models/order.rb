@@ -19,7 +19,7 @@ class Order < ApplicationRecord
 
   private
     def dimensioning
-      self.dimension = self.length.to_d * self.width.to_d * self.height.to_d
+      self.dimension = (self.length.to_d * self.width.to_d * self.height.to_d) / 1000000
     end
 
     def addressing

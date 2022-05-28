@@ -4,6 +4,6 @@ pt-BR:
       estimated_date: "Prazo estimado"
     attributes:
       estimated_date:
-        min_distance: "Distância mínima em metros"
-        max_distance: "Distância máxima em metros"
+        min_distance: "Distância mínima em Km"
+        max_distance: "Distância máxima em Km"
         business_day: "Dia(s) úteis"

@@ -33,8 +33,8 @@ class TablePrice < ApplicationRecord
 
   private
     def dimensioning
-      self.max_dimension = self.max_length.to_d * self.max_width.to_d * self.max_height.to_d
-      self.minimum_dimension = self.minimum_length.to_d * self.minimum_width.to_d * self.minimum_height.to_d
+      self.max_dimension = (self.max_length.to_d * self.max_width.to_d * self.max_height.to_d) / 1000000
+      self.minimum_dimension = (self.minimum_length.to_d * self.minimum_width.to_d * self.minimum_height.to_d) / 1000000
     end
 
     def nulling_interval_conflict
