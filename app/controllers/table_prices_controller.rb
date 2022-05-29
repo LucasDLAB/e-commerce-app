@@ -1,5 +1,6 @@
 class TablePricesController < ApplicationController
 	before_action :authenticate_user!, only: [:new, :create]
+	before_action :authenticate_admin!, only: [:search, :calculate]
 
 	def show
 		@table_prices = []
@@ -33,16 +34,20 @@ class TablePricesController < ApplicationController
 	end
 
 	def calculate
-		@shipping_company = ShippingCompany.all
-		@dimension = params[:length].to_d * params[:width].to_d * params[:height].to_d / 1000000
-		@weight = params[:weight].to_d
-		@distance = params[:distance].to_d
-		@prices = []
-		@dates = []
-		defining_price
-		@tables = []
-		@prices.each do |ps|
-			@tables << TablePrice.find(ps)
+		if params[:weight] == "" || params[:height] == "" || params[:width] == "" || params[:length] == "" || params[:distance] == ""
+			redirect_to search_table_prices_path, notice: "É necessário preencher todos os campos para criar um orçamento"
+		else
+			@shipping_company = ShippingCompany.all
+			@dimension = params[:length].to_d * params[:width].to_d * params[:height].to_d / 1000000
+			@weight = params[:weight].to_d
+			@distance = params[:distance].to_d
+			@prices = []
+			@dates = []
+			defining_price
+			@tables = []
+			@prices.each do |ps|
+				@tables << TablePrice.find(ps)
+			end
 		end
 	end
 

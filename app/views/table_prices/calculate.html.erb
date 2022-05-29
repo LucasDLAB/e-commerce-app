@@ -8,12 +8,17 @@
 			<td>Nome da Transportadora</td>
 			<td>Preço</td>
 			<td>Prazo</td>
-		</tr>
-					
+		</tr>		
 			<% @tables.each do |t|%>
-				<tr>
+				<tr>	
 				<td>Transportadora <%= t.shipping_company.corporate_name%></td>
-				<td><%= number_to_currency(t.price * @distance)%></td>
+				<td>
+					<% if (t.price * @distance) < t.shipping_company.min_price%>
+						<%= number_to_currency(t.shipping_company.min_price)%>	
+					<%else%>
+						<%= number_to_currency(t.price * @distance)%>
+					<%end%>
+				</td>
 				<td><%= @dates[@tables.index(t)]%> dia(s) úteis</td>
 			<%end%>
 		</tr>
