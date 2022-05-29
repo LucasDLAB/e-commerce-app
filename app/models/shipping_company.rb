@@ -2,6 +2,7 @@ class ShippingCompany < ApplicationRecord
 	has_many :users
 	has_many :transport_vehicles
 	has_many :table_prices 
+	has_many :estimated_dates
 	# presence
 	validates :distance,:brand_name, :corporate_name, :email_domain, :registration_number, :state, :street, :number, :city, presence:true
 

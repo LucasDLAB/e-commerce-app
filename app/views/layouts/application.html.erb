@@ -13,16 +13,15 @@
     <header>
       <h1 id="titulo"><%= link_to "Stay Night", root_path%></h1>
         <nav>
-          <%if admin_signed_in?%>
-            <%= link_to "Pedidos", orders_path%> |
-          <%end%>
           <%= link_to "Rastrear um pedido"%> |
           <%if user_signed_in? || admin_signed_in?%>
+            <%= link_to "Pedidos", orders_path%> |
             <%if user_signed_in?%>
               <%=current_user.name%> |
               <%= current_user.email%> |
               <%= button_to "Sair", destroy_user_session_path, method: :delete%>
             <% else%>
+              <%= link_to "Fazer um novo orçamento", search_table_prices_path%>|
               <%=current_admin.name%> |
               <%= current_admin.email%> |
               <%= button_to "Sair", destroy_admin_session_path, method: :delete%>

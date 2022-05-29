@@ -1,0 +1,83 @@
+<title>Visualizando pedido</title>
+
+<h2>Pedido <%= @order.order_code%></h2>
+
+<dl>
+	<%if admin_signed_in?%>
+		<dt>
+			<%=Order.human_attribute_name(:destinatary_name)%>
+		</dt>
+
+		<dd>
+			<%=@order.destinatary_name%>
+		</dd>
+
+		<dt>
+			<%= Order.human_attribute_name(:destinatary_identification)%>
+		</dt>
+
+		<dd>
+			<%= @order.destinatary_identification%>
+		</dd>
+
+		<dt>
+			<%= Order.human_attribute_name(:full_address)%>
+		</dt>
+
+		<dd>
+			<%= @order.full_address%>
+		</dd>
+	<%end%>
+
+	<dt>
+		<%= Order.human_attribute_name(:destinatary_distance)%>
+	</dt>
+
+	<dd>
+		<%= @order.destinatary_distance%> Km
+	</dd>
+
+	<dt>
+		<%= Order.human_attribute_name(:dimension)%>
+	</dt>
+
+	<dd>
+		<%=@order.dimension%> m³
+	</dd>
+
+	<dt>
+		<%= Order.human_attribute_name(:weight)%>
+	</dt>
+
+	<dd>
+		<%=@order.weight%> Kg
+	</dd>
+
+	<dt>
+		<%= Order.human_attribute_name(:status)%>
+	</dt>
+
+	<dd>
+		<%= Order.human_enum_name(:status,@order.status)%>
+	</dd>
+
+	<% if !admin_signed_in? || !user_signed_in?%>
+
+	<%elsif admin_signed_in? || current_user.shipping_company_id == @order.shipping_company_id%>
+		<dt>
+			<%= Order.human_attribute_name(:destinatary_identification)%>
+		</dt>
+
+		<dd>
+			<%= @order.destinatary_identification%>
+		</dd>
+
+		<dt>
+			<%= Order.human_attribute_name(:full_address)%>
+		</dt>
+
+		<dd>
+			<%= @order.full_address%>
+		</dd>
+	<%end%>
+</dl>

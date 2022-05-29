@@ -5,7 +5,7 @@ class OrdersController < ApplicationController
 		if admin_signed_in?
 			@orders = Order.all
 		elsif user_signed_in?
-			@orders = Order.pending
+			@orders = Order.pending 
 		else
 			redirect_to root_path, notice: "É necessário ser um Administrador ou Usuário de transportadora para acessar esta página"
 		end
@@ -26,6 +26,11 @@ class OrdersController < ApplicationController
 			flash.now[:notice] = "Falha ao cadastrar ao criar o novo pedido"
 			render :new
 		end
+	end
+
+	def show
+		@order = Order.find(params[:id])
+		format_documentation(@order)
 	end
 
 	private

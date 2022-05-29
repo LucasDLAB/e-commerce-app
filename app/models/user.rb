@@ -7,6 +7,8 @@ class User < ApplicationRecord
   validates :name, presence: true 
   validate :existing_email_domain
 
+  validates :name, format: {with:/[A-Z][a-z]+/}
+
   after_validation :associate_company_id
 
   private 

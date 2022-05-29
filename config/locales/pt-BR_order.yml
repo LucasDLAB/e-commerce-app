@@ -17,6 +17,7 @@ pt-BR:
         destinatary_distance: "Distância do destinatário em Km"
         dimension: "Dimensão"
         status: "Status do pedido"
+        full_address: "Endereço completo do destinatário"
         statuses:
           pending: "Pendente de aceite" 
           refused: "Recusada"
@@ -24,4 +25,5 @@ pt-BR:
           waiting: "Aguardando pagamento"
           road: "À caminho"
           delivered: "Entregue"
+          preparing: "Preparando o pedido"
 

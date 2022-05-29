@@ -22,7 +22,7 @@ RSpec.describe Order, type: :model do
 
 		it "falso se os campos [Peso,Largura,Comprimento,Altura,Número,Distância do destinatário]" do
 			order = Order.new(weight:"a",width:"a",height:"a",length:"a",number:"a",
-												destinatary_distance:"a",height:"a")
+												destinatary_distance:"a")
 			 
 			order.valid?
 

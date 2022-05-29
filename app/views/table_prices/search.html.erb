@@ -1,0 +1,34 @@
+<title>Criando um orçamento</title>
+
+<h2>Criando um orçamento</h2>
+
+<%=form_with(url: calculate_table_prices_path, method: :get) do |c|%>
+	<div>
+		<%= c.label :distance, "Distância em Km"%>
+		<%= c.number_field :distance %>
+	</div>
+
+	<div>
+		<%= c.label :height, "Altura em cm"%>
+		<%= c.number_field :height%>
+	</div>
+
+	<div>
+		<%= c.label :width, "Largura em cm"%>
+		<%= c.number_field :width %>
+	</div>
+
+	<div>
+		<%= c.label :length, "Comprimento em cm"%>
+		<%= c.number_field :length %>
+	</div>
+
+	<div>
+		<%= c.label :weight, "Peso em Kg"%>
+		<%= c.number_field :weight %>
+	</div>
+
+	<div>
+		<%= c.submit "Confirmar parâmetros"%>
+	</div>
+<%end%>

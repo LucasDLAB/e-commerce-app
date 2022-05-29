@@ -31,7 +31,7 @@ describe "Administrador cria um novo pedido" do
 	end 
 
 	it "com sucesso" do
-		Admin.create!(email:"lucas@sistemadefrete.com",password:"password",name:"Lucas")
+		admin = Admin.create!(email:"lucas@sistemadefrete.com",password:"password",name:"Lucas")
 		ShippingCompany.create!(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
 														registration_number:"12345678910112",email_domain: "@ligeiro.com",
 														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:100)
@@ -59,8 +59,6 @@ describe "Administrador cria um novo pedido" do
 
 		expect(page).to have_content "Pedido feito com sucesso" 
 		expect(page).to have_content "Pedido ABCDEF123456789"
-		expect(page).to have_content "Nome do destinatário"
-		expect(page).to have_content "João"
 		expect(page).to have_content "Distância do destinatário"
 		expect(page).to have_content "5000"
 		expect(page).to have_content "Peso"
