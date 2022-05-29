@@ -20,10 +20,13 @@ describe "Colaborador da Transportadora acessa a página de transportadora" do
 		
 		expect(page).not_to have_content "Entrar"
 		expect(page).to have_content "Transportadora Ligeirinho"
+		expect(page).to have_content "Razão Social"
 		expect(page).to have_content "Ligeirinho LTDA"
+		expect(page).to have_content "Número de registro"
 		expect(page).to have_content "12.345.678/9101-12"
+		expect(page).to have_content "Endereço de faturamento"
 		expect(sc.billing_address).to eql "Carlos Reis 152 - São Gonçalo, RJ"
-		expect(page).to have_content "Distância"
+		expect(page).to have_content "Distância em Km"
 		expect(page).to have_content "1.0 Km"
 	end
 

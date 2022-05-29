@@ -15,7 +15,7 @@ pt-BR:
         length: "Comprimento em cm"
         height: "Altura em cm"
         destinatary_distance: "Distância do destinatário em Km"
-        dimension: "Dimensão"
+        dimension: "Metragem Cúbica"
         status: "Status do pedido"
         full_address: "Endereço completo do destinatário"
         statuses:

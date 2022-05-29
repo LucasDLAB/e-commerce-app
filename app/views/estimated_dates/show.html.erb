@@ -6,9 +6,9 @@
 	<div>
 		<table>
 				<tr>
-					<td>Distância mínima</td>
-					<td>Distância máxima</td>
-					<td>Dia(s) úteis</td>
+					<td><%= EstimatedDate.human_attribute_name(:min_distance)%></td>
+					<td><%=EstimatedDate.human_attribute_name(:max_distance)%></td>
+					<td><%=EstimatedDate.human_attribute_name(:business_day)%></td>
 				</tr>
 					
 				<%@estimated_date_lines.each do |ed|%>

@@ -6,8 +6,8 @@ pt-BR:
       table_price: 
         minimum_weight: "Peso mínimo em Kg"
         max_weight: "Peso máximo em Kg"
-        minimum_dimension: "Dimensão mínima"
-        max_dimension: "Dimensão máxima"
+        minimum_dimension: "Metragem Cúbica mínima"
+        max_dimension: "Metragem Cúbica máxima"
         max_height: "Altura máxima em cm"
         minimum_height: "Altura mínima em cm"
         max_width: "Largura máxima em cm"

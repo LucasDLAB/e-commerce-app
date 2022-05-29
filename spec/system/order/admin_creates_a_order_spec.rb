@@ -63,7 +63,7 @@ describe "Administrador cria um novo pedido" do
 		expect(page).to have_content "5000"
 		expect(page).to have_content "Peso"
 		expect(page).to have_content "27.0 Kg"
-		expect(page).to have_content "Dimensão"
+		expect(page).to have_content "Metragem Cúbica"
 		expect(page).to have_content "0.00576 m³"
 		expect(page).to have_content "Status do pedido"
 		expect(page).to have_content "Pendente de aceite"

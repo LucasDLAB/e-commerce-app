@@ -4,12 +4,12 @@
       transport_vehicle: "Veículo de entrega"
     attributes:
       transport_vehicle: 
-        brand: "Marca"
+        brand: "Marca do Veículo"
         year_manufacture: "Ano de fabricação"
         payload: "Capacidade máxima em Kg"
         vehicle_model: "Modelo do Veículo"
         identification_plate: "Placa de identificação"
-        dimension: "Dimensão"
+        dimension: "Metragem Cúbica"
         height: "Altura em cm"
         length: "Comprimento em cm"
         width: "Largura em cm"

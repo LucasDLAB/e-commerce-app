@@ -18,12 +18,18 @@ describe "Usuário da Transportadora acessa a página de detalhes do veículo" d
 		click_on "Veículos"
 
 		expect(page).to have_content "Frota da Transportadora Ligeirinho"
+		expect(page).to have_content "Marca do Veículo"
 		expect(page).to have_content "Mercedes"
+		expect(page).to have_content "Ano de fabricação"
 		expect(page).to have_content "2017"
+		expect(page).to have_content "Modelo do Veículo"
 		expect(page).to have_content "Atego"
+		expect(page).to have_content "Placa de identificação"
 		expect(page).to have_content "AAAA000"
+		expect(page).to have_content "Capacidade máxima"
 		expect(page).to have_content "9000"
-		expect(page).to have_content "17028"
+		expect(page).to have_content "Metragem Cúbica"
+		expect(page).to have_content "0.017028 m³"
 	end
 
 	it "sem veículos cadastrados" do
