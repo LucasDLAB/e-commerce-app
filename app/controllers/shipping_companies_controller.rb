@@ -41,6 +41,22 @@ class ShippingCompaniesController < ApplicationController
 		end
 	end
 
+	def active
+		shipping_company = ShippingCompany.find(params[:id])
+
+		shipping_company.active!
+
+		redirect_to shipping_company_path(shipping_company.id)
+	end
+
+	def disable
+		shipping_company = ShippingCompany.find(params[:id])
+
+		shipping_company.disable!
+
+		redirect_to shipping_company_path(shipping_company.id)
+	end
+
 	private
 	 def format_documentation(cnpj)
       cnpj.registration_number.insert(2, ".")

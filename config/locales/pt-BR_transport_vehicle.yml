@@ -13,3 +13,8 @@
         height: "Altura em cm"
         length: "Comprimento em cm"
         width: "Largura em cm"
+        status: "Status do Veículo"
+        statuses:
+          available: "Na garagem"
+          broken: "Quebrado"
+          delivering: "Em uma entrega"

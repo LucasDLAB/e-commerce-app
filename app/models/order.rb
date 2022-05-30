@@ -14,7 +14,7 @@ class Order < ApplicationRecord
   validates :order_code, length: {is:15}
   validates :state, length: {is:2}
   
-  after_validation :dimensioning,:addressing
+  after_validation :dimensioning,:addressing, :finding_companies
   before_validation :generate_code
 
   private
@@ -28,5 +28,38 @@ class Order < ApplicationRecord
 
     def generate_code
       self.order_code = SecureRandom.alphanumeric(15).upcase
+    end
+
+    def finding_companies
+      prices_id = []
+      ShippingCompany.all.each do |sc|
+        last_price = 0
+        id = 0
+        if sc.active? && sc.transport_vehicles.available.count
+          sc.table_prices.each do |tp|
+            if ((tp.minimum_weight <= self.weight && self.weight <= tp.max_weight) || 
+            (tp.minimum_dimension <= self.dimension && self.dimension <= tp.max_dimension)) && 
+            last_price < (self.destinatary_distance.to_d * tp.price)
+              last_price = self.destinatary_distance.to_d * tp.price
+              id = tp.id
+            end
+          end
+          if id != 0
+            sc.estimated_dates.each do |ed|
+              if self.destinatary_distance >= ed.min_distance && self.destinatary_distance <= ed.max_distance
+                prices_id << [id,last_price]
+              end
+            end
+          end
+        end
+      end
+
+      prices_id = prices_id.sort_by(&:last)
+      prices_id.each do |ps|
+        ps.delete_at 1
+      end
+
+      
+      self.wanted_companies = prices_id = prices_id.join(" ")
     end
 end

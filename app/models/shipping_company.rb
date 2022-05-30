@@ -1,4 +1,5 @@
 class ShippingCompany < ApplicationRecord
+	enum status: {active:0, disable:2}
 	has_many :users
 	has_many :transport_vehicles
 	has_many :table_prices 

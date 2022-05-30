@@ -54,6 +54,14 @@
 				<dd>
 					<%=tv.dimension%> m³
 				</dd>
+
+				<dt>
+					<%= TransportVehicle.human_attribute_name(:status)%>
+				</dt>
+
+				<dd>
+					<%=TransportVehicle.human_enum_name(:status,tv.status)%> 
+				</dd>
 			</dl>
 		</div>
 		<br>

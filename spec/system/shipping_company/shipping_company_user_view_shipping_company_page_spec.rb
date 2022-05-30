@@ -15,9 +15,9 @@ describe "Colaborador da Transportadora acessa a página de transportadora" do
 			fill_in "Senha", with: "password"
 			fill_in "Confirme sua senha", with: "password"
 			click_on "Registrar"
-		end			
+		end
 		click_on "Transportadora Ligeirinho"
-		
+
 		expect(page).not_to have_content "Entrar"
 		expect(page).to have_content "Transportadora Ligeirinho"
 		expect(page).to have_content "Razão Social"

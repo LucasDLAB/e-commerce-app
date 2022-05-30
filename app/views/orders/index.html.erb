@@ -1,7 +1,9 @@
 <title>Listagem de pedidos</title>
 
 <nav>
-<%= link_to "Criar um novo pedido", new_order_path %>
+	<%if admin_signed_in?%>
+		<%= link_to "Criar um novo pedido", new_order_path %>
+	<%end%>
 </nav>
 
 <h2>Listagem de pedidos</h2>
@@ -42,6 +44,11 @@
 				<%= Order.human_enum_name(:status,o.status)%>
 			</dd>
 		</dl>
+			<%if user_signed_in?%>
+				<%= button_to "Aceitar Pedido", accept_order_path(o.id), {method: "patch"}%>
+				<br>
+				<%= button_to "Recusar pedido", refuse_order_path(o.id), {method: "patch"}%>
+			<%end%>
 	<%end%>
 <%else%>
 <p>Não possui pedidos cadastrados</p>

@@ -51,4 +51,46 @@ describe "Administrador acessa a página de transportadoras" do
 
 		expect(page).to have_content "Transportadoras Filiadas"
 	end
+
+	it "desativa a transportadora" do
+		Admin.create!(email:"lucas@sistemadefrete.com",password:"password",name:"Lucas")
+		ShippingCompany.create!(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
+														registration_number:"12345678910112",email_domain: "@ligeiro.com",
+														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
+
+		visit root_path
+		click_on "Entrar como Administrador"
+		fill_in "E-mail", with:"lucas@sistemadefrete.com"
+		fill_in "Senha", with: "password"
+		within "form" do
+			click_on "Entrar"
+		end
+		click_on "Transportadoras"
+		click_on "Ligeirinho"
+		click_on "Desativar transportadora"
+
+		expect(page).to have_content "Status da Transportadora"
+		expect(page).to have_content "Desativada"
+	end
+
+	it "ativa a transportadora" do
+		Admin.create!(email:"lucas@sistemadefrete.com",password:"password",name:"Lucas")
+		ShippingCompany.create!(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
+														registration_number:"12345678910112",email_domain: "@ligeiro.com",
+														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1,status:2)
+
+		visit root_path
+		click_on "Entrar como Administrador"
+		fill_in "E-mail", with:"lucas@sistemadefrete.com"
+		fill_in "Senha", with: "password"
+		within "form" do
+			click_on "Entrar"
+		end
+		click_on "Transportadoras"
+		click_on "Ligeirinho"
+		click_on "Ativar transportadora"
+
+		expect(page).to have_content "Status da Transportadora"
+		expect(page).to have_content "Ativa"
+	end
 end

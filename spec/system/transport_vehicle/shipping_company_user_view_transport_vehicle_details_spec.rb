@@ -8,7 +8,7 @@ describe "Usuário da Transportadora acessa a página de detalhes do veículo" d
 		User.create!(name:"Walter",email:"walter@ligeiro.com",password:"password")
 		TransportVehicle.create!(brand: "Mercedes",year_manufacture: 2017,payload: 9000,
 											 identification_plate:"AAAA000",vehicle_model:"Atego",
-											 height:12,length:33,width:43, shipping_company_id:1,dimension:17028)
+											 height:12,length:33,width:43, shipping_company_id:1)
 		visit root_path
 		click_on "Entrar como colaborador de uma Transportadora"
 		fill_in "E-mail", with: "walter@ligeiro.com"
@@ -30,6 +30,8 @@ describe "Usuário da Transportadora acessa a página de detalhes do veículo" d
 		expect(page).to have_content "9000"
 		expect(page).to have_content "Metragem Cúbica"
 		expect(page).to have_content "0.017028 m³"
+		expect(page).to have_content "Status do Veículo"
+		expect(page).to have_content "Na garagem"
 	end
 
 	it "sem veículos cadastrados" do

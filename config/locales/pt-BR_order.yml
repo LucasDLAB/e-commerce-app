@@ -16,8 +16,8 @@ pt-BR:
         height: "Altura em cm"
         destinatary_distance: "Distância do destinatário em Km"
         dimension: "Metragem Cúbica"
-        status: "Status do pedido"
         full_address: "Endereço completo do destinatário"
+        status: "Status do pedido"
         statuses:
           pending: "Pendente de aceite" 
           refused: "Recusada"

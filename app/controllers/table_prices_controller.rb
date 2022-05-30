@@ -37,7 +37,6 @@ class TablePricesController < ApplicationController
 		if params[:weight] == "" || params[:height] == "" || params[:width] == "" || params[:length] == "" || params[:distance] == ""
 			redirect_to search_table_prices_path, notice: "É necessário preencher todos os campos para criar um orçamento"
 		else
-			@shipping_company = ShippingCompany.all
 			@dimension = params[:length].to_d * params[:width].to_d * params[:height].to_d / 1000000
 			@weight = params[:weight].to_d
 			@distance = params[:distance].to_d
@@ -53,22 +52,25 @@ class TablePricesController < ApplicationController
 
 	private 
 		def defining_price
-			@shipping_company.each do |sc|
+			ShippingCompany.all.each do |sc|
 				last_price = 0
 				id = 0
-				sc.table_prices.each do |tp|
-					if ((tp.minimum_weight <= @weight && @weight <= tp.max_weight) || 
-					(tp.minimum_dimension <= @dimension && @dimension <= tp.max_dimension)) && 
-					last_price < (@distance * tp.price)
-						last_price = @distance * tp.price
-						id = tp.id
+				if sc.active? && sc.transport_vehicles.available.count
+					sc.table_prices.each do |tp|
+						if ((tp.minimum_weight <= @weight && @weight <= tp.max_weight) || 
+						(tp.minimum_dimension <= @dimension && @dimension <= tp.max_dimension)) && 
+						last_price < (@distance * tp.price)
+							last_price = @distance * tp.price
+							id = tp.id
+						end
 					end
-				end
-				@prices << id
-
-				sc.estimated_dates.each do |ed|
-					if @distance >= ed.min_distance && @distance <= ed.max_distance
-						@dates << ed.business_day
+					if id != 0
+						sc.estimated_dates.each do |ed|
+							if @distance >= ed.min_distance && @distance <= ed.max_distance
+								@prices << id
+								@dates << ed.business_day
+							end
+						end
 					end
 				end
 			end

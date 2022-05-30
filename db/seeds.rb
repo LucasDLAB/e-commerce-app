@@ -21,8 +21,31 @@ p "Transportadora pronta"
 p linha
 p "Carregando Usuário"
 	User.create!(email:"teste@ligeiro.com",password:"password",name:"Testing")
-p "Usuário pronto"
 p linha 
+p "Usuário pronto"
+
+p linha
+p "Carregando Veículo"
+	TransportVehicle.create!(brand: "Mercedes",year_manufacture: 2017,payload: 9000,
+											 identification_plate:"AAAA000",vehicle_model:"Atego",
+											 height:12,length:33,width:43, shipping_company_id:1)
+p linha 
+p "Veículo pronto"
+
+p linha
+p "Carregando Linha de preço"
+	TablePrice.create!(minimum_weight:10,max_weight:50,minimum_height:1,
+											 max_height:5,minimum_width:1,max_width:5,
+											 minimum_length:10,max_length:15,price:0.5,shipping_company_id:1)
+p linha 
+p "Linha de preço pronta"
+
+p linha
+p "Carregando prazo estimado"
+EstimatedDate.create!(min_distance:10 , max_distance:100, business_day: 3,shipping_company_id:1)
+p linha 
+p "Prazo estimado pronto"
+
 
 
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])

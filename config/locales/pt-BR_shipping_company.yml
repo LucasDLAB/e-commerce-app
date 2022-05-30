@@ -14,4 +14,7 @@ pt-BR:
         state: "Estado"
         city: "Cidade"
         distance: "Distância em Km"
-        
+        status: "Status da Transportadora"
+        statuses:
+          active: "Ativa"
+          disable: "Desativada"        

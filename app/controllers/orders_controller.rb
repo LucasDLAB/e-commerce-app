@@ -5,7 +5,12 @@ class OrdersController < ApplicationController
 		if admin_signed_in?
 			@orders = Order.all
 		elsif user_signed_in?
-			@orders = Order.pending 
+			@orders = []
+			Order.pending.each do |o|
+				if o.wanted_companies.match(/\w+/)[0].to_i == current_user.shipping_company_id 
+					@orders << o 
+				end
+			end
 		else
 			redirect_to root_path, notice: "É necessário ser um Administrador ou Usuário de transportadora para acessar esta página"
 		end
