@@ -12,7 +12,10 @@ Rails.application.routes.draw do
     get "search", on: :collection
     get "calculate", on: :collection
   end
-  resources :orders, only: [:index,:new, :create,:show]
+  resources :orders, only: [:index,:new, :create,:show] do 
+    get "choose_vehicle", on: :member
+    patch "associate_shipping_company", on: :member
+  end
   resources :estimated_dates, only: [:new, :create,:show]
   # Defines the root path route ("/")
   # root "articles#index"

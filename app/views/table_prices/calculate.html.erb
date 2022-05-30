@@ -13,13 +13,9 @@
 				<tr>	
 				<td>Transportadora <%= t.shipping_company.corporate_name%></td>
 				<td>
-					<% if (t.price * @distance) < t.shipping_company.min_price%>
-						<%= number_to_currency(t.shipping_company.min_price)%>	
-					<%else%>
-						<%= number_to_currency(t.price * @distance)%>
-					<%end%>
+					<%= number_to_currency(@data[@tables.index(t)][0])%>	
 				</td>
-				<td><%= @dates[@tables.index(t)]%> dia(s) úteis</td>
+				<td><%= @data[@tables.index(t)][1]%> dia(s) úteis</td>
 			<%end%>
 		</tr>
 	</table>

@@ -236,7 +236,6 @@ describe "Administrador cria um orçamento" do
 		expect(page).to have_content "R$ 100,00"
 		expect(page).not_to have_content "R$ 75,00"
 	end
-
 end
 
 

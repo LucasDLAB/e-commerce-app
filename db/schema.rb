@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_29_230225) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_30_213813) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -54,7 +54,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_29_230225) do
     t.integer "status", default: 0
     t.string "full_address"
     t.string "wanted_companies"
+    t.integer "transport_vehicle_id"
+    t.decimal "order_price"
+    t.integer "estimated_date"
     t.index ["shipping_company_id"], name: "index_orders_on_shipping_company_id"
+    t.index ["transport_vehicle_id"], name: "index_orders_on_transport_vehicle_id"
   end
 
   create_table "shipping_companies", force: :cascade do |t|
@@ -126,6 +130,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_29_230225) do
 
   add_foreign_key "estimated_dates", "shipping_companies"
   add_foreign_key "orders", "shipping_companies"
+  add_foreign_key "orders", "transport_vehicles"
   add_foreign_key "table_prices", "shipping_companies"
   add_foreign_key "transport_vehicles", "shipping_companies"
   add_foreign_key "users", "shipping_companies"

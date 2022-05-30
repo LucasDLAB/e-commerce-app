@@ -40,11 +40,11 @@ class TablePricesController < ApplicationController
 			@dimension = params[:length].to_d * params[:width].to_d * params[:height].to_d / 1000000
 			@weight = params[:weight].to_d
 			@distance = params[:distance].to_d
-			@prices = []
-			@dates = []
+			@data = []
+			@ids = []
 			defining_price
 			@tables = []
-			@prices.each do |ps|
+			@ids.each do |ps|
 				@tables << TablePrice.find(ps)
 			end
 		end
@@ -53,22 +53,25 @@ class TablePricesController < ApplicationController
 	private 
 		def defining_price
 			ShippingCompany.all.each do |sc|
-				last_price = 0
+				higher_price = sc.min_price
 				id = 0
 				if sc.active? && sc.transport_vehicles.available.count > 0
 					sc.table_prices.each do |tp|
 						if ((tp.minimum_weight <= @weight && @weight <= tp.max_weight) || 
-						(tp.minimum_dimension <= @dimension && @dimension <= tp.max_dimension)) && 
-						last_price < (@distance * tp.price)
-							last_price = @distance * tp.price
-							id = tp.id
+						(tp.minimum_dimension <= @dimension && @dimension <= tp.max_dimension))
+							if higher_price > (@distance * tp.price)
+								id = tp.id
+							else
+								higher_price = @distance * tp.price
+								id = tp.id
+							end
 						end
 					end
 					if id != 0
 						sc.estimated_dates.each do |ed|
 							if @distance >= ed.min_distance && @distance <= ed.max_distance
-								@prices << id
-								@dates << ed.business_day
+								@ids << id
+								@data << [higher_price,ed.business_day]
 							end
 						end
 					end

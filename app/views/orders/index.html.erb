@@ -10,7 +10,9 @@
 
 <%if @orders.any?%>
 	<% @orders.each do |o|%>
-		<h3><%= link_to "Pedido  #{o.order_code}", o%></h3>
+		<%if (user_signed_in? && o.shipping_company_id == current_user.shipping_company_id) || admin_signed_in?%>
+			<h3><%= link_to "Pedido  #{o.order_code}", o%></h3>
+		<%end%>
 		<dl>
 			<dt>
 				<%=Order.human_attribute_name(:destinatary_distance)%>
@@ -44,10 +46,10 @@
 				<%= Order.human_enum_name(:status,o.status)%>
 			</dd>
 		</dl>
-			<%if user_signed_in?%>
-				<%= button_to "Aceitar Pedido", accept_order_path(o.id), {method: "patch"}%>
+			<%if user_signed_in? && o.pending?%>
+				<%= button_to "Aceitar Pedido", choose_vehicle_order_path(o), method: :get%>
 				<br>
-				<%= button_to "Recusar pedido", refuse_order_path(o.id), {method: "patch"}%>
+				<%= button_to "Recusar pedido"%>
 			<%end%>
 	<%end%>
 <%else%>

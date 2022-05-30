@@ -18,6 +18,10 @@ pt-BR:
         dimension: "Metragem Cúbica"
         full_address: "Endereço completo do destinatário"
         status: "Status do pedido"
+        shipping_company_id: "Transportadora responsável"
+        transport_vehicle_id: "Veículo da entrega"
+        order_price: "Valor do pedido"
+        estimated_date: "Prazo estimado"
         statuses:
           pending: "Pendente de aceite" 
           refused: "Recusada"

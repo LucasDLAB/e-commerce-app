@@ -1,5 +1,5 @@
 class TransportVehicle < ApplicationRecord
-  enum status: {available: 0, broken: 2, delivering:4}
+  enum status: {available: 0, broken: 2, delivery:4}
 
   belongs_to :shipping_company, optional: true
   

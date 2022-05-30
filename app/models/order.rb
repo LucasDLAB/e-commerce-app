@@ -1,7 +1,8 @@
 class Order < ApplicationRecord
-  enum status: {pending: 0, refused:2, accepted:4, waiting:6, preparing:7,road:8,delivered:10}
+  enum status: {pending: 0, refused:2, waiting:6, preparing:7,road:8,delivered:10}
   belongs_to :shipping_company, optional: true
-
+  belongs_to :transport_vehicle, optional: true
+  
   validates :destinatary_name, :destinatary_identification,:street, :city, :state, :number, 
             :weight, :width, :length, :height, :destinatary_distance, :order_code, presence: true
   

@@ -17,4 +17,4 @@
         statuses:
           available: "Na garagem"
           broken: "Quebrado"
-          delivering: "Em uma entrega"
+          delivery: "Em uma entrega"

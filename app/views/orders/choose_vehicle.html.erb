@@ -1,0 +1,12 @@
+<title>Selecionando um veículo</title>
+
+<h2>Selecionando um veículo</h2>
+
+<%= form_with(url: associate_shipping_company_order_path, method: :patch) do |o|%>
+	<div>
+		<%= o.label :vehicle,"Veículo"%>
+		<%= o.collection_select :vehicle,@vehicles,:id,:vehicle_model%>
+	</div>
+	
+	<%=o.submit "Selecionar veículo"%>
+<%end%>
