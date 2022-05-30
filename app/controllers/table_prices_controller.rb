@@ -55,7 +55,7 @@ class TablePricesController < ApplicationController
 			ShippingCompany.all.each do |sc|
 				last_price = 0
 				id = 0
-				if sc.active? && sc.transport_vehicles.available.count
+				if sc.active? && sc.transport_vehicles.available.count > 0
 					sc.table_prices.each do |tp|
 						if ((tp.minimum_weight <= @weight && @weight <= tp.max_weight) || 
 						(tp.minimum_dimension <= @dimension && @dimension <= tp.max_dimension)) && 

@@ -27,6 +27,9 @@ describe "Administrador cria um orçamento" do
 		ShippingCompany.create!(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
 														registration_number:"12345678910112",email_domain: "@ligeiro.com",
 														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo", distance:1)
+		TransportVehicle.create!(brand: "Mercedes",year_manufacture: 2017,payload: 9000,
+											 identification_plate:"AAAA000",vehicle_model:"Atego",
+											 height:12,length:33,width:43, shipping_company_id:1)
 		TablePrice.create!(minimum_weight:10,max_weight:50,minimum_height:1,
 											 max_height:5,minimum_width:1,max_width:5,
 											 minimum_length:10,max_length:15,price:0.5,shipping_company_id:1)
@@ -60,7 +63,9 @@ describe "Administrador cria um orçamento" do
 		TablePrice.create!(minimum_weight:10,max_weight:50,minimum_height:5,
 											 max_height:10,minimum_width:10,max_width:50,
 											 minimum_length:10,max_length:15,price:1.5,shipping_company_id:1)
-		
+		TransportVehicle.create!(brand: "Mercedes",year_manufacture: 2017,payload: 9000,
+											 identification_plate:"AAAA000",vehicle_model:"Atego",
+											 height:12,length:33,width:43, shipping_company_id:1)
 		TablePrice.create!(minimum_weight:1,max_weight:20,minimum_height:1,
 											 max_height:4,minimum_width:1,max_width:5,
 											 minimum_length:10,max_length:15,price:0.2,shipping_company_id:1)
@@ -95,6 +100,12 @@ describe "Administrador cria um orçamento" do
 		ShippingCompany.create!(brand_name: "Quicksilver LTDA",corporate_name:"Quicksilver",
 														registration_number:"12345678910110",email_domain: "@quick.com",
 														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
+		TransportVehicle.create!(brand: "Mercedes",year_manufacture: 2017,payload: 9000,
+											 identification_plate:"AAAA000",vehicle_model:"Atego",
+											 height:12,length:33,width:43, shipping_company_id:1)
+		TransportVehicle.create!(brand: "Mercedes",year_manufacture: 2017,payload: 9000,
+											 identification_plate:"AAAA001",vehicle_model:"Atego",
+											 height:12,length:33,width:43, shipping_company_id:2)		
 		TablePrice.create!(minimum_weight:10,max_weight:50,minimum_height:5,
 											 max_height:10,minimum_width:10,max_width:50,
 											 minimum_length:10,max_length:15,price:1.5,shipping_company_id:1)
@@ -162,7 +173,9 @@ describe "Administrador cria um orçamento" do
 		TablePrice.create!(minimum_weight:10,max_weight:50,minimum_height:5,
 											 max_height:10,minimum_width:10,max_width:50,
 											 minimum_length:10,max_length:15,price:1.5,shipping_company_id:1)
-		
+		TransportVehicle.create!(brand: "Mercedes",year_manufacture: 2017,payload: 9000,
+											 identification_plate:"AAAA000",vehicle_model:"Atego",
+											 height:12,length:33,width:43, shipping_company_id:1)
 		EstimatedDate.create!(min_distance:0.1 , max_distance:200, business_day: 5,shipping_company_id:1)
 	
 		visit root_path 
@@ -191,6 +204,9 @@ describe "Administrador cria um orçamento" do
 		ShippingCompany.create!(brand_name: "Quicksilver LTDA",corporate_name:"Quicksilver",
 														registration_number:"12345678910110",email_domain: "@quick.com",
 														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
+		TransportVehicle.create!(brand: "Mercedes",year_manufacture: 2017,payload: 9000,
+											 identification_plate:"AAAA000",vehicle_model:"Atego",
+											 height:12,length:33,width:43, shipping_company_id:2)
 		TablePrice.create!(minimum_weight:10,max_weight:50,minimum_height:5,
 											 max_height:10,minimum_width:10,max_width:50,
 											 minimum_length:10,max_length:15,price:1.5,shipping_company_id:1)

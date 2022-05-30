@@ -35,7 +35,7 @@ class Order < ApplicationRecord
       ShippingCompany.all.each do |sc|
         last_price = 0
         id = 0
-        if sc.active? && sc.transport_vehicles.available.count
+        if sc.active? && sc.transport_vehicles.available.count > 0
           sc.table_prices.each do |tp|
             if ((tp.minimum_weight <= self.weight && self.weight <= tp.max_weight) || 
             (tp.minimum_dimension <= self.dimension && self.dimension <= tp.max_dimension)) && 
@@ -59,7 +59,6 @@ class Order < ApplicationRecord
         ps.delete_at 1
       end
 
-      
-      self.wanted_companies = prices_id = prices_id.join(" ")
+      self.wanted_companies = prices_id.join(" ")
     end
 end
