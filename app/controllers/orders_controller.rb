@@ -47,7 +47,7 @@ class OrdersController < ApplicationController
 		shipping_company = ShippingCompany.find(current_user.shipping_company_id)
 		@vehicles = []
 		shipping_company.transport_vehicles.available.each do |v|
-			if v.dimension > @order.dimension && v.payload < @order.weight
+			if v.dimension > @order.dimension && v.payload > @order.weight
 				@vehicles << v
 			end
 		end
