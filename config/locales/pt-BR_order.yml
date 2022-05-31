@@ -22,6 +22,7 @@ pt-BR:
         transport_vehicle_id: "Veículo da entrega"
         order_price: "Valor do pedido"
         estimated_date: "Prazo estimado"
+        collect_code: "Código de retirada"
         statuses:
           pending: "Pendente de aceite" 
           refused: "Recusada"

@@ -98,5 +98,13 @@
 		<dd>
 			<%= @order.estimated_date%> dia(s) úteis
 		</dd>
+
+		<dt>
+			<%= Order.human_attribute_name(:collect_code)%>
+		</dt>
+
+		<dd>
+			<%= @order.collect_code%> 
+		</dd>
 	<%end%>
 </dl>

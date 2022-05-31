@@ -45,13 +45,23 @@ class OrdersController < ApplicationController
 	def choose_vehicle
 		@order = Order.find(params[:id])
 		shipping_company = ShippingCompany.find(current_user.shipping_company_id)
-		@vehicles = shipping_company.transport_vehicles.available
+		@vehicles = []
+		shipping_company.transport_vehicles.available.each do |v|
+			if v.dimension > @order.dimension && v.payload < @order.weight
+				@vehicles << v
+			end
+		end
+
+		if @vehicles == []
+			redirect_to root_path, notice: "Disponibilize um veículo com dimensão e capacidade máxima adequada"
+		end
 	end
 
 	def associate_shipping_company
 		@order = Order.find(params[:id])
 		@order.waiting!
 		shipping_company = ShippingCompany.find(current_user.shipping_company_id)
+		@order.collect_code = SecureRandom.alphanumeric(10).upcase
 		@order.shipping_company_id = shipping_company.id
 		@order.transport_vehicle_id = params[:vehicle]
 		@order.order_price = price(shipping_company)

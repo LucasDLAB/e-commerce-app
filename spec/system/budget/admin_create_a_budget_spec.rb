@@ -193,7 +193,7 @@ describe "Administrador cria um orçamento" do
 		fill_in "Peso em Kg", with:10
 		click_on "Confirmar parâmetros"
 
-		expect(page).to have_content "R$ 0,20"
+		expect(page).to have_content "R$ 7,29"
 	end
 
 	it "deve apresentar apenas de Transportadoras ativadas" do

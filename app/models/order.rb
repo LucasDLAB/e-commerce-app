@@ -12,6 +12,8 @@ class Order < ApplicationRecord
 
   validates :order_code, uniqueness: true
 
+  validates :destinatary_identification, length: {is:11}
+
   validates :order_code, length: {is:15}
   validates :state, length: {is:2}
   

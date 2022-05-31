@@ -74,6 +74,7 @@ describe "Usuário da Transportadora acessa a página de pedidos" do
 		expect(page).to have_content "Valor do pedido"
 		expect(page).to have_content "R$ 2.500,00"
 		expect(page).to have_content "Prazo estimado"	
-		expect(page).to have_content "3 dia(s) úteis"	
+		expect(page).to have_content "3 dia(s) úteis"
+		expect(page).to have_content "Código de retirada"
 	end
 end
