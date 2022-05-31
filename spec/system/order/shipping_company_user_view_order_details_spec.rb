@@ -25,7 +25,6 @@ describe "Usuário da Transportadora acessa a página de pedidos" do
 		click_on "Entrar"
 		click_on "Pedidos"
 
-		expect(page).to have_button "Recusar pedido"
 		expect(page).to have_button "Aceitar Pedido"
 		expect(page).not_to have_content "Pedido ABCDEF123456789"
 	end
@@ -53,7 +52,6 @@ describe "Usuário da Transportadora acessa a página de pedidos" do
 		fill_in "Senha", with: "password"
 		click_on "Entrar"
 		click_on "Pedidos"
-		expect(page).to have_button "Recusar pedido"
 		click_on "Aceitar Pedido"
 		select transport_vehicle.vehicle_model, from: "Veículo"
 		click_on "Selecionar veículo"

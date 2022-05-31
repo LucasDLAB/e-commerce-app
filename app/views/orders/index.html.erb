@@ -48,8 +48,6 @@
 		</dl>
 			<%if user_signed_in? && o.pending?%>
 				<%= button_to "Aceitar Pedido", choose_vehicle_order_path(o), method: :get%>
-				<br>
-				<%= button_to "Recusar pedido"%>
 			<%end%>
 	<%end%>
 <%else%>
