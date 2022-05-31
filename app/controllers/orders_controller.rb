@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
 	before_action :authenticate_admin!, only: [:new, :create]
+	before_action :authenticate_user!, only: [:choose_vehicle, :associate_shipping_company]
 
 	def index 
 		if admin_signed_in?

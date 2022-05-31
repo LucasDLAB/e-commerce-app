@@ -5,8 +5,12 @@ class TablePricesController < ApplicationController
 	def show
 		@table_prices = []
 		@endereco = ShippingCompany.find(params[:id])
-		TablePrice.where(shipping_company_id: params[:id]).find_each do |tp|
-			@table_prices << tp
+		if admin_signed_in? || (user_signed_in? && current_user.shipping_company_id == @endereco.id)
+			TablePrice.where(shipping_company_id: params[:id]).find_each do |tp|
+				@table_prices << tp
+			end
+		else
+			redirect_to root_path, notice: "Página disponível apenas para Administradores ou Usuários desta Transportadora"
 		end
 	end
 	

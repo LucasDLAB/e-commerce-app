@@ -1,5 +1,5 @@
 class ShippingCompaniesController < ApplicationController
-	before_action :authenticate_admin!, only: [:index,:new, :create]
+	before_action :authenticate_admin!, only: [:index,:new, :create,:active,:disable]
 
 	def index
 		@shipping_companies = ShippingCompany.all
@@ -13,7 +13,7 @@ class ShippingCompaniesController < ApplicationController
 		format_documentation(@shipping_company)
 
 		if  user_signed_in?
-			if current_user.shipping_company_id.to_s != params[:id]
+			if current_user.shipping_company_id != @shipping_company.id
 				redirect_to root_path, notice: "Acesso permitido apenas para Administradores ou Usuários desta Transportadora"
 			end
 		elsif !admin_signed_in?

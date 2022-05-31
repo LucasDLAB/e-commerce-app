@@ -4,8 +4,12 @@ class TransportVehiclesController < ApplicationController
 	def show
 		@transport_vehicles = []
 		@endereco = ShippingCompany.find(params[:id])
-		TransportVehicle.where(shipping_company_id: params[:id]).find_each do |tv|
-			@transport_vehicles << tv
+		if admin_signed_in? || (user_signed_in? && current_user.shipping_company_id == @endereco.id)
+			TransportVehicle.where(shipping_company_id: params[:id]).find_each do |tv|
+				@transport_vehicles << tv
+			end
+		else
+			redirect_to root_path, notice: "Página disponível apenas para Administradores ou Usuários desta Transportadora"
 		end
 	end
 
