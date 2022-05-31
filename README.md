@@ -26,22 +26,39 @@
 <li>Ruby on rails</li>  
 <li>CSS</li>
 <li>HTML</li>  
+<li>I18n</li>
 </ul>
 
 <h2>Funcionalidades</h2>
 <ul>
-  <li></li>
-  <li></li>
-  <li></li>
-  <li></li>
-  <li></li>
+  <li>Criação de contas:Para que a navegação na aplicação seja controlada, o acesso foi dividido entre dois tipos de contas (Administradores e Usuários de Transportadora)</li>
+  <li>
+    Administradores
+    <ul>
+      <li>Cria a conta de Administrador enviando o nome, email com o domínio @sistemadefrete.com e uma senha</li>
+      <li>Cadastra novas Transportadoras ao sistema enviando apenas a Razão social,CNPJ(apenas os 14 números),o domínio de e-mail da empresa, rua, número, cidade, sigla do estado e a distância da transportadora para o depósito em Km</li>
+      <li>As transportadoras terão automaticamente o valor mínimo de entrega de R$ 7,29</li>
+      <li>Cria novos pedidos enviando o nome e cpf com os 10 números do destinatário, sua distância em Km, rua, número, cidade, sigla do estado, peso do pedido, medidas em em cm(Altura, Largura e Comprimento) e terá um código de identificação gerado automaticamente possuindo 15 caracteres alfanuméricos </li>
+      <li>Visualizar os pedidos: Como administrador é possível visualizar todos os pedidos</li>
+      <li>Faz um orçamento enviando as medidas em cm, distância em Km e o peso em Kg</li>
+     </ul>
+  </li>
+  <li>Usuários de Transportadora
+    <ul>
+      <li>Cria a conta de Usuário de Transportadora  enviando o nome, email com o domínio da empresa e a extensão .com, e uma senha</li>
+      <li>Cadastra novos veículos enviando a marca do veículo, ano de fabricação, capacidade máxima de carga em Kg, placa do veículo seguindo a convenção de 3 números e 4 letras, o modelo do veículo, medidas do baú do veículo em cm</li>
+      <li>Adiciona intervalos na tabela de preço enviando o peso mínimo e máximo em Kg do intervalo, as medidas mínima e máxima do intervalo e o preço dessa linha da tabela</li>
+      <li>Adiciona estimativas de prazo apenas enviando a distância mínima e máxima em Km do intervalo e o prazo em dias úteis</li>
+      <li>Aceita novos pedidos, ao um novo pedido ser criado por um Administrador, o pedido automaticamente cria uma lista de transportadoras que atendem aos seus parâmetros sendo apresentado para uma de cada vez com base no menor preço, cabendo a transportadora requisitada aceitar</li>
+    </ul>
+  </li>
 </ul>
 
 <h2>Gems Utilizadas</h2>
 <ul>
   <li><strong>Devise</strong>: foi utilizada para a criação dos tipos de conta na aplicação(Administradores e Usuários de transportadora) e sendo utilizada para limitação de acesso em certas contas</li> 
   <li><strong>Rspec</strong>: foi utilizada com o intuito de seguir a filosofia de TDD auxiliando na construção das funcionalidades, tornando o trabalho de escrever o código mais dinâmico</li> 
-  <li><strong>Capybara</strong> complementando a gem anterior esta permitiu que os testes simulassem uma navegação real</li>  
+  <li><strong>Capybara</strong>: complementando a gem anterior esta permitiu que os testes simulassem uma navegação real</li>  
 </ul>
 
 <h2>Como iniciar o projeto</h2>
