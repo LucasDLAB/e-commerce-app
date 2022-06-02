@@ -10,7 +10,7 @@ class EstimatedDate < ApplicationRecord
 
 	validates :min_distance, :max_distance, uniqueness: {scope: :shipping_company}
 
-	after_validation :nulling_interval_conflict
+	after_create :nulling_interval_conflict
 
 	private
 		def nulling_interval_conflict

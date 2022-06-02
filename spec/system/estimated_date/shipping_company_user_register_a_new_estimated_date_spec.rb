@@ -67,6 +67,17 @@ describe "Usuário da Transportadora registra uma nova estimativa de entrega" do
 		click_on "Criar linha de estimativa"
 
 		expect(page).to have_content "Falha ao adicionar a nova linha de estimativa"
+		expect(page).to have_content "Distância mínima em Km não pode ficar em branco"
+    expect(page).to have_content "Distância máxima em Km não pode ficar em branco"
+    expect(page).to have_content "Dia(s) úteis não pode ficar em branco"
+    expect(page).to have_content "Distância mínima em Km não é um número"
+    expect(page).to have_content "Distância máxima em Km não é um número"
+    expect(page).to have_content "Dia(s) úteis não é um número"
+    expect(page).to have_content "Distância mínima em Km não pode ficar em branco"
+    expect(page).to have_content "Distância máxima em Km não pode ficar em branco"
+    expect(page).to have_content "Dia(s) úteis não pode ficar em branco"
+    expect(page).to have_content "Distância mínima em Km não pode ficar em branco"
+
 	end
 
 	it "retorna à página da Transportadora" do

@@ -14,7 +14,7 @@ p linha
 p "Carregando Transportadora"
 	ShippingCompany.create!(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
 													registration_number:"12345678910112",email_domain: "@ligeiro.com",
-													street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
+													street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:50)
 p linha 
 p "Transportadora pronta"
 
