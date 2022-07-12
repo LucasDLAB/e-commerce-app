@@ -73,7 +73,7 @@ RSpec.describe TablePrice, type: :model do
 											 max_height:5,minimum_width:1,max_width:5,
 											 minimum_length:10,max_length:15,price:10,shipping_company_id:s.id)
 			result = second_tp.valid? 
-			
+		
 			expect(result).to be true
 		end
 
@@ -105,7 +105,7 @@ RSpec.describe TablePrice, type: :model do
 											 minimum_length:10,max_length:14,price:10,shipping_company_id:c.id)
 			result = second_tp.valid? 
 			
-			expect(second_tp.errors[:max_dimension]).to include("deve possuir valor maior ou inferior ao dos intervalos anteriores")
+			expect(second_tp.errors[:max_dimension]).to include("não pode possuir intervalos que abrangem outros intervalos")
 		end
 
 		it "falso se possuir intervalos dentro de outros intervalos" do 	
