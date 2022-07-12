@@ -25,30 +25,30 @@ class TablePrice < ApplicationRecord
 
   validates :price, uniqueness: {scope: :shipping_company}
 
-  after_validation :dimensioning
+  before_validation :dimensioning
 
-  after_validation :nulling_interval_conflict
+  validate :nulling_interval_conflict
 
   private
     def dimensioning
-      self.max_dimension = (self.max_length.to_d * self.max_width.to_d * self.max_height.to_d) / 1000000
-      self.minimum_dimension = (self.minimum_length.to_d * self.minimum_width.to_d * self.minimum_height.to_d) / 1000000
+      self.max_dimension = (max_length.to_d * max_width.to_d * max_height.to_d) / 1000000
+      self.minimum_dimension = (minimum_length.to_d * minimum_width.to_d * minimum_height.to_d) / 1000000
     end
 
     def nulling_interval_conflict
-      tp = TablePrice.all
-      tp.each do |t|
-        if t.shipping_company_id == self.shipping_company_id && self.id != t.id
-          if self.minimum_dimension > t.minimum_dimension && self.minimum_dimension < t.max_dimension
-            self.errors.add(:minimum_dimension,"deve possuir valor maior ou inferior ao dos intervalos anteriores")
-          elsif (self.minimum_dimension < t.minimum_dimension && self.max_dimension > t.minimum_dimension)
-            self.errors.add(:minimum_dimension,"não pode possuir intervalos que abrangem outros intervalos")
-          end
+      tp = TablePrice.where(shipping_company_id: shipping_company_id)
 
-          if self.max_dimension > t.minimum_dimension && self.max_dimension < t.max_dimension
-            self.errors.add(:max_dimension,"deve possuir valor maior ou inferior ao dos intervalos anteriores")
-            self.errors.add(:max_dimension,"não pode possuir intervalos que abrangem outros intervalos")
-          end
+      tp.each do |t|
+        next if id == t.id
+        if minimum_dimension >= t.minimum_dimension && minimum_dimension <= t.max_dimension
+          self.errors.add(:minimum_dimension,"deve possuir valor maior ou inferior ao dos intervalos anteriores")
+        elsif (self.minimum_dimension < t.minimum_dimension && self.max_dimension > t.minimum_dimension)
+          self.errors.add(:minimum_dimension,"não pode possuir intervalos que abrangem outros intervalos")
+        end
+
+        if max_dimension > t.minimum_dimension && max_dimension < t.max_dimension
+          self.errors.add(:max_dimension,"deve possuir valor maior ou inferior ao dos intervalos anteriores")
+          self.errors.add(:max_dimension,"não pode possuir intervalos que abrangem outros intervalos")
         end
       end
     end
