@@ -38,7 +38,7 @@ RSpec.describe TablePrice, type: :model do
 		it "falso se o campo Peso mínimo maior que Peso máximo" do
 			tp = TablePrice.create(minimum_weight:100,max_weight:50,minimum_height:1,
 											 max_height:5,minimum_width:1,max_width:5,
-											 minimum_length:10,max_length:15,price:10,shipping_company_id:1)
+											 minimum_length:10,max_length:15,price:10)
 			
 			tp.valid?
 			result = tp.errors.include?(:max_weight)
@@ -50,7 +50,7 @@ RSpec.describe TablePrice, type: :model do
 		it "falso se o campo Peso mínimo igual ao Peso máximo" do
 			tp = TablePrice.create(minimum_weight:100,max_weight:100,minimum_height:1,
 											 max_height:5,minimum_width:1,max_width:5,
-											 minimum_length:10,max_length:15,price:10,shipping_company_id:1)
+											 minimum_length:10,max_length:15,price:10)
 			
 			tp.valid?
 			result = tp.errors.include?(:max_weight)
@@ -60,82 +60,76 @@ RSpec.describe TablePrice, type: :model do
 		end
 
 		it "verdadeiro se o campo Dimensão máxima e Dimensão mínima for igual em Tabelas de diferentes transportadoras" do 	
-			c = ShippingCompany.create!(brand_name: "Quicksilver LTDA",corporate_name:"Quicksilver",
-														registration_number:"12345678910110",email_domain: "@quick.com",
-														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
-			s = ShippingCompany.create!(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
-														registration_number:"12345678910112",email_domain: "@ligeiro.com",
-														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo", distance:1)
-			tp = TablePrice.create!(minimum_weight:10,max_weight:50,minimum_height:1,
+			first_company = create(:shipping_company)
+			second_company = create(:shipping_company)
+
+			table = TablePrice.create!(minimum_weight:10,max_weight:50,minimum_height:1,
 											 max_height:5,minimum_width:1,max_width:5,
-											 minimum_length:10,max_length:15,price:10,shipping_company_id:c.id)
-			second_tp = TablePrice.create(minimum_weight:10,max_weight:50,minimum_height:1,
+											 minimum_length:10,max_length:15,price:10,shipping_company_id:first_company.id)
+
+			second_table = TablePrice.create(minimum_weight:10,max_weight:50,minimum_height:1,
 											 max_height:5,minimum_width:1,max_width:5,
-											 minimum_length:10,max_length:15,price:10,shipping_company_id:s.id)
-			result = second_tp.valid? 
+											 minimum_length:10,max_length:15,price:10,shipping_company_id:second_company.id)
+			result = second_table.valid? 
 		
 			expect(result).to be true
 		end
 
 
 		it "Dimensão mínima deve estar fora de intervalos cadastrados" do 	
-			c = ShippingCompany.create!(brand_name: "Quicksilver LTDA",corporate_name:"Quicksilver",
-														registration_number:"12345678910110",email_domain: "@quick.com",
-														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
-			tp = TablePrice.create!(minimum_weight:10,max_weight:50,minimum_height:1,
+			shipping_company = create(:shipping_company)
+			table = TablePrice.create!(minimum_weight:10,max_weight:50,minimum_height:1,
 											 max_height:5,minimum_width:1,max_width:5,
-											 minimum_length:10,max_length:15,price:10,shipping_company_id:c.id,minimum_dimension:10,max_dimension:375)
-			second_tp = TablePrice.create(minimum_weight:10,max_weight:50,minimum_height:1,
+											 minimum_length:10,max_length:15,price:10,shipping_company_id:shipping_company.id,
+											 minimum_dimension:10,max_dimension:375)
+			second_table = TablePrice.create(minimum_weight:10,max_weight:50,minimum_height:1,
 											 max_height:5,minimum_width:1,max_width:5,
-											 minimum_length:11,max_length:15,price:10,shipping_company_id:c.id,minimum_dimension:11,max_dimension:400)
-			result = second_tp.valid? 
+											 minimum_length:11,max_length:15,price:10,shipping_company_id:shipping_company.id,
+											 minimum_dimension:11,max_dimension:400)
+			result = second_table.valid? 
 			
-			expect(second_tp.errors[:minimum_dimension]).to include("deve possuir valor maior ou inferior ao dos intervalos anteriores")
+			expect(second_table.errors[:minimum_dimension]).to include("deve possuir valor maior ou inferior ao dos intervalos anteriores")
 		end
 
 		it "Dimensão máxima deve estar fora de intervalos cadastrados" do 	
-			c = ShippingCompany.create!(brand_name: "Quicksilver LTDA",corporate_name:"Quicksilver",
-														registration_number:"12345678910110",email_domain: "@quick.com",
-														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
-			tp = TablePrice.create!(minimum_weight:10,max_weight:50,minimum_height:1,
+			shipping_company = create(:shipping_company)
+			table = TablePrice.create!(minimum_weight:10,max_weight:50,minimum_height:1,
 											 max_height:5,minimum_width:1,max_width:5,
-											 minimum_length:10,max_length:15,price:10,shipping_company_id:c.id)
-			second_tp = TablePrice.create(minimum_weight:10,max_weight:50,minimum_height:1,
+											 minimum_length:10,max_length:15,price:10,shipping_company_id:shipping_company.id)
+			second_table = TablePrice.create(minimum_weight:10,max_weight:50,minimum_height:1,
 											 max_height:5,minimum_width:1,max_width:5,
-											 minimum_length:10,max_length:14,price:10,shipping_company_id:c.id)
-			result = second_tp.valid? 
+											 minimum_length:10,max_length:14,price:10,shipping_company_id:shipping_company.id)
+			result = second_table.valid? 
 			
-			expect(second_tp.errors[:max_dimension]).to include("não pode possuir intervalos que abrangem outros intervalos")
+			expect(second_table.errors[:max_dimension]).to include("não pode possuir intervalos que abrangem outros intervalos")
 		end
 
 		it "falso se possuir intervalos dentro de outros intervalos" do 	
-			c = ShippingCompany.create!(brand_name: "Quicksilver LTDA",corporate_name:"Quicksilver",
-														registration_number:"12345678910110",email_domain: "@quick.com",
-														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
-			tp = TablePrice.create!(minimum_weight:10,max_weight:50,minimum_height:1,
+			shipping_company = create(:shipping_company)
+			table = TablePrice.create!(minimum_weight:10,max_weight:50,minimum_height:1,
 											 max_height:5,minimum_width:1,max_width:5,
-											 minimum_length:10,max_length:15,price:10,shipping_company_id:c.id,minimum_dimension:10,max_dimension:375)
-			second_tp = TablePrice.create(minimum_weight:10,max_weight:50,minimum_height:1,
+											 minimum_length:10,max_length:15,price:10,shipping_company_id:shipping_company.id,
+											 minimum_dimension:10,max_dimension:375)
+			second_table = TablePrice.create(minimum_weight:10,max_weight:50,minimum_height:1,
 											 max_height:5,minimum_width:1,max_width:5,
-											 minimum_length:9,max_length:15,price:10,shipping_company_id:c.id,minimum_dimension:9,max_dimension:376)
-			result = second_tp.valid? 
+											 minimum_length:9,max_length:15,price:10,shipping_company_id:shipping_company.id,
+											 minimum_dimension:9,max_dimension:376)
+			result = second_table.valid? 
 			
-			expect(second_tp.errors[:minimum_dimension]).to include("não pode possuir intervalos que abrangem outros intervalos")
+			expect(second_table.errors[:minimum_dimension]).to include("não pode possuir intervalos que abrangem outros intervalos")
 		end
 
 		it "falso Dimensão máxima possuir parâmetros dentro de outros intervalos" do 	
-			c = ShippingCompany.create!(brand_name: "Quicksilver LTDA",corporate_name:"Quicksilver",
-														registration_number:"12345678910110",email_domain: "@quick.com",
-														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
-			tp = TablePrice.create!(minimum_weight:10,max_weight:50,minimum_height:1,
+			shipping_company = create(:shipping_company)
+			table = TablePrice.create!(minimum_weight:10,max_weight:50,minimum_height:1,
 											 max_height:5,minimum_width:1,max_width:5,
-											 minimum_length:10,max_length:15,price:10,shipping_company_id:c.id)
-			second_tp = TablePrice.create(minimum_weight:10,max_weight:50,minimum_height:1,
+											 minimum_length:10,max_length:15,price:10,shipping_company_id:shipping_company.id)
+			second_table = TablePrice.create(minimum_weight:10,max_weight:50,minimum_height:1,
 											 max_height:5,minimum_width:1,max_width:5,
-											 minimum_length:9,max_length:14,price:10,shipping_company_id:c.id)
-			result = second_tp.valid? 
+											 minimum_length:9,max_length:14,price:10,shipping_company_id:shipping_company.id)
+			result = second_table.valid? 
 			
-			expect(second_tp.errors[:max_dimension]).to include("não pode possuir intervalos que abrangem outros intervalos")
+			expect(second_table.errors[:max_dimension]).to include("não pode possuir intervalos que abrangem outros intervalos")
 		end
 	end
 end

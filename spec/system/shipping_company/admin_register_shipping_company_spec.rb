@@ -40,7 +40,7 @@ describe "Administrador registra uma nova Transportadora" do
 		click_on "Cadastrar uma nova Transportadora"
 		fill_in "Nome Fantasia", with: "Ligeirinho"
 		fill_in "Razão Social", with: "Ligeirinho LTDA"
-		fill_in "Número de registro", with: "12345678910112"
+		fill_in "Número de registro", with: '55307710191150'
 		fill_in "Domínio de email", with: "@ligeiro.com"
 		fill_in "Rua", with: "Rua Carlos Reis"
 		fill_in "Número", with: 152
@@ -51,7 +51,7 @@ describe "Administrador registra uma nova Transportadora" do
 
 		expect(page).to have_content "Transportadora Ligeirinho"
 		expect(page).to have_content "Ligeirinho LTDA"
-		expect(page).to have_content "12.345.678/9101-12"
+		expect(page).to have_content '55.307.710/1911-50'
 		expect(page).to have_content "Rua Carlos Reis 152 - São Gonçalo, RJ"
   end
 
@@ -85,7 +85,6 @@ describe "Administrador registra uma nova Transportadora" do
     expect(page).to have_content "Nome Fantasia não pode ficar em branco"
     expect(page).to have_content "Domínio de email não pode ficar em branco"
     expect(page).to have_content "Número de registro não pode ficar em branco"
-    expect(page).to have_content "Número de registro não possui o tamanho esperado (14 caracteres)"
     expect(page).to have_content "Número de registro não é válido"
     expect(page).to have_content "Domínio de email não é válido"
 	end

@@ -24,16 +24,14 @@ describe "Administrador cria um orçamento" do
 
 	it "com sucesso" do
 		Admin.create!(email:"lucas@sistemadefrete.com",password:"password",name:"Lucas")
-		ShippingCompany.create!(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
-														registration_number:"12345678910112",email_domain: "@ligeiro.com",
-														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo", distance:1)
+		shipping_company = create(:shipping_company)
 		TransportVehicle.create!(brand: "Mercedes",year_manufacture: 2017,payload: 9000,
 											 identification_plate:"AAAA000",vehicle_model:"Atego",
-											 height:12,length:33,width:43, shipping_company_id:1)
+											 height:12,length:33,width:43, shipping_company_id:shipping_company.id)
 		TablePrice.create!(minimum_weight:10,max_weight:50,minimum_height:1,
 											 max_height:5,minimum_width:1,max_width:5,
-											 minimum_length:10,max_length:15,price:0.5,shipping_company_id:1)
-		EstimatedDate.create!(min_distance:10 , max_distance:100, business_day: 3,shipping_company_id:1)
+											 minimum_length:10,max_length:15,price:0.5,shipping_company_id:shipping_company.id)
+		EstimatedDate.create!(min_distance:10 , max_distance:100, business_day: 3,shipping_company_id:shipping_company.id)
 
 		visit root_path 
 		click_on "Entrar como Administrador"
@@ -57,20 +55,18 @@ describe "Administrador cria um orçamento" do
 
 	it "deve apresentar apenas o maior valor de uma Transportadora" do
 		Admin.create!(email:"lucas@sistemadefrete.com",password:"password",name:"Lucas")
-		ShippingCompany.create!(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
-														registration_number:"12345678910112",email_domain: "@ligeiro.com",
-														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo", distance:1)
+		shipping_company = create(:shipping_company)
 		TablePrice.create!(minimum_weight:10,max_weight:50,minimum_height:5,
 											 max_height:10,minimum_width:10,max_width:50,
 											 minimum_length:10,max_length:15,price:1.5,shipping_company_id:1)
 		TransportVehicle.create!(brand: "Mercedes",year_manufacture: 2017,payload: 9000,
 											 identification_plate:"AAAA000",vehicle_model:"Atego",
-											 height:12,length:33,width:43, shipping_company_id:1)
+											 height:12,length:33,width:43, shipping_company_id:shipping_company.id)
 		TablePrice.create!(minimum_weight:1,max_weight:20,minimum_height:1,
 											 max_height:4,minimum_width:1,max_width:5,
-											 minimum_length:10,max_length:15,price:0.2,shipping_company_id:1)
-		EstimatedDate.create!(min_distance:101 , max_distance:200, business_day: 5,shipping_company_id:1)
-		EstimatedDate.create!(min_distance:10 , max_distance:100, business_day: 3,shipping_company_id:1)
+											 minimum_length:10,max_length:15,price:0.2,shipping_company_id: shipping_company.id)
+		EstimatedDate.create!(min_distance:101 , max_distance:200, business_day: 5,shipping_company_id: shipping_company.id)
+		EstimatedDate.create!(min_distance:10 , max_distance:100, business_day: 3,shipping_company_id:shipping_company.id)
 
 		visit root_path 
 		click_on "Entrar como Administrador"
@@ -94,27 +90,23 @@ describe "Administrador cria um orçamento" do
 
 	it "deve apresentar o maior valor de cada Transportadora" do
 		Admin.create!(email:"lucas@sistemadefrete.com",password:"password",name:"Lucas")
-		ShippingCompany.create!(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
-														registration_number:"12345678910112",email_domain: "@ligeiro.com",
-														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo", distance:1)
-		ShippingCompany.create!(brand_name: "Quicksilver LTDA",corporate_name:"Quicksilver",
-														registration_number:"12345678910110",email_domain: "@quick.com",
-														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
+		first_company = create(:shipping_company)
+		second_company = create(:shipping_company)
 		TransportVehicle.create!(brand: "Mercedes",year_manufacture: 2017,payload: 9000,
 											 identification_plate:"AAAA000",vehicle_model:"Atego",
-											 height:12,length:33,width:43, shipping_company_id:1)
+											 height:12,length:33,width:43, shipping_company_id:first_company.id)
 		TransportVehicle.create!(brand: "Mercedes",year_manufacture: 2017,payload: 9000,
 											 identification_plate:"AAAA001",vehicle_model:"Atego",
-											 height:12,length:33,width:43, shipping_company_id:2)		
+											 height:12,length:33,width:43, shipping_company_id: second_company.id)		
 		TablePrice.create!(minimum_weight:10,max_weight:50,minimum_height:5,
 											 max_height:10,minimum_width:10,max_width:50,
-											 minimum_length:10,max_length:15,price:1.5,shipping_company_id:1)
+											 minimum_length:10,max_length:15,price:1.5,shipping_company_id: first_company.id)
 		
 		TablePrice.create!(minimum_weight:10,max_weight:50,minimum_height:5,
 											 max_height:10,minimum_width:10,max_width:50,
-											 minimum_length:10,max_length:15,price:2,shipping_company_id:2)
-		EstimatedDate.create!(min_distance:10 , max_distance:200, business_day: 5,shipping_company_id:1)
-		EstimatedDate.create!(min_distance:10 , max_distance:100, business_day: 3,shipping_company_id:2)
+											 minimum_length:10,max_length:15,price:2,shipping_company_id: second_company.id)
+		EstimatedDate.create!(min_distance:10 , max_distance:200, business_day: 5,shipping_company_id:first_company.id)
+		EstimatedDate.create!(min_distance:10 , max_distance:100, business_day: 3,shipping_company_id: second_company.id)
 
 		visit root_path 
 		click_on "Entrar como Administrador"
@@ -138,14 +130,12 @@ describe "Administrador cria um orçamento" do
 
 	it "valores não podem estar vazios" do
 		Admin.create!(email:"lucas@sistemadefrete.com",password:"password",name:"Lucas")
-		ShippingCompany.create!(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
-														registration_number:"12345678910112",email_domain: "@ligeiro.com",
-														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo", distance:1)
+		shipping_company = create(:shipping_company)
 		TablePrice.create!(minimum_weight:10,max_weight:50,minimum_height:5,
 											 max_height:10,minimum_width:10,max_width:50,
-											 minimum_length:10,max_length:15,price:1.5,shipping_company_id:1)
+											 minimum_length:10,max_length:15,price:1.5,shipping_company_id:shipping_company.id)
 		
-		EstimatedDate.create!(min_distance:10 , max_distance:200, business_day: 5,shipping_company_id:1)
+		EstimatedDate.create!(min_distance:10 , max_distance:200, business_day: 5,shipping_company_id:shipping_company.id)
 	
 		visit root_path 
 		click_on "Entrar como Administrador"
@@ -167,16 +157,14 @@ describe "Administrador cria um orçamento" do
 
 	it "o preço deve ser igual ou maior ao preço mínimo" do
 		Admin.create!(email:"lucas@sistemadefrete.com",password:"password",name:"Lucas")
-		ShippingCompany.create!(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
-														registration_number:"12345678910112",email_domain: "@ligeiro.com",
-														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo", distance:1)
+		shipping_company = create(:shipping_company, corporate_name:'Ligeirinho')
 		TablePrice.create!(minimum_weight:10,max_weight:50,minimum_height:5,
 											 max_height:10,minimum_width:10,max_width:50,
-											 minimum_length:10,max_length:15,price:1.5,shipping_company_id:1)
+											 minimum_length:10,max_length:15,price:1.5,shipping_company_id:shipping_company.id)
 		TransportVehicle.create!(brand: "Mercedes",year_manufacture: 2017,payload: 9000,
 											 identification_plate:"AAAA000",vehicle_model:"Atego",
-											 height:12,length:33,width:43, shipping_company_id:1)
-		EstimatedDate.create!(min_distance:0.1 , max_distance:200, business_day: 5,shipping_company_id:1)
+											 height:12,length:33,width:43, shipping_company_id: shipping_company.id)
+		EstimatedDate.create!(min_distance:0.1 , max_distance:200, business_day: 5,shipping_company_id: shipping_company.id)
 	
 		visit root_path 
 		click_on "Entrar como Administrador"
@@ -198,24 +186,20 @@ describe "Administrador cria um orçamento" do
 
 	it "deve apresentar apenas de Transportadoras ativadas" do
 		Admin.create!(email:"lucas@sistemadefrete.com",password:"password",name:"Lucas")
-		ShippingCompany.create!(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
-														registration_number:"12345678910112",email_domain: "@ligeiro.com",
-														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo", distance:1,status:2)
-		ShippingCompany.create!(brand_name: "Quicksilver LTDA",corporate_name:"Quicksilver",
-														registration_number:"12345678910110",email_domain: "@quick.com",
-														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
+		first_company = create(:shipping_company, email_domain: '@ligeiro.com', status:2)
+		second_company = create(:shipping_company)
 		TransportVehicle.create!(brand: "Mercedes",year_manufacture: 2017,payload: 9000,
 											 identification_plate:"AAAA000",vehicle_model:"Atego",
-											 height:12,length:33,width:43, shipping_company_id:2)
+											 height:12,length:33,width:43, shipping_company_id:second_company.id)
 		TablePrice.create!(minimum_weight:10,max_weight:50,minimum_height:5,
 											 max_height:10,minimum_width:10,max_width:50,
-											 minimum_length:10,max_length:15,price:1.5,shipping_company_id:1)
+											 minimum_length:10,max_length:15,price:1.5,shipping_company_id:first_company.id)
 		
 		TablePrice.create!(minimum_weight:10,max_weight:50,minimum_height:5,
 											 max_height:10,minimum_width:10,max_width:50,
-											 minimum_length:10,max_length:15,price:2,shipping_company_id:2)
-		EstimatedDate.create!(min_distance:10 , max_distance:200, business_day: 5,shipping_company_id:1)
-		EstimatedDate.create!(min_distance:10 , max_distance:100, business_day: 3,shipping_company_id:2)
+											 minimum_length:10,max_length:15,price:2,shipping_company_id: second_company.id)
+		EstimatedDate.create!(min_distance:10 , max_distance:200, business_day: 5,shipping_company_id: first_company.id)
+		EstimatedDate.create!(min_distance:10 , max_distance:100, business_day: 3,shipping_company_id: second_company.id)
 
 		visit root_path 
 		click_on "Entrar como Administrador"

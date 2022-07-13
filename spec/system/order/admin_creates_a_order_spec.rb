@@ -3,9 +3,7 @@ require "rails_helper"
 describe "Administrador cria um novo pedido" do 
 	it "acessa o formulário do pedido" do
 		Admin.create!(email:"lucas@sistemadefrete.com",password:"password",name:"Lucas")
-		ShippingCompany.create!(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
-														registration_number:"12345678910112",email_domain: "@ligeiro.com",
-														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:100)
+		create(:shipping_company, distance:100)
 		
 		visit root_path 
 		click_on "Entrar como Administrador"
@@ -32,9 +30,7 @@ describe "Administrador cria um novo pedido" do
 
 	it "com sucesso" do
 		admin = Admin.create!(email:"lucas@sistemadefrete.com",password:"password",name:"Lucas")
-		ShippingCompany.create!(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
-														registration_number:"12345678910112",email_domain: "@ligeiro.com",
-														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:100)
+		create(:shipping_company, distance:100)
 		
 		visit root_path 
 		click_on "Entrar como Administrador"
@@ -45,7 +41,7 @@ describe "Administrador cria um novo pedido" do
 		click_on "Criar um novo pedido"
 		allow(SecureRandom).to receive(:alphanumeric).and_return("ABCDEF123456789")
 		fill_in "Nome do destinatário", with:"João"
-		fill_in "Número de identificação do destinatário", with: "00000000000"
+		fill_in "Número de identificação do destinatário", with: "96719903047"
 		fill_in "Rua", with: "Rua Santa Teresa"
 		fill_in "Cidade", with: "Rio de janeiro"
 		fill_in "Número", with: 24
@@ -71,9 +67,7 @@ describe "Administrador cria um novo pedido" do
 
 	it "com campos vazios" do
 		Admin.create!(email:"lucas@sistemadefrete.com",password:"password",name:"Lucas")
-		ShippingCompany.create!(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
-														registration_number:"12345678910112",email_domain: "@ligeiro.com",
-														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:100)
+		create(:shipping_company, distance:100)
 		
 		visit root_path 
 		click_on "Entrar como Administrador"
@@ -107,9 +101,7 @@ describe "Administrador cria um novo pedido" do
 
 	it "retornar para a página de pedidos" do
 		Admin.create!(email:"lucas@sistemadefrete.com",password:"password",name:"Lucas")
-		ShippingCompany.create!(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
-														registration_number:"12345678910112",email_domain: "@ligeiro.com",
-														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:100)
+		create(:shipping_company, distance:100)
 		
 		visit root_path 
 		click_on "Entrar como Administrador"

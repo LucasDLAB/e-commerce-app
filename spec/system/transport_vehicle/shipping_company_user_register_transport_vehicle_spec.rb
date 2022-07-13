@@ -2,9 +2,7 @@ require "rails_helper"
 
 describe "Usuário da Transportadora cadastrada um novo veículo" do	
 	it "acessa a página do formulário" do
-		ShippingCompany.create!(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
-														registration_number:"12345678910112",email_domain: "@ligeiro.com",
-														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
+		create(:shipping_company, corporate_name: 'Ligeirinho', email_domain: '@ligeiro.com')
 		User.create!(name:"Walter",email:"walter@ligeiro.com",password:"password")
 
 		visit root_path
@@ -26,14 +24,12 @@ describe "Usuário da Transportadora cadastrada um novo veículo" do
 	end
 
 	it "com sucesso" do
-		sc = ShippingCompany.create!(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
-														registration_number:"12345678910112",email_domain: "@ligeir.com",
-														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
-		u =User.create!(name:"Walter",email:"walter@ligeir.com",password:"password")
+		create(:shipping_company, corporate_name: 'Ligeirinho', email_domain: '@ligeiro.com')
+		User.create!(name:"Walter",email:"walter@ligeiro.com",password:"password")
 
 		visit root_path
 		click_on "Entrar como colaborador de uma Transportadora"
-		fill_in "E-mail", with: "walter@ligeir.com"
+		fill_in "E-mail", with: "walter@ligeiro.com"
 		fill_in "Senha", with: "password"
 		click_on "Entrar"
 		click_on "Transportadora Ligeirinho"
@@ -54,9 +50,7 @@ describe "Usuário da Transportadora cadastrada um novo veículo" do
 	end
 
 	it "com dados vazios" do
-		ShippingCompany.create!(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
-														registration_number:"12345678910112",email_domain: "@ligeiro.com",
-														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo", distance:1)
+		create(:shipping_company, corporate_name: 'Ligeirinho', email_domain: '@ligeiro.com')
 		User.create!(name:"Walter",email:"walter@ligeiro.com",password:"password")
 
 		visit root_path
@@ -83,9 +77,7 @@ describe "Usuário da Transportadora cadastrada um novo veículo" do
 	end
 
 	it "retorna à página da Transportadora" do
-		ShippingCompany.create!(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
-														registration_number:"12345678910112",email_domain: "@ligeiro.com",
-														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
+		create(:shipping_company, corporate_name: 'Ligeirinho', email_domain: '@ligeiro.com')
 		User.create!(name:"Walter",email:"walter@ligeiro.com",password:"password")
 		
 		visit root_path
