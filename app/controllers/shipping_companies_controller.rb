@@ -3,14 +3,10 @@ class ShippingCompaniesController < ApplicationController
 
 	def index
 		@shipping_companies = ShippingCompany.all
-		@shipping_companies.each do |sc|
-			format_documentation(sc)
-		end
 	end
 
 	def show
 		@shipping_company = ShippingCompany.find(params[:id])
-		format_documentation(@shipping_company)
 
 		if  user_signed_in?
 			if current_user.shipping_company_id != @shipping_company.id
@@ -52,12 +48,4 @@ class ShippingCompaniesController < ApplicationController
 
 		redirect_to shipping_company_path(shipping_company.id)
 	end
-
-	private
-	 def format_documentation(cnpj)
-      cnpj.registration_number.insert(2, ".")
-      cnpj.registration_number.insert(6, ".")
-      cnpj.registration_number.insert(10, "/")
-      cnpj.registration_number.insert(15, "-")
-    end
 end

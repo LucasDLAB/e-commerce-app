@@ -2,9 +2,7 @@ require "rails_helper"
 
 describe "Usuário da Transportadora registra uma nova estimativa de entrega" do
 	it "acessa o formulário de estimativa de entrega" do
-		ShippingCompany.create!(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
-														registration_number:"12345678910112",email_domain: "@ligeiro.com",
-														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
+		create(:shipping_company, corporate_name:'Ligeirinho', email_domain: '@ligeiro.com')
 		User.create!(name:"Walter",email:"walter@ligeiro.com",password:"password")
 
 		visit root_path
@@ -22,9 +20,7 @@ describe "Usuário da Transportadora registra uma nova estimativa de entrega" do
 	end
 
 	it "com sucesso" do
-		ShippingCompany.create!(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
-														registration_number:"12345678910112",email_domain: "@ligeiro.com",
-														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
+		create(:shipping_company, corporate_name:'Ligeirinho', email_domain: '@ligeiro.com')
 		User.create!(name:"Walter",email:"walter@ligeiro.com",password:"password")
 
 		visit root_path
@@ -51,9 +47,7 @@ describe "Usuário da Transportadora registra uma nova estimativa de entrega" do
 	end
 
 	it "com campos vazios" do 
-		ShippingCompany.create!(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
-														registration_number:"12345678910112",email_domain: "@ligeiro.com",
-														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
+		create(:shipping_company, corporate_name:'Ligeirinho', email_domain: '@ligeiro.com')
 		User.create!(name:"Walter",email:"walter@ligeiro.com",password:"password")
 
 		visit root_path
@@ -81,9 +75,7 @@ describe "Usuário da Transportadora registra uma nova estimativa de entrega" do
 	end
 
 	it "retorna à página da Transportadora" do
-		ShippingCompany.create!(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
-														registration_number:"12345678910112",email_domain: "@ligeiro.com",
-														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
+		create(:shipping_company, corporate_name:'Ligeirinho', email_domain: '@ligeiro.com')
 		User.create!(name:"Walter",email:"walter@ligeiro.com",password:"password")
 
 		visit root_path

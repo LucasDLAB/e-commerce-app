@@ -29,14 +29,13 @@ class OrdersController < ApplicationController
 		if @order.save
 			redirect_to orders_path, notice: "Pedido feito com sucesso"
 		else 
-			flash.now[:notice] = "Falha ao cadastrar ao criar o novo pedido"
+			flash.now[:alert] = "Falha ao cadastrar ao criar o novo pedido"
 			render :new
 		end
 	end
 
 	def show
 		@order = Order.find(params[:id])
-		format_documentation(@order)
 		if admin_signed_in? || (user_signed_in? && current_user.shipping_company_id == @order.shipping_company_id)
 		else
 			redirect_to root_path, notice: "Apenas Administradores ou Usuários de transportadoras responsaveis por este pedido podem visualiza-lo"
@@ -73,12 +72,6 @@ class OrdersController < ApplicationController
 	end
 
 	private
-	 def format_documentation(cpf)
-      cpf.destinatary_identification.insert(3, ".")
-      cpf.destinatary_identification.insert(7, ".")
-      cpf.destinatary_identification.insert(11, "-")
-    end
-
     def price(sc)
     	@higher_price = sc.min_price
     	sc.table_prices.each do |tp|

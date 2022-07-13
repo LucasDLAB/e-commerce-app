@@ -21,10 +21,7 @@ class EstimatedDatesController < ApplicationController
 	def show
 		@endereco = ShippingCompany.find(params[:id])
 		if admin_signed_in? || (user_signed_in? && current_user.shipping_company_id == @endereco.id)
-			@estimated_date_lines = []
-			EstimatedDate.where(shipping_company_id: @endereco.id).find_each do |ed|
-				@estimated_date_lines << ed
-			end
+			@estimated_date_lines = EstimatedDate.where(shipping_company_id: @endereco.id)
 		end
 	end
 end

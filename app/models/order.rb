@@ -12,15 +12,23 @@ class Order < ApplicationRecord
 
   validates :order_code, uniqueness: true
 
-  validates :destinatary_identification, length: {is:11}
-
   validates :order_code, length: {is:15}
   validates :state, length: {is:2}
+  validate :cpf_validator
   
   after_validation :dimensioning,:addressing, :finding_companies
   before_validation :generate_code
 
   private
+    def cpf_validator
+      if CPF.valid?(destinatary_identification, strict: true)
+        register_id = CPF.new(destinatary_identification)
+        self.destinatary_identification = register_id.formatted
+      else
+        errors.add(:destinatary_identification, 'não é válido')
+      end
+    end
+
     def dimensioning
       self.dimension = (self.length.to_d * self.width.to_d * self.height.to_d) / 1000000
     end

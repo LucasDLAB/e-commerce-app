@@ -3,9 +3,8 @@ require "rails_helper"
 describe "Colaborador da Transportadora acessa a página de transportadora" do
 
 	it "com sucesso" do
-		sc = ShippingCompany.create!(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
-														registration_number:"12345678910112",email_domain: "@ligeiro.com",
-														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
+		shipping_company = create(:shipping_company, corporate_name: 'Ligeirinho', email_domain: '@ligeiro.com')
+		
 		visit root_path
 		click_on "Entrar como colaborador de uma Transportadora"
 		click_on "Criar um usuário"
@@ -21,20 +20,17 @@ describe "Colaborador da Transportadora acessa a página de transportadora" do
 		expect(page).not_to have_content "Entrar"
 		expect(page).to have_content "Transportadora Ligeirinho"
 		expect(page).to have_content "Razão Social"
-		expect(page).to have_content "Ligeirinho LTDA"
+		expect(page).to have_content shipping_company.brand_name
 		expect(page).to have_content "Número de registro"
-		expect(page).to have_content "12.345.678/9101-12"
+		expect(page).to have_content shipping_company.registration_number
 		expect(page).to have_content "Endereço de faturamento"
-		expect(sc.billing_address).to eql "Carlos Reis 152 - São Gonçalo, RJ"
+		expect(page).to have_content shipping_company.billing_address
 		expect(page).to have_content "Distância em Km"
-		expect(page).to have_content "1.0 Km"
+		expect(page).to have_content shipping_company.distance
 	end
 
 	it "criar conta de colaborador de uma Transportadora" do
-		ShippingCompany.create!(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
-														registration_number:"12345678910112",email_domain: "@ligeiro.com",
-														street: "Carlos Reis", number: 152, state:"RJ", 
-														city:"São Gonçalo",distance:1)
+		create(:shipping_company, corporate_name: 'Ligeirinho', email_domain: '@ligeiro.com')
 
 		visit root_path
 		click_on "Entrar como colaborador de uma Transportadora"

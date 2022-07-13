@@ -2,13 +2,11 @@ require "rails_helper"
 
 describe "Usuário da Transportadora acessa a página de detalhes do veículo" do
 	it "acessa a página com todos os veículos cadastrados" do
-		ShippingCompany.create!(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
-														registration_number:"12345678910112",email_domain: "@ligeiro.com",
-														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
+		shipping_company = create(:shipping_company, corporate_name: 'Ligeirinho', email_domain: '@ligeiro.com')
 		User.create!(name:"Walter",email:"walter@ligeiro.com",password:"password")
 		TransportVehicle.create!(brand: "Mercedes",year_manufacture: 2017,payload: 9000,
 											 identification_plate:"AAAA000",vehicle_model:"Atego",
-											 height:12,length:33,width:43, shipping_company_id:1)
+											 height:12,length:33,width:43, shipping_company_id: shipping_company.id)
 		visit root_path
 		click_on "Entrar como colaborador de uma Transportadora"
 		fill_in "E-mail", with: "walter@ligeiro.com"
@@ -35,9 +33,7 @@ describe "Usuário da Transportadora acessa a página de detalhes do veículo" d
 	end
 
 	it "sem veículos cadastrados" do
-		ShippingCompany.create!(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
-														registration_number:"12345678910112",email_domain: "@ligeiro.com",
-														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
+		create(:shipping_company, corporate_name: 'Ligeirinho', email_domain: '@ligeiro.com')
 		User.create!(name:"Walter",email:"walter@ligeiro.com",password:"password")
 
 		visit root_path
@@ -52,9 +48,7 @@ describe "Usuário da Transportadora acessa a página de detalhes do veículo" d
 	end
 
 	it "retorna à página da Transportadora" do
-		ShippingCompany.create!(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
-														registration_number:"12345678910112",email_domain: "@ligeiro.com",
-														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
+		create(:shipping_company, corporate_name: 'Ligeirinho', email_domain: '@ligeiro.com')
 		User.create!(name:"Walter",email:"walter@ligeiro.com",password:"password")
 		
 		visit root_path

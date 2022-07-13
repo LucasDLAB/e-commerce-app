@@ -20,9 +20,7 @@ describe "Administrador acessa a página de transportadoras" do
 
 	it "com sucesso" do
 		Admin.create!(email:"lucas@sistemadefrete.com",password:"password",name:"Lucas")
-		ShippingCompany.create!(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
-														registration_number:"12345678910112",email_domain: "@ligeiro.com",
-														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
+		shipping_company = create(:shipping_company, corporate_name: 'Ligeirinho')
 
 		visit root_path
 		click_on "Entrar como Administrador"
@@ -35,7 +33,7 @@ describe "Administrador acessa a página de transportadoras" do
 
 		expect(page).to have_content "Transportadoras Filiadas"
 		expect(page).to have_content "Ligeirinho"
-		expect(page).to have_content "12.345.678/9101-12"
+		expect(page).to have_content shipping_company.registration_number
 	end
 
 	it "criar conta de Administrador" do
@@ -54,9 +52,7 @@ describe "Administrador acessa a página de transportadoras" do
 
 	it "desativa a transportadora" do
 		Admin.create!(email:"lucas@sistemadefrete.com",password:"password",name:"Lucas")
-		ShippingCompany.create!(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
-														registration_number:"12345678910112",email_domain: "@ligeiro.com",
-														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1)
+		create(:shipping_company, corporate_name: 'Ligeirinho')
 
 		visit root_path
 		click_on "Entrar como Administrador"
@@ -75,9 +71,7 @@ describe "Administrador acessa a página de transportadoras" do
 
 	it "ativa a transportadora" do
 		Admin.create!(email:"lucas@sistemadefrete.com",password:"password",name:"Lucas")
-		ShippingCompany.create!(brand_name: "Ligeirinho LTDA",corporate_name:"Ligeirinho",
-														registration_number:"12345678910112",email_domain: "@ligeiro.com",
-														street: "Carlos Reis", number: 152, state:"RJ", city:"São Gonçalo",distance:1,status:2)
+		create(:shipping_company, corporate_name: 'Ligeirinho', status: 2)
 
 		visit root_path
 		click_on "Entrar como Administrador"
