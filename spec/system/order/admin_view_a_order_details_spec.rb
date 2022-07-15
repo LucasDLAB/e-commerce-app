@@ -4,12 +4,12 @@ require 'rails_helper'
 
 describe 'Administrador acessa a página de detalhes de um pedido' do
   it 'com sucesso' do
-    Admin.create!(email: 'lucas@sistemadefrete.com', password: 'password', name: 'Lucas')
+    create(:admin, email: 'lucas@sistemadefrete.com')
     create(:shipping_company, corporate_name: 'Ligeirinho', email_domain: '@ligeiro.com', distance: 100)
     allow(SecureRandom).to receive(:alphanumeric).and_return('ABCDEF123456789')
-    Order.create!(destinatary_name: 'João', destinatary_distance: 5000, destinatary_identification: '96719903047',
-                  street: 'Rua Santa Teresa', city: 'Rio de janeiro', number: 24, state: 'RJ',
-                  weight: 27, length: 15, width: 12, height: 32, status: 8)
+    create(:order, destinatary_name: 'João', destinatary_distance: 5000, destinatary_identification: '96719903047',
+                   street: 'Rua Santa Teresa', city: 'Rio de janeiro', number: 24, state: 'RJ',
+                   weight: 27, length: 15, width: 12, height: 32, status: 8)
 
     visit root_path
     click_on 'Entrar como Administrador'

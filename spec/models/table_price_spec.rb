@@ -114,23 +114,24 @@ RSpec.describe TablePrice, type: :model do
                                             max_height: 5, minimum_width: 1, max_width: 5,
                                             minimum_length: 9, max_length: 15, price: 10, shipping_company_id: shipping_company.id,
                                             minimum_dimension: 9, max_dimension: 376)
-      result = second_table.valid?
+      second_table.valid?
 
       expect(second_table.errors[:minimum_dimension]).to include('não pode possuir intervalos que abrangem outros intervalos')
     end
 
     it 'falso Dimensão máxima possuir parâmetros dentro de outros intervalos' do
       shipping_company = create(:shipping_company)
-      table = described_class.create!(minimum_weight: 10, max_weight: 50, minimum_height: 1,
-                                      max_height: 5, minimum_width: 1, max_width: 5,
-                                      minimum_length: 10, max_length: 15, price: 10, shipping_company_id: shipping_company.id)
+      described_class.create!(minimum_weight: 10, max_weight: 50, minimum_height: 1,
+                              max_height: 5, minimum_width: 1, max_width: 5,
+                              minimum_length: 10, max_length: 15, price: 10, 
+                              shipping_company_id: shipping_company.id)
       second_table = described_class.create(minimum_weight: 10, max_weight: 50, minimum_height: 1,
                                             max_height: 5, minimum_width: 1, max_width: 5,
-                                            minimum_length: 9, max_length: 14, price: 10, shipping_company_id: shipping_company.id)
-      result = second_table.valid?
+                                            minimum_length: 9, max_length: 14, price: 10,
+                                            shipping_company_id: shipping_company.id)
+      second_table.valid?
 
-      expect(second_table.errors[:max_dimension]).to include('não pode possuir intervalos que abrangem outros\n
-                                                              intervalos')
+      expect(second_table.errors[:max_dimension]).to include('não pode possuir intervalos que abrangem outros intervalos')
     end
   end
 end

@@ -5,7 +5,7 @@ require 'rails_helper'
 describe 'Usuário da Transportadora registra uma nova estimativa de entrega' do
   it 'acessa o formulário de estimativa de entrega' do
     create(:shipping_company, corporate_name: 'Ligeirinho', email_domain: '@ligeiro.com')
-    User.create!(name: 'Walter', email: 'walter@ligeiro.com', password: 'password')
+    create(:user, email: 'walter@ligeiro.com')
 
     visit root_path
     click_on 'Entrar como colaborador de uma Transportadora'
@@ -23,7 +23,7 @@ describe 'Usuário da Transportadora registra uma nova estimativa de entrega' do
 
   it 'com sucesso' do
     create(:shipping_company, corporate_name: 'Ligeirinho', email_domain: '@ligeiro.com')
-    User.create!(name: 'Walter', email: 'walter@ligeiro.com', password: 'password')
+    create(:user, email: 'walter@ligeiro.com')
 
     visit root_path
     click_on 'Entrar como colaborador de uma Transportadora'
@@ -50,7 +50,7 @@ describe 'Usuário da Transportadora registra uma nova estimativa de entrega' do
 
   it 'com campos vazios' do
     create(:shipping_company, corporate_name: 'Ligeirinho', email_domain: '@ligeiro.com')
-    User.create!(name: 'Walter', email: 'walter@ligeiro.com', password: 'password')
+    create(:user, email: 'walter@ligeiro.com')
 
     visit root_path
     click_on 'Entrar como colaborador de uma Transportadora'
@@ -77,7 +77,7 @@ describe 'Usuário da Transportadora registra uma nova estimativa de entrega' do
 
   it 'retorna à página da Transportadora' do
     create(:shipping_company, corporate_name: 'Ligeirinho', email_domain: '@ligeiro.com')
-    User.create!(name: 'Walter', email: 'walter@ligeiro.com', password: 'password')
+    create(:user, email: 'walter@ligeiro.com')
 
     visit root_path
     click_on 'Entrar como colaborador de uma Transportadora'
