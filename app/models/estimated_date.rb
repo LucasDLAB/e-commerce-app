@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EstimatedDate < ApplicationRecord
   belongs_to :shipping_company
   validates :min_distance, :max_distance, :business_day, presence: true
@@ -18,10 +20,10 @@ class EstimatedDate < ApplicationRecord
 
   def nulling_interval_conflict
     ed = EstimatedDate.where(shipping_company_id: shipping_company_id)
-    
-    ed.each do |e|   
+
+    ed.each do |e|
       next if id == e.id
-       
+
       if min_distance >= e.min_distance && min_distance <= e.max_distance
         errors.add(:min_distance,
                    'deve possuir valor maior ou inferior ao dos intervalos anteriores')

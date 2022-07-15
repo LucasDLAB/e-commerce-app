@@ -1,225 +1,230 @@
-require "rails_helper"
+# frozen_string_literal: true
 
-describe "Administrador cria um orçamento" do 
-	it "acessa o formulário" do
-		Admin.create!(email:"lucas@sistemadefrete.com",password:"password",name:"Lucas")
+require 'rails_helper'
 
-		visit root_path 
-		click_on "Entrar como Administrador"
-		fill_in "E-mail", with:"lucas@sistemadefrete.com"
-		fill_in "Senha", with: "password"
-		within "form" do
-			click_on "Entrar"
-		end
-		click_on "Fazer um novo orçamento"
+describe 'Administrador cria um orçamento' do
+  it 'acessa o formulário' do
+    Admin.create!(email: 'lucas@sistemadefrete.com', password: 'password', name: 'Lucas')
 
-		expect(page).to have_content "Criando um orçamento"
-		expect(page).to have_field "Distância em Km"
-		expect(page).to have_field "Altura em cm"
-		expect(page).to have_field "Largura em cm"
-		expect(page).to have_field "Comprimento em cm"
-		expect(page).to have_field "Peso em Kg"
-		expect(page).to have_button "Confirmar parâmetros"
-	end
+    visit root_path
+    click_on 'Entrar como Administrador'
+    fill_in 'E-mail', with: 'lucas@sistemadefrete.com'
+    fill_in 'Senha', with: 'password'
+    within 'form' do
+      click_on 'Entrar'
+    end
+    click_on 'Fazer um novo orçamento'
 
-	it "com sucesso" do
-		Admin.create!(email:"lucas@sistemadefrete.com",password:"password",name:"Lucas")
-		shipping_company = create(:shipping_company)
-		TransportVehicle.create!(brand: "Mercedes",year_manufacture: 2017,payload: 9000,
-											 identification_plate:"AAAA000",vehicle_model:"Atego",
-											 height:12,length:33,width:43, shipping_company_id:shipping_company.id)
-		TablePrice.create!(minimum_weight:10,max_weight:50,minimum_height:1,
-											 max_height:5,minimum_width:1,max_width:5,
-											 minimum_length:10,max_length:15,price:0.5,shipping_company_id:shipping_company.id)
-		EstimatedDate.create!(min_distance:10 , max_distance:100, business_day: 3,shipping_company_id:shipping_company.id)
+    expect(page).to have_content 'Criando um orçamento'
+    expect(page).to have_field 'Distância em Km'
+    expect(page).to have_field 'Altura em cm'
+    expect(page).to have_field 'Largura em cm'
+    expect(page).to have_field 'Comprimento em cm'
+    expect(page).to have_field 'Peso em Kg'
+    expect(page).to have_button 'Confirmar parâmetros'
+  end
 
-		visit root_path 
-		click_on "Entrar como Administrador"
-		fill_in "E-mail", with:"lucas@sistemadefrete.com"
-		fill_in "Senha", with: "password"
-		within "form" do
-			click_on "Entrar"
-		end
-		click_on "Fazer um novo orçamento"
-		fill_in "Distância em Km", with:50
-		fill_in "Altura em cm", with:3
-		fill_in "Largura em cm", with:3
-		fill_in "Comprimento em cm", with:3
-		fill_in "Peso em Kg", with:25
-		click_on "Confirmar parâmetros"
+  it 'com sucesso' do
+    Admin.create!(email: 'lucas@sistemadefrete.com', password: 'password', name: 'Lucas')
+    shipping_company = create(:shipping_company)
+    TransportVehicle.create!(brand: 'Mercedes', year_manufacture: 2017, payload: 9000,
+                             identification_plate: 'AAAA000', vehicle_model: 'Atego',
+                             height: 12, length: 33, width: 43, shipping_company_id: shipping_company.id)
+    TablePrice.create!(minimum_weight: 10, max_weight: 50, minimum_height: 1,
+                       max_height: 5, minimum_width: 1, max_width: 5,
+                       minimum_length: 10, max_length: 15, price: 0.5, shipping_company_id: shipping_company.id)
+    EstimatedDate.create!(min_distance: 10, max_distance: 100, business_day: 3,
+                          shipping_company_id: shipping_company.id)
 
-		expect(page).to have_content "Resultado do orçamento"
-		expect(page).to have_content "3 dia(s) úteis"
-		expect(page).to have_content "R$ 25,00"
-	end
+    visit root_path
+    click_on 'Entrar como Administrador'
+    fill_in 'E-mail', with: 'lucas@sistemadefrete.com'
+    fill_in 'Senha', with: 'password'
+    within 'form' do
+      click_on 'Entrar'
+    end
+    click_on 'Fazer um novo orçamento'
+    fill_in 'Distância em Km', with: 50
+    fill_in 'Altura em cm', with: 3
+    fill_in 'Largura em cm', with: 3
+    fill_in 'Comprimento em cm', with: 3
+    fill_in 'Peso em Kg', with: 25
+    click_on 'Confirmar parâmetros'
 
-	it "deve apresentar apenas o maior valor de uma Transportadora" do
-		Admin.create!(email:"lucas@sistemadefrete.com",password:"password",name:"Lucas")
-		shipping_company = create(:shipping_company)
-		TablePrice.create!(minimum_weight:10,max_weight:50,minimum_height:5,
-											 max_height:10,minimum_width:10,max_width:50,
-											 minimum_length:10,max_length:15,price:1.5,shipping_company_id:1)
-		TransportVehicle.create!(brand: "Mercedes",year_manufacture: 2017,payload: 9000,
-											 identification_plate:"AAAA000",vehicle_model:"Atego",
-											 height:12,length:33,width:43, shipping_company_id:shipping_company.id)
-		TablePrice.create!(minimum_weight:1,max_weight:20,minimum_height:1,
-											 max_height:4,minimum_width:1,max_width:5,
-											 minimum_length:10,max_length:15,price:0.2,shipping_company_id: shipping_company.id)
-		EstimatedDate.create!(min_distance:101 , max_distance:200, business_day: 5,shipping_company_id: shipping_company.id)
-		EstimatedDate.create!(min_distance:10 , max_distance:100, business_day: 3,shipping_company_id:shipping_company.id)
+    expect(page).to have_content 'Resultado do orçamento'
+    expect(page).to have_content '3 dia(s) úteis'
+    expect(page).to have_content 'R$ 25,00'
+  end
 
-		visit root_path 
-		click_on "Entrar como Administrador"
-		fill_in "E-mail", with:"lucas@sistemadefrete.com"
-		fill_in "Senha", with: "password"
-		within "form" do
-			click_on "Entrar"
-		end
-		click_on "Fazer um novo orçamento"
-		fill_in "Distância em Km", with:50
-		fill_in "Altura em cm", with:3
-		fill_in "Largura em cm", with:3
-		fill_in "Comprimento em cm", with:3
-		fill_in "Peso em Kg", with:25
-		click_on "Confirmar parâmetros"
+  it 'deve apresentar apenas o maior valor de uma Transportadora' do
+    Admin.create!(email: 'lucas@sistemadefrete.com', password: 'password', name: 'Lucas')
+    shipping_company = create(:shipping_company)
+    TablePrice.create!(minimum_weight: 10, max_weight: 50, minimum_height: 5,
+                       max_height: 10, minimum_width: 10, max_width: 50,
+                       minimum_length: 10, max_length: 15, price: 1.5, shipping_company_id: 1)
+    TransportVehicle.create!(brand: 'Mercedes', year_manufacture: 2017, payload: 9000,
+                             identification_plate: 'AAAA000', vehicle_model: 'Atego',
+                             height: 12, length: 33, width: 43, shipping_company_id: shipping_company.id)
+    TablePrice.create!(minimum_weight: 1, max_weight: 20, minimum_height: 1,
+                       max_height: 4, minimum_width: 1, max_width: 5,
+                       minimum_length: 10, max_length: 15, price: 0.2, shipping_company_id: shipping_company.id)
+    EstimatedDate.create!(min_distance: 101, max_distance: 200, business_day: 5,
+                          shipping_company_id: shipping_company.id)
+    EstimatedDate.create!(min_distance: 10, max_distance: 100, business_day: 3,
+                          shipping_company_id: shipping_company.id)
 
-		expect(page).to have_content "Resultado do orçamento"
-		expect(page).not_to have_content "R$ 10,00"
-		expect(page).to have_content "R$ 75,00"
-	end
+    visit root_path
+    click_on 'Entrar como Administrador'
+    fill_in 'E-mail', with: 'lucas@sistemadefrete.com'
+    fill_in 'Senha', with: 'password'
+    within 'form' do
+      click_on 'Entrar'
+    end
+    click_on 'Fazer um novo orçamento'
+    fill_in 'Distância em Km', with: 50
+    fill_in 'Altura em cm', with: 3
+    fill_in 'Largura em cm', with: 3
+    fill_in 'Comprimento em cm', with: 3
+    fill_in 'Peso em Kg', with: 25
+    click_on 'Confirmar parâmetros'
 
-	it "deve apresentar o maior valor de cada Transportadora" do
-		Admin.create!(email:"lucas@sistemadefrete.com",password:"password",name:"Lucas")
-		first_company = create(:shipping_company)
-		second_company = create(:shipping_company)
-		TransportVehicle.create!(brand: "Mercedes",year_manufacture: 2017,payload: 9000,
-											 identification_plate:"AAAA000",vehicle_model:"Atego",
-											 height:12,length:33,width:43, shipping_company_id:first_company.id)
-		TransportVehicle.create!(brand: "Mercedes",year_manufacture: 2017,payload: 9000,
-											 identification_plate:"AAAA001",vehicle_model:"Atego",
-											 height:12,length:33,width:43, shipping_company_id: second_company.id)		
-		TablePrice.create!(minimum_weight:10,max_weight:50,minimum_height:5,
-											 max_height:10,minimum_width:10,max_width:50,
-											 minimum_length:10,max_length:15,price:1.5,shipping_company_id: first_company.id)
-		
-		TablePrice.create!(minimum_weight:10,max_weight:50,minimum_height:5,
-											 max_height:10,minimum_width:10,max_width:50,
-											 minimum_length:10,max_length:15,price:2,shipping_company_id: second_company.id)
-		EstimatedDate.create!(min_distance:10 , max_distance:200, business_day: 5,shipping_company_id:first_company.id)
-		EstimatedDate.create!(min_distance:10 , max_distance:100, business_day: 3,shipping_company_id: second_company.id)
+    expect(page).to have_content 'Resultado do orçamento'
+    expect(page).not_to have_content 'R$ 10,00'
+    expect(page).to have_content 'R$ 75,00'
+  end
 
-		visit root_path 
-		click_on "Entrar como Administrador"
-		fill_in "E-mail", with:"lucas@sistemadefrete.com"
-		fill_in "Senha", with: "password"
-		within "form" do
-			click_on "Entrar"
-		end
-		click_on "Fazer um novo orçamento"
-		fill_in "Distância em Km", with:50
-		fill_in "Altura em cm", with:3
-		fill_in "Largura em cm", with:3
-		fill_in "Comprimento em cm", with:3
-		fill_in "Peso em Kg", with:25
-		click_on "Confirmar parâmetros"
+  it 'deve apresentar o maior valor de cada Transportadora' do
+    Admin.create!(email: 'lucas@sistemadefrete.com', password: 'password', name: 'Lucas')
+    first_company = create(:shipping_company)
+    second_company = create(:shipping_company)
+    TransportVehicle.create!(brand: 'Mercedes', year_manufacture: 2017, payload: 9000,
+                             identification_plate: 'AAAA000', vehicle_model: 'Atego',
+                             height: 12, length: 33, width: 43, shipping_company_id: first_company.id)
+    TransportVehicle.create!(brand: 'Mercedes', year_manufacture: 2017, payload: 9000,
+                             identification_plate: 'AAAA001', vehicle_model: 'Atego',
+                             height: 12, length: 33, width: 43, shipping_company_id: second_company.id)
+    TablePrice.create!(minimum_weight: 10, max_weight: 50, minimum_height: 5,
+                       max_height: 10, minimum_width: 10, max_width: 50,
+                       minimum_length: 10, max_length: 15, price: 1.5, shipping_company_id: first_company.id)
 
-		expect(page).to have_content "Resultado do orçamento"
-		expect(page).to have_content "R$ 100,00"
-		expect(page).to have_content "R$ 75,00"
-	end
+    TablePrice.create!(minimum_weight: 10, max_weight: 50, minimum_height: 5,
+                       max_height: 10, minimum_width: 10, max_width: 50,
+                       minimum_length: 10, max_length: 15, price: 2, shipping_company_id: second_company.id)
+    EstimatedDate.create!(min_distance: 10, max_distance: 200, business_day: 5, shipping_company_id: first_company.id)
+    EstimatedDate.create!(min_distance: 10, max_distance: 100, business_day: 3, shipping_company_id: second_company.id)
 
-	it "valores não podem estar vazios" do
-		Admin.create!(email:"lucas@sistemadefrete.com",password:"password",name:"Lucas")
-		shipping_company = create(:shipping_company)
-		TablePrice.create!(minimum_weight:10,max_weight:50,minimum_height:5,
-											 max_height:10,minimum_width:10,max_width:50,
-											 minimum_length:10,max_length:15,price:1.5,shipping_company_id:shipping_company.id)
-		
-		EstimatedDate.create!(min_distance:10 , max_distance:200, business_day: 5,shipping_company_id:shipping_company.id)
-	
-		visit root_path 
-		click_on "Entrar como Administrador"
-		fill_in "E-mail", with:"lucas@sistemadefrete.com"
-		fill_in "Senha", with: "password"
-		within "form" do
-			click_on "Entrar"
-		end
-		click_on "Fazer um novo orçamento"
-		fill_in "Distância em Km", with:""
-		fill_in "Altura em cm", with:""
-		fill_in "Largura em cm", with:""
-		fill_in "Comprimento em cm", with:""
-		fill_in "Peso em Kg", with:""
-		click_on "Confirmar parâmetros"
+    visit root_path
+    click_on 'Entrar como Administrador'
+    fill_in 'E-mail', with: 'lucas@sistemadefrete.com'
+    fill_in 'Senha', with: 'password'
+    within 'form' do
+      click_on 'Entrar'
+    end
+    click_on 'Fazer um novo orçamento'
+    fill_in 'Distância em Km', with: 50
+    fill_in 'Altura em cm', with: 3
+    fill_in 'Largura em cm', with: 3
+    fill_in 'Comprimento em cm', with: 3
+    fill_in 'Peso em Kg', with: 25
+    click_on 'Confirmar parâmetros'
 
-		expect(page).to have_content "É necessário preencher todos os campos para criar um orçamento"
-	end
+    expect(page).to have_content 'Resultado do orçamento'
+    expect(page).to have_content 'R$ 100,00'
+    expect(page).to have_content 'R$ 75,00'
+  end
 
-	it "o preço deve ser igual ou maior ao preço mínimo" do
-		Admin.create!(email:"lucas@sistemadefrete.com",password:"password",name:"Lucas")
-		shipping_company = create(:shipping_company, corporate_name:'Ligeirinho')
-		TablePrice.create!(minimum_weight:10,max_weight:50,minimum_height:5,
-											 max_height:10,minimum_width:10,max_width:50,
-											 minimum_length:10,max_length:15,price:1.5,shipping_company_id:shipping_company.id)
-		TransportVehicle.create!(brand: "Mercedes",year_manufacture: 2017,payload: 9000,
-											 identification_plate:"AAAA000",vehicle_model:"Atego",
-											 height:12,length:33,width:43, shipping_company_id: shipping_company.id)
-		EstimatedDate.create!(min_distance:0.1 , max_distance:200, business_day: 5,shipping_company_id: shipping_company.id)
-	
-		visit root_path 
-		click_on "Entrar como Administrador"
-		fill_in "E-mail", with:"lucas@sistemadefrete.com"
-		fill_in "Senha", with: "password"
-		within "form" do
-			click_on "Entrar"
-		end
-		click_on "Fazer um novo orçamento"
-		fill_in "Distância em Km", with:0.1
-		fill_in "Altura em cm", with:10
-		fill_in "Largura em cm", with:10
-		fill_in "Comprimento em cm", with:10
-		fill_in "Peso em Kg", with:10
-		click_on "Confirmar parâmetros"
+  it 'valores não podem estar vazios' do
+    Admin.create!(email: 'lucas@sistemadefrete.com', password: 'password', name: 'Lucas')
+    shipping_company = create(:shipping_company)
+    TablePrice.create!(minimum_weight: 10, max_weight: 50, minimum_height: 5,
+                       max_height: 10, minimum_width: 10, max_width: 50,
+                       minimum_length: 10, max_length: 15, price: 1.5, shipping_company_id: shipping_company.id)
 
-		expect(page).to have_content "R$ 7,29"
-	end
+    EstimatedDate.create!(min_distance: 10, max_distance: 200, business_day: 5,
+                          shipping_company_id: shipping_company.id)
 
-	it "deve apresentar apenas de Transportadoras ativadas" do
-		Admin.create!(email:"lucas@sistemadefrete.com",password:"password",name:"Lucas")
-		first_company = create(:shipping_company, email_domain: '@ligeiro.com', status:2)
-		second_company = create(:shipping_company)
-		TransportVehicle.create!(brand: "Mercedes",year_manufacture: 2017,payload: 9000,
-											 identification_plate:"AAAA000",vehicle_model:"Atego",
-											 height:12,length:33,width:43, shipping_company_id:second_company.id)
-		TablePrice.create!(minimum_weight:10,max_weight:50,minimum_height:5,
-											 max_height:10,minimum_width:10,max_width:50,
-											 minimum_length:10,max_length:15,price:1.5,shipping_company_id:first_company.id)
-		
-		TablePrice.create!(minimum_weight:10,max_weight:50,minimum_height:5,
-											 max_height:10,minimum_width:10,max_width:50,
-											 minimum_length:10,max_length:15,price:2,shipping_company_id: second_company.id)
-		EstimatedDate.create!(min_distance:10 , max_distance:200, business_day: 5,shipping_company_id: first_company.id)
-		EstimatedDate.create!(min_distance:10 , max_distance:100, business_day: 3,shipping_company_id: second_company.id)
+    visit root_path
+    click_on 'Entrar como Administrador'
+    fill_in 'E-mail', with: 'lucas@sistemadefrete.com'
+    fill_in 'Senha', with: 'password'
+    within 'form' do
+      click_on 'Entrar'
+    end
+    click_on 'Fazer um novo orçamento'
+    fill_in 'Distância em Km', with: ''
+    fill_in 'Altura em cm', with: ''
+    fill_in 'Largura em cm', with: ''
+    fill_in 'Comprimento em cm', with: ''
+    fill_in 'Peso em Kg', with: ''
+    click_on 'Confirmar parâmetros'
 
-		visit root_path 
-		click_on "Entrar como Administrador"
-		fill_in "E-mail", with:"lucas@sistemadefrete.com"
-		fill_in "Senha", with: "password"
-		within "form" do
-			click_on "Entrar"
-		end
-		click_on "Fazer um novo orçamento"
-		fill_in "Distância em Km", with:50
-		fill_in "Altura em cm", with:3
-		fill_in "Largura em cm", with:3
-		fill_in "Comprimento em cm", with:3
-		fill_in "Peso em Kg", with:25
-		click_on "Confirmar parâmetros"
+    expect(page).to have_content 'É necessário preencher todos os campos para criar um orçamento'
+  end
 
-		expect(page).to have_content "Resultado do orçamento"
-		expect(page).to have_content "R$ 100,00"
-		expect(page).not_to have_content "R$ 75,00"
-	end
+  it 'o preço deve ser igual ou maior ao preço mínimo' do
+    Admin.create!(email: 'lucas@sistemadefrete.com', password: 'password', name: 'Lucas')
+    shipping_company = create(:shipping_company, corporate_name: 'Ligeirinho')
+    TablePrice.create!(minimum_weight: 10, max_weight: 50, minimum_height: 5,
+                       max_height: 10, minimum_width: 10, max_width: 50,
+                       minimum_length: 10, max_length: 15, price: 1.5, shipping_company_id: shipping_company.id)
+    TransportVehicle.create!(brand: 'Mercedes', year_manufacture: 2017, payload: 9000,
+                             identification_plate: 'AAAA000', vehicle_model: 'Atego',
+                             height: 12, length: 33, width: 43, shipping_company_id: shipping_company.id)
+    EstimatedDate.create!(min_distance: 0.1, max_distance: 200, business_day: 5,
+                          shipping_company_id: shipping_company.id)
+
+    visit root_path
+    click_on 'Entrar como Administrador'
+    fill_in 'E-mail', with: 'lucas@sistemadefrete.com'
+    fill_in 'Senha', with: 'password'
+    within 'form' do
+      click_on 'Entrar'
+    end
+    click_on 'Fazer um novo orçamento'
+    fill_in 'Distância em Km', with: 0.1
+    fill_in 'Altura em cm', with: 10
+    fill_in 'Largura em cm', with: 10
+    fill_in 'Comprimento em cm', with: 10
+    fill_in 'Peso em Kg', with: 10
+    click_on 'Confirmar parâmetros'
+
+    expect(page).to have_content 'R$ 7,29'
+  end
+
+  it 'deve apresentar apenas de Transportadoras ativadas' do
+    Admin.create!(email: 'lucas@sistemadefrete.com', password: 'password', name: 'Lucas')
+    first_company = create(:shipping_company, email_domain: '@ligeiro.com', status: 2)
+    second_company = create(:shipping_company)
+    TransportVehicle.create!(brand: 'Mercedes', year_manufacture: 2017, payload: 9000,
+                             identification_plate: 'AAAA000', vehicle_model: 'Atego',
+                             height: 12, length: 33, width: 43, shipping_company_id: second_company.id)
+    TablePrice.create!(minimum_weight: 10, max_weight: 50, minimum_height: 5,
+                       max_height: 10, minimum_width: 10, max_width: 50,
+                       minimum_length: 10, max_length: 15, price: 1.5, shipping_company_id: first_company.id)
+
+    TablePrice.create!(minimum_weight: 10, max_weight: 50, minimum_height: 5,
+                       max_height: 10, minimum_width: 10, max_width: 50,
+                       minimum_length: 10, max_length: 15, price: 2, shipping_company_id: second_company.id)
+    EstimatedDate.create!(min_distance: 10, max_distance: 200, business_day: 5, shipping_company_id: first_company.id)
+    EstimatedDate.create!(min_distance: 10, max_distance: 100, business_day: 3, shipping_company_id: second_company.id)
+
+    visit root_path
+    click_on 'Entrar como Administrador'
+    fill_in 'E-mail', with: 'lucas@sistemadefrete.com'
+    fill_in 'Senha', with: 'password'
+    within 'form' do
+      click_on 'Entrar'
+    end
+    click_on 'Fazer um novo orçamento'
+    fill_in 'Distância em Km', with: 50
+    fill_in 'Altura em cm', with: 3
+    fill_in 'Largura em cm', with: 3
+    fill_in 'Comprimento em cm', with: 3
+    fill_in 'Peso em Kg', with: 25
+    click_on 'Confirmar parâmetros'
+
+    expect(page).to have_content 'Resultado do orçamento'
+    expect(page).to have_content 'R$ 100,00'
+    expect(page).not_to have_content 'R$ 75,00'
+  end
 end
-
-
