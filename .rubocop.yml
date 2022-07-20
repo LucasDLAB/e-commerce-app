@@ -12,7 +12,7 @@ AllCops:
     - 'db/schema.rb'
     - 'config/application.rb'
   TargetRailsVersion: 7.0
-  TargetRubyVersion: 3.1.0
+  TargetRubyVersion: 3.1.2
 
 Style/Documentation:
   Enabled: false
