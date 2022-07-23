@@ -43,12 +43,8 @@ class TablePricesController < ApplicationController
     setting_values
 
     @data = []
-    @ids = []
-    defining_price
     @tables = []
-    @ids.each do |ps|
-      @tables << TablePrice.find(ps)
-    end
+    defining_price
   end
 
   private
@@ -70,27 +66,20 @@ class TablePricesController < ApplicationController
   end
 
   def defining_price
-    ShippingCompany.all.each do |sc|
+    ShippingCompany.active.each do |sc|
       higher_price = sc.min_price
-      id = 0
-      next unless sc.active? && sc.transport_vehicles.available.count.positive?
 
-      sc.table_prices.each do |tp|
-        next unless (tp.minimum_weight <= @weight && @weight <= tp.max_weight) ||
-                    (tp.minimum_dimension <= @dimension && @dimension <= tp.max_dimension)
+      weight = TablePrice.where('shipping_company_id = ? AND ? BETWEEN minimum_weight AND max_weight', sc.id, @weight)
 
-        higher_price = @distance * tp.price if higher_price <= (@distance * tp.price)
+      dimension = TablePrice.where('shipping_company_id = ? AND ? BETWEEN minimum_dimension AND max_dimension', sc.id, @dimension)
 
-        id = tp.id
+      [weight.first, dimension.first].each do |t|
+        higher_price = @distance * t.price if t.present? && higher_price < (@distance * t.price)
       end
-      next unless id != 0
 
-      sc.estimated_dates.each do |ed|
-        if @distance >= ed.min_distance && @distance <= ed.max_distance
-          @ids << id
-          @data << [higher_price, ed.business_day]
-        end
-      end
+      date = EstimatedDate.where('shipping_company_id = ? AND ? BETWEEN min_distance AND max_distance', sc.id, @distance)
+
+      @data << [higher_price, date.first.business_day, sc.corporate_name] if date.present?
     end
   end
 end
