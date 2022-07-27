@@ -9,13 +9,13 @@
 			<td>Preço</td>
 			<td>Prazo</td>
 		</tr>		
-			<% @tables.each do |t|%>
+			<% @data.each  do |datas|%>
 				<tr>	
-				<td>Transportadora <%= t.shipping_company.corporate_name%></td>
+				<td>Transportadora <%= datas[2]%></td>
 				<td>
-					<%= number_to_currency(@data[@tables.index(t)][0])%>	
+					<%= number_to_currency(datas[0])%>	
 				</td>
-				<td><%= @data[@tables.index(t)][1]%> dia(s) úteis</td>
+				<td><%= datas[1]%> dia(s) úteis</td>
 			<%end%>
 		</tr>
 	</table>

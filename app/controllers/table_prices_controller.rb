@@ -8,9 +8,8 @@ class TablePricesController < ApplicationController
     @table_prices = []
     @endereco = ShippingCompany.find(params[:id])
     if admin_signed_in? || (user_signed_in? && current_user.shipping_company_id == @endereco.id)
-      TablePrice.where(shipping_company_id: params[:id]).find_each do |tp|
-        @table_prices << tp
-      end
+      @table_prices = TablePrice.where(shipping_company_id: params[:id])
+
     else
       redirect_to root_path, notice: 'Página disponível apenas para Administradores ou Usuários desta Transportadora'
     end
@@ -41,46 +40,32 @@ class TablePricesController < ApplicationController
   def calculate
     if params[:weight] == '' || params[:height] == '' || params[:width] == '' || params[:length] == '' || params[:distance] == ''
       redirect_to search_table_prices_path, notice: 'É necessário preencher todos os campos para criar um orçamento'
-    else
-      @dimension = params[:length].to_d * params[:width].to_d * params[:height].to_d / 1_000_000
-      @weight = params[:weight].to_d
-      @distance = params[:distance].to_d
-      @data = []
-      @ids = []
-      defining_price
-      @tables = []
-      @ids.each do |ps|
-        @tables << TablePrice.find(ps)
-      end
     end
+
+    setting_values
+
+    @data = []
+    @tables = []
+    defining_price
   end
 
   private
 
   def defining_price
-    ShippingCompany.all.each do |sc|
+    ShippingCompany.active.each do |sc|
       higher_price = sc.min_price
-      id = 0
-      next unless sc.active? && sc.transport_vehicles.available.count.positive?
 
-      sc.table_prices.each do |tp|
-        next unless (tp.minimum_weight <= @weight && @weight <= tp.max_weight) ||
-                    (tp.minimum_dimension <= @dimension && @dimension <= tp.max_dimension)
+      weight = TablePrice.where('shipping_company_id = ? AND ? BETWEEN minimum_weight AND max_weight', sc.id, @weight)
 
-        if higher_price > (@distance * tp.price)
-        else
-          higher_price = @distance * tp.price
-        end
-        id = tp.id
+      dimension = TablePrice.where('shipping_company_id = ? AND ? BETWEEN minimum_dimension AND max_dimension', sc.id, @dimension)
+
+      [weight.first, dimension.first].each do |t|
+        higher_price = @distance * t.price if t.present? && higher_price < (@distance * t.price)
       end
-      next unless id != 0
 
-      sc.estimated_dates.each do |ed|
-        if @distance >= ed.min_distance && @distance <= ed.max_distance
-          @ids << id
-          @data << [higher_price, ed.business_day]
-        end
-      end
+      date = EstimatedDate.where('shipping_company_id = ? AND ? BETWEEN min_distance AND max_distance', sc.id, @distance)
+
+      @data << [higher_price, date.first.business_day, sc.corporate_name] if date.present?
     end
   end
 end
