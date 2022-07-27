@@ -8,8 +8,7 @@ class EstimatedDatesController < ApplicationController
   end
 
   def create
-    estimated_date_params = params.require(:estimated_date).permit(:min_distance, :max_distance,
-                                                                   :business_day)
+    estimated_date_params = params.require(:estimated_date).permit(:min_distance, :max_distance, :business_day)
     @estimated_date = EstimatedDate.new(estimated_date_params)
     @estimated_date.shipping_company_id = current_user.shipping_company_id
     if @estimated_date.save
