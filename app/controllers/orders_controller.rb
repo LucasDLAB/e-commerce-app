@@ -9,7 +9,11 @@ class OrdersController < ApplicationController
       @orders = Order.all
     elsif user_signed_in?
       @orders = []
-      wanted_orders
+      Order.pending.each do |o|
+        if o.wanted_companies != '' && o.wanted_companies.match(/\w+/)[0].to_i == current_user.shipping_company_id
+          @orders << o
+        end
+      end
     else
       redirect_to root_path,
                   notice: 'É necessário ser um Administrador ou Usuário de transportadora para acessar esta página'
@@ -34,24 +38,25 @@ class OrdersController < ApplicationController
   end
 
   def show
-    if admin_signed_in? || (user_signed_in? && current_user.shipping_company_id == params[:id].to_i)
-      @order = Order.find(params[:id])
+    @order = Order.find(params[:id])
+    if admin_signed_in? || (user_signed_in? && current_user.shipping_company_id == @order.shipping_company_id)
     else
-      message = 'Apenas Administradores ou Usuários de transportadoras responsaveis por este pedido podem visualiza-lo'
       redirect_to root_path,
-                  notice: message
+                  notice: 'Apenas Administradores ou Usuários de transportadoras responsaveis por este pedido podem visualiza-lo'
     end
   end
 
   def choose_vehicle
     @order = Order.find(params[:id])
     shipping_company = ShippingCompany.find(current_user.shipping_company_id)
-    @vehicles = TransportVehicle.where('shipping_company_id = ? AND dimension >= ? AND payload >= ?',
-                                       shipping_company.id, @order.dimension, @order.weight)
+    @vehicles = []
+    shipping_company.transport_vehicles.available.each do |v|
+      @vehicles << v if v.dimension > @order.dimension && v.payload > @order.weight
+    end
 
-    return if @vehicles.present?
-
-    redirect_to root_path, notice: 'Disponibilize um veículo com dimensão e capacidade máxima adequada'
+    if @vehicles == []
+      redirect_to root_path, notice: 'Disponibilize um veículo com dimensão e capacidade máxima adequada'
+    end
   end
 
   def associate_shipping_company
@@ -70,28 +75,22 @@ class OrdersController < ApplicationController
 
   private
 
-  def price(shipping_company)
-    @higher_price = shipping_company.min_price
-    shipping_company.table_prices.each do |table_price|
-      line_price = @order.destinatary_distance.to_d * table_price.price
-      next unless (table_price.minimum_weight <= @order.weight && @order.weight <= table_price.max_weight) ||
-                  (table_price.minimum_dimension <= @order.dimension && @order.dimension <= table_price.max_dimension)
+  def price(sc)
+    @higher_price = sc.min_price
+    sc.table_prices.each do |tp|
+      line_price = @order.destinatary_distance.to_d * tp.price
+      next unless (tp.minimum_weight <= @order.weight && @order.weight <= tp.max_weight) ||
+                  (tp.minimum_dimension <= @order.dimension && @order.dimension <= tp.max_dimension)
 
       @higher_price = line_price if @higher_price < line_price
     end
     @higher_price
   end
 
-  def date(shipping_company)
-    estimated_date = EstimatedDate.where('shipping_company_id = ? AND min_distance <= ? AND max_distance >= ?',
-                                         shipping_company.id, @order.destinatary_distance, @order.destinatary_distance)
-    estimated_date.first.business_day
-  end
-
-  def wanted_orders
-    Order.pending.each do |o|
-      if o.wanted_companies != '' && o.wanted_companies.match(/\w+/)[0].to_i == current_user.shipping_company_id
-        @orders << o
+  def date(sc)
+    sc.estimated_dates.each do |ed|
+      if @order.destinatary_distance >= ed.min_distance && @order.destinatary_distance <= ed.max_distance
+        return ed.business_day
       end
     end
   end
