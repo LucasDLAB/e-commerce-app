@@ -9,6 +9,7 @@ class TablePricesController < ApplicationController
 
     if admin_signed_in? || (user_signed_in? && current_user.shipping_company_id == @endereco.id)
       @table_prices = TablePrice.where(shipping_company_id: params[:id])
+
     else
       redirect_to root_path, notice: 'Página disponível apenas para Administradores ou Usuários desta Transportadora'
     end
