@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe 'Administrador acessa a página de transportadoras' do
   it 'sem transportadoras cadastradas' do
-    Admin.create!(email: 'lucas@sistemadefrete.com', password: 'password', name: 'Lucas')
+    create(:admin, email: 'lucas@sistemadefrete.com')
 
     visit root_path
     click_on 'Entrar como Administrador'
@@ -20,7 +20,7 @@ describe 'Administrador acessa a página de transportadoras' do
   end
 
   it 'com sucesso' do
-    Admin.create!(email: 'lucas@sistemadefrete.com', password: 'password', name: 'Lucas')
+    create(:admin, email: 'lucas@sistemadefrete.com')
     shipping_company = create(:shipping_company, corporate_name: 'Ligeirinho')
 
     visit root_path
@@ -52,7 +52,7 @@ describe 'Administrador acessa a página de transportadoras' do
   end
 
   it 'desativa a transportadora' do
-    Admin.create!(email: 'lucas@sistemadefrete.com', password: 'password', name: 'Lucas')
+    create(:admin, email: 'lucas@sistemadefrete.com')
     create(:shipping_company, corporate_name: 'Ligeirinho')
 
     visit root_path
@@ -71,7 +71,7 @@ describe 'Administrador acessa a página de transportadoras' do
   end
 
   it 'ativa a transportadora' do
-    Admin.create!(email: 'lucas@sistemadefrete.com', password: 'password', name: 'Lucas')
+    create(:admin, email: 'lucas@sistemadefrete.com')
     create(:shipping_company, corporate_name: 'Ligeirinho', status: 2)
 
     visit root_path

@@ -6,16 +6,14 @@ describe 'Usuário da Transportadora acessa a página de pedidos' do
   it 'visualiza pedidos pendentes' do
     shipping_company = create(:shipping_company, corporate_name: 'Ligeirinho', email_domain: '@ligeiro.com',
                                                  distance: 100)
-    User.create!(email: 'lucas@ligeiro.com', password: 'password', name: 'Lucas')
-    TransportVehicle.create!(brand: 'Mercedes', year_manufacture: 2017, payload: 9000,
-                             identification_plate: 'AAAA000', vehicle_model: 'Atego',
-                             height: 12, length: 33, width: 43,
-                             shipping_company_id: shipping_company.id, status: 0)
-    TablePrice.create!(minimum_weight: 10, max_weight: 50, minimum_height: 1,
-                       max_height: 35, minimum_width: 1, max_width: 5,
-                       minimum_length: 10, max_length: 16, price: 0.5, shipping_company_id: shipping_company.id)
-    EstimatedDate.create!(min_distance: 10, max_distance: 5100, business_day: 3,
-                          shipping_company_id: shipping_company.id)
+    create(:user, email: 'lucas@ligeiro.com')
+    create(:transport_vehicle, payload: 9000, height: 12, length: 33,
+                               width: 43, shipping_company_id: shipping_company.id, status: 0)
+    create(:table_price, minimum_weight: 10, max_weight: 50, minimum_height: 1,
+                         max_height: 35, minimum_width: 1, max_width: 5,
+                         minimum_length: 10, max_length: 16, price: 0.5, shipping_company_id: shipping_company.id)
+    create(:estimated_date, min_distance: 10, max_distance: 5100, business_day: 3,
+                            shipping_company_id: shipping_company.id)
     allow(SecureRandom).to receive(:alphanumeric).and_return('ABCDEF123456789')
     Order.create!(destinatary_name: 'João', destinatary_distance: 5000, destinatary_identification: '96719903047',
                   street: 'Rua Santa Teresa', city: 'Rio de janeiro', number: 24, state: 'RJ',
@@ -33,16 +31,17 @@ describe 'Usuário da Transportadora acessa a página de pedidos' do
   end
 
   it 'com pedidos pendentes' do
-    create(:shipping_company, corporate_name: 'Ligeirinho', brand_name: 'Ligeirinho LTDA', email_domain: '@ligeiro.com',
-                              distance: 100)
-    User.create!(email: 'lucas@ligeiro.com', password: 'password', name: 'Lucas')
-    transport_vehicle = TransportVehicle.create!(brand: 'Mercedes', year_manufacture: 2017, payload: 9000,
-                                                 identification_plate: 'AAAA000', vehicle_model: 'Atego',
-                                                 height: 12, length: 33, width: 43, shipping_company_id: 1, status: 0)
-    TablePrice.create!(minimum_weight: 10, max_weight: 50, minimum_height: 1,
-                       max_height: 35, minimum_width: 1, max_width: 5,
-                       minimum_length: 10, max_length: 16, price: 0.5, shipping_company_id: 1)
-    EstimatedDate.create!(min_distance: 10, max_distance: 5100, business_day: 3, shipping_company_id: 1)
+    shipping_company = create(:shipping_company, corporate_name: 'Ligeirinho', brand_name: 'Ligeirinho LTDA',
+                                                 email_domain: '@ligeiro.com', distance: 100)
+    create(:user, email: 'lucas@ligeiro.com')
+    transport_vehicle = create(:transport_vehicle, identification_plate: 'AAAA000', vehicle_model: 'Atego',
+                                                   payload: 9000, height: 12, length: 33,
+                                                   width: 43, shipping_company_id: shipping_company.id, status: 0)
+    create(:table_price, minimum_weight: 10, max_weight: 50, minimum_height: 1,
+                         max_height: 35, minimum_width: 1, max_width: 5,
+                         minimum_length: 10, max_length: 16, price: 0.5, shipping_company_id: shipping_company.id)
+    create(:estimated_date, min_distance: 10, max_distance: 5100, business_day: 3,
+                            shipping_company_id: shipping_company.id)
     allow(SecureRandom).to receive(:alphanumeric).and_return('ABCDEF123456789')
     Order.create!(destinatary_name: 'João', destinatary_distance: 5000, destinatary_identification: '96719903047',
                   street: 'Rua Santa Teresa', city: 'Rio de janeiro', number: 24, state: 'RJ',

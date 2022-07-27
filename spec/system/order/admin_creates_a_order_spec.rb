@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe 'Administrador cria um novo pedido' do
   it 'acessa o formulário do pedido' do
-    Admin.create!(email: 'lucas@sistemadefrete.com', password: 'password', name: 'Lucas')
+    create(:admin, email: 'lucas@sistemadefrete.com')
     create(:shipping_company, distance: 100)
 
     visit root_path
@@ -31,7 +31,7 @@ describe 'Administrador cria um novo pedido' do
   end
 
   it 'com sucesso' do
-    Admin.create!(email: 'lucas@sistemadefrete.com', password: 'password', name: 'Lucas')
+    create(:admin, email: 'lucas@sistemadefrete.com')
     create(:shipping_company, distance: 100)
 
     visit root_path
@@ -68,7 +68,7 @@ describe 'Administrador cria um novo pedido' do
   end
 
   it 'com campos vazios' do
-    Admin.create!(email: 'lucas@sistemadefrete.com', password: 'password', name: 'Lucas')
+    create(:admin, email: 'lucas@sistemadefrete.com')
     create(:shipping_company, distance: 100)
 
     visit root_path
@@ -102,7 +102,7 @@ describe 'Administrador cria um novo pedido' do
   end
 
   it 'retornar para a página de pedidos' do
-    Admin.create!(email: 'lucas@sistemadefrete.com', password: 'password', name: 'Lucas')
+    create(:admin, email: 'lucas@sistemadefrete.com')
     create(:shipping_company, distance: 100)
 
     visit root_path

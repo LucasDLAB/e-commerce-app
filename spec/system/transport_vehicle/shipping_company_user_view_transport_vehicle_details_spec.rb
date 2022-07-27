@@ -5,10 +5,10 @@ require 'rails_helper'
 describe 'Usuário da Transportadora acessa a página de detalhes do veículo' do
   it 'acessa a página com todos os veículos cadastrados' do
     shipping_company = create(:shipping_company, corporate_name: 'Ligeirinho', email_domain: '@ligeiro.com')
-    User.create!(name: 'Walter', email: 'walter@ligeiro.com', password: 'password')
-    TransportVehicle.create!(brand: 'Mercedes', year_manufacture: 2017, payload: 9000,
-                             identification_plate: 'AAAA000', vehicle_model: 'Atego',
-                             height: 12, length: 33, width: 43, shipping_company_id: shipping_company.id)
+    create(:user, email: 'walter@ligeiro.com')
+    create(:transport_vehicle, brand: 'Mercedes', identification_plate: 'AAAA000', year_manufacture: 2017,
+                               vehicle_model: 'Atego', payload: 9000, height: 12, length: 33,
+                               width: 43, shipping_company_id: shipping_company.id)
     visit root_path
     click_on 'Entrar como colaborador de uma Transportadora'
     fill_in 'E-mail', with: 'walter@ligeiro.com'
@@ -36,7 +36,7 @@ describe 'Usuário da Transportadora acessa a página de detalhes do veículo' d
 
   it 'sem veículos cadastrados' do
     create(:shipping_company, corporate_name: 'Ligeirinho', email_domain: '@ligeiro.com')
-    User.create!(name: 'Walter', email: 'walter@ligeiro.com', password: 'password')
+    create(:user, email: 'walter@ligeiro.com')
 
     visit root_path
     click_on 'Entrar como colaborador de uma Transportadora'
@@ -51,7 +51,7 @@ describe 'Usuário da Transportadora acessa a página de detalhes do veículo' d
 
   it 'retorna à página da Transportadora' do
     create(:shipping_company, corporate_name: 'Ligeirinho', email_domain: '@ligeiro.com')
-    User.create!(name: 'Walter', email: 'walter@ligeiro.com', password: 'password')
+    create(:user, email: 'walter@ligeiro.com')
 
     visit root_path
     click_on 'Entrar como colaborador de uma Transportadora'

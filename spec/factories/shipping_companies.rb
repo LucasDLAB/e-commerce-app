@@ -4,7 +4,7 @@ FactoryBot.define do
   factory :shipping_company do
     brand_name { Faker::Company.name }
     corporate_name { Faker::Company.industry }
-    email_domain { "@#{Faker::Name.first_name}.com" }
+    email_domain { "@#{Faker::Name.first_name.downcase}.com" }
     registration_number { CNPJ.generate }
     street { Faker::Address.street_name }
     number { Faker::Address.building_number.to_i }
