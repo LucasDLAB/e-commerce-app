@@ -7,7 +7,7 @@ class OrdersController < ApplicationController
   def index
     if admin_signed_in?
       @orders = Order.all
-      
+
     elsif user_signed_in?
       @orders = []
       wanted_orders

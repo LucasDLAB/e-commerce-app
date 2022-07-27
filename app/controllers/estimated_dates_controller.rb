@@ -11,6 +11,7 @@ class EstimatedDatesController < ApplicationController
     estimated_date_params = params.require(:estimated_date).permit(:min_distance, :max_distance, :business_day)
     @estimated_date = EstimatedDate.new(estimated_date_params)
     @estimated_date.shipping_company_id = current_user.shipping_company_id
+    
     if @estimated_date.save
       redirect_to estimated_date_path(current_user.shipping_company_id),
                   notice: 'Nova linha de estimativa adicionada com sucesso'
