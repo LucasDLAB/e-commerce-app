@@ -16,21 +16,15 @@ class EstimatedDatesController < ApplicationController
       redirect_to estimated_date_path(current_user.shipping_company_id),
                   notice: 'Nova linha de estimativa adicionada com sucesso'
     else
-      rendering_failure
+      flash[:notice] = 'Falha ao adicionar a nova linha de estimativa'
+      render :new
     end
   end
 
   def show
     @endereco = ShippingCompany.find(params[:id])
-    return unless admin_signed_in? || (user_signed_in? && current_user.shipping_company_id == @endereco.id)
-
-    @estimated_date_lines = EstimatedDate.where(shipping_company_id: @endereco.id)
-  end
-
-  private
-
-  def rendering_failure
-    flash[:notice] = 'Falha ao adicionar a nova linha de estimativa'
-    render :new
+    if admin_signed_in? || (user_signed_in? && current_user.shipping_company_id == @endereco.id)
+      @estimated_date_lines = EstimatedDate.where(shipping_company_id: @endereco.id)
+    end
   end
 end

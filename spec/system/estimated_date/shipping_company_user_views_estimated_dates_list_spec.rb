@@ -5,7 +5,7 @@ require 'rails_helper'
 describe 'Usuário da Transportadora acessa a página da Tabela de estimativa de entrega' do
   it 'sem linhas adicionadas' do
     create(:shipping_company, corporate_name: 'Ligeirinho', email_domain: '@ligeiro.com')
-    User.create!(name: 'Walter', email: 'walter@ligeiro.com', password: 'password')
+    create(:user, email: 'walter@ligeiro.com')
 
     visit root_path
     click_on 'Entrar como colaborador de uma Transportadora'
@@ -19,9 +19,10 @@ describe 'Usuário da Transportadora acessa a página da Tabela de estimativa de
   end
 
   it 'com linhas adicionadas' do
-    create(:shipping_company, corporate_name: 'Ligeirinho', email_domain: '@ligeiro.com')
-    User.create!(name: 'Walter', email: 'walter@ligeiro.com', password: 'password')
-    EstimatedDate.create!(min_distance: 10, max_distance: 100, business_day: 3, shipping_company_id: 1)
+    shipping_company = create(:shipping_company, corporate_name: 'Ligeirinho', email_domain: '@ligeiro.com')
+    create(:user, email: 'walter@ligeiro.com')
+    create(:estimated_date, min_distance: 10, max_distance: 100, business_day: 3,
+                            shipping_company_id: shipping_company.id)
 
     visit root_path
     click_on 'Entrar como colaborador de uma Transportadora'
@@ -42,9 +43,10 @@ describe 'Usuário da Transportadora acessa a página da Tabela de estimativa de
   end
 
   it 'retorna à página da Transportadora' do
-    create(:shipping_company, corporate_name: 'Ligeirinho', email_domain: '@ligeiro.com')
-    User.create!(name: 'Walter', email: 'walter@ligeiro.com', password: 'password')
-    EstimatedDate.create!(min_distance: 10, max_distance: 100, business_day: 3, shipping_company_id: 1)
+    shipping_company = create(:shipping_company, corporate_name: 'Ligeirinho', email_domain: '@ligeiro.com')
+    create(:user, email: 'walter@ligeiro.com')
+    create(:estimated_date, min_distance: 10, max_distance: 100, business_day: 3,
+                            shipping_company_id: shipping_company.id)
 
     visit root_path
     click_on 'Entrar como colaborador de uma Transportadora'

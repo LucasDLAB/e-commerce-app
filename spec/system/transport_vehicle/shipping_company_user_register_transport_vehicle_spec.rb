@@ -5,7 +5,7 @@ require 'rails_helper'
 describe 'Usuário da Transportadora cadastrada um novo veículo' do
   it 'acessa a página do formulário' do
     create(:shipping_company, corporate_name: 'Ligeirinho', email_domain: '@ligeiro.com')
-    User.create!(name: 'Walter', email: 'walter@ligeiro.com', password: 'password')
+    create(:user, email: 'walter@ligeiro.com')
 
     visit root_path
     click_on 'Entrar como colaborador de uma Transportadora'
@@ -27,7 +27,7 @@ describe 'Usuário da Transportadora cadastrada um novo veículo' do
 
   it 'com sucesso' do
     create(:shipping_company, corporate_name: 'Ligeirinho', email_domain: '@ligeiro.com')
-    User.create!(name: 'Walter', email: 'walter@ligeiro.com', password: 'password')
+    create(:user, email: 'walter@ligeiro.com')
 
     visit root_path
     click_on 'Entrar como colaborador de uma Transportadora'
@@ -53,7 +53,7 @@ describe 'Usuário da Transportadora cadastrada um novo veículo' do
 
   it 'com dados vazios' do
     create(:shipping_company, corporate_name: 'Ligeirinho', email_domain: '@ligeiro.com')
-    User.create!(name: 'Walter', email: 'walter@ligeiro.com', password: 'password')
+    create(:user, email: 'walter@ligeiro.com')
 
     visit root_path
     click_on 'Entrar como colaborador de uma Transportadora'
@@ -80,7 +80,7 @@ describe 'Usuário da Transportadora cadastrada um novo veículo' do
 
   it 'retorna à página da Transportadora' do
     create(:shipping_company, corporate_name: 'Ligeirinho', email_domain: '@ligeiro.com')
-    User.create!(name: 'Walter', email: 'walter@ligeiro.com', password: 'password')
+    create(:user, email: 'walter@ligeiro.com')
 
     visit root_path
     click_on 'Entrar como colaborador de uma Transportadora'

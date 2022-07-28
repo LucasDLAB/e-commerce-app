@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe 'Administrador registra uma nova Transportadora' do
   it 'acessa o formulário de cadastro' do
-    Admin.create!(email: 'lucas@sistemadefrete.com', password: 'password', name: 'Lucas')
+    create(:admin, email: 'lucas@sistemadefrete.com')
 
     visit root_path
     click_on 'Entrar como Administrador'
@@ -28,7 +28,7 @@ describe 'Administrador registra uma nova Transportadora' do
   end
 
   it 'com sucesso' do
-    Admin.create!(email: 'lucas@sistemadefrete.com', password: 'password', name: 'Lucas')
+    create(:admin, email: 'lucas@sistemadefrete.com')
 
     visit root_path
     click_on 'Entrar como Administrador'
@@ -58,7 +58,7 @@ describe 'Administrador registra uma nova Transportadora' do
   end
 
   it 'com dados inválidos' do
-    Admin.create!(email: 'lucas@sistemadefrete.com', password: 'password', name: 'Lucas')
+    create(:admin, email: 'lucas@sistemadefrete.com')
 
     visit root_path
     click_on 'Entrar como Administrador'
@@ -92,7 +92,7 @@ describe 'Administrador registra uma nova Transportadora' do
   end
 
   it 'retorna à página de transportadoras a partir da página registro de transportadora' do
-    Admin.create!(email: 'lucas@sistemadefrete.com', password: 'password', name: 'Lucas')
+    create(:admin, email: 'lucas@sistemadefrete.com')
 
     visit root_path
     click_on 'Entrar como Administrador'
