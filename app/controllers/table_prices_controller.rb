@@ -51,6 +51,22 @@ class TablePricesController < ApplicationController
 
   private
 
+  def rendering_failure
+    flash.now[:notice] = 'Falha ao adicionar a nova linha de preço'
+    render :new
+  end
+
+  def empty_params?
+    params[:weight].blank? || params[:height].blank? || params[:width].blank? ||
+      params[:length].blank? || params[:distance].blank?
+  end
+
+  def setting_values
+    @dimension = params[:length].to_d * params[:width].to_d * params[:height].to_d / 1_000_000
+    @weight = params[:weight].to_d
+    @distance = params[:distance].to_d
+  end
+
   def defining_price
     ShippingCompany.active.each do |sc|
       higher_price = sc.min_price
