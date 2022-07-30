@@ -28,4 +28,16 @@ describe 'Administrador acessa a página de detalhes de um pedido' do
     expect(page).to have_content '967.199.030-47'
     expect(page).to have_content 'Rua Santa Teresa 24 - Rio de janeiro, RJ'
   end
+
+  it 'necessita estar logado' do
+    allow(SecureRandom).to receive(:alphanumeric).and_return('ABCDEF123456789')
+    create(:order, destinatary_name: 'João', destinatary_distance: 5000, destinatary_identification: '96719903047',
+                   street: 'Rua Santa Teresa', city: 'Rio de janeiro', number: 24, state: 'RJ',
+                   weight: 27, length: 15, width: 12, height: 32, status: 8)
+
+    visit orders_path
+
+    message = 'É necessário ser um Administrador ou Usuário de transportadora para acessar esta página'
+    expect(page).to have_content message
+  end
 end

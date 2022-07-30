@@ -30,15 +30,14 @@ class TablePricesController < ApplicationController
       redirect_to table_price_path(current_user.shipping_company_id), notice: 'Nova linha adicionada com sucesso!'
 
     else
-      flash.now[:notice] = 'Falha ao adicionar a nova linha de preço'
-      render :new
+      rendering_failure
     end
   end
 
   def search; end
 
   def calculate
-    if params[:weight] == '' || params[:height] == '' || params[:width] == '' || params[:length] == '' || params[:distance] == ''
+    if empty_params?
       redirect_to search_table_prices_path, notice: 'É necessário preencher todos os campos para criar um orçamento'
     end
 
