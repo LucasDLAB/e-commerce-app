@@ -44,4 +44,27 @@ describe 'Colaborador da Transportadora acessa a página de transportadora' do
 
     expect(page).to have_content 'Transportadora Ligeirinho'
   end
+
+  it 'deve pertencer a Transportadora' do
+    shipping_company = create(:shipping_company, corporate_name: 'Ligeirinho', email_domain: '@ligeiro.com')
+    create(:shipping_company, email_domain: '@quick.com')
+    create(:user, email: 'walter@quick.com')
+
+    visit root_path
+    click_on 'Entrar como colaborador de uma Transportadora'
+    fill_in 'E-mail', with: 'walter@quick.com'
+    fill_in 'Senha', with: 'password'
+    click_on 'Entrar'
+    visit shipping_company_path(shipping_company.id)
+
+    expect(page).to have_content 'Acesso permitido apenas para Administradores ou Usuários desta Transportadora'
+  end
+
+  it 'deve estar logado' do
+    shipping_company = create(:shipping_company, corporate_name: 'Ligeirinho', email_domain: '@ligeiro.com')
+
+    visit shipping_company_path(shipping_company.id)
+
+    expect(page).to have_content 'Acesso permitido apenas para Administradores ou Usuários desta Transportadora'
+  end
 end

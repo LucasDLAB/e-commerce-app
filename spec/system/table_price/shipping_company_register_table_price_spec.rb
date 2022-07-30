@@ -68,7 +68,7 @@ describe 'Usuário da Transportadora cadastra uma nova linha na tabela de preço
     fill_in 'Peso mínimo', with: ''
     click_on 'Adicionar linha'
 
-    expect(page).to have_content 'Falha ao adicionar a nova linha'
+    expect(page).to have_content 'Falha ao adicionar a nova linha de preço'
   end
 
   it 'retorna à página da Transportadora' do
